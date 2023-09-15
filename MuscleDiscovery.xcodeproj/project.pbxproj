@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		119293722AB44E4C002AA155 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293712AB44E4C002AA155 /* Food.swift */; };
+		844DC7082AB4690500A8DD0F /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DC7072AB4690500A8DD0F /* OnboardingModel.swift */; };
 		119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293752AB450D9002AA155 /* FoodAnalysisView.swift */; };
 		119293792AB45114002AA155 /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293782AB45114002AA155 /* FoodListView.swift */; };
 		1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192937A2AB4513B002AA155 /* FoodDetailView.swift */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		119293712AB44E4C002AA155 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		844DC7072AB4690500A8DD0F /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingModel.swift; path = ../../../../Pictures/OnboardingModel.swift; sourceTree = "<group>"; };
 		119293752AB450D9002AA155 /* FoodAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAnalysisView.swift; sourceTree = "<group>"; };
 		119293782AB45114002AA155 /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
 		1192937A2AB4513B002AA155 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				A2241E4B2AB07C4C00E06D8B /* ViewModifiers.swift */,
 				A2241E492AB0795300E06D8B /* Extensions.swift */,
 				84BE45CD2AB419B80088A60D /* backButton.swift */,
+				844DC7072AB4690500A8DD0F /* OnboardingModel.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */,
 				119293842AB451F3002AA155 /* TargetCardView.swift in Sources */,
 				A2241E402AB066F600E06D8B /* ColorConstants.swift in Sources */,
+				844DC7082AB4690500A8DD0F /* OnboardingModel.swift in Sources */,
 				119293722AB44E4C002AA155 /* Food.swift in Sources */,
 				A2241E3C2AB063D100E06D8B /* Trainer.swift in Sources */,
 				A2241E5A2AB1A5C700E06D8B /* AppointmentViewModel.swift in Sources */,
