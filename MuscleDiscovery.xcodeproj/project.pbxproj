@@ -242,7 +242,6 @@
 		A2241E052AB05A4600E06D8B = {
 			isa = PBXGroup;
 			children = (
-				A20EE5AE2AB40F9100191FC6 /* .gitignore */,
 				A2241E102AB05A4600E06D8B /* MuscleDiscovery */,
 				A2241E0F2AB05A4600E06D8B /* Products */,
 				84BE45CF2AB41A040088A60D /* Frameworks */,
@@ -353,7 +352,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20EE5AF2AB40F9100191FC6 /* .gitignore in Resources */,
 				A2241E192AB05A4800E06D8B /* Preview Assets.xcassets in Resources */,
 				A2241E162AB05A4800E06D8B /* Assets.xcassets in Resources */,
 				A2241E382AB061B700E06D8B /* GoogleService-Info.plist in Resources */,
