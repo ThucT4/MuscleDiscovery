@@ -10,7 +10,7 @@ struct SplashView: View {
     var body: some View {
         // If splash view animated duration end, jump to Login view
         if isActive {
-            WelcomeView()
+            MultipleOnboardingView()
         } else {
             ZStack {
                 Color("Background")

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		119293722AB44E4C002AA155 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293712AB44E4C002AA155 /* Food.swift */; };
-		844DC7082AB4690500A8DD0F /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DC7072AB4690500A8DD0F /* OnboardingModel.swift */; };
 		119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293752AB450D9002AA155 /* FoodAnalysisView.swift */; };
 		119293792AB45114002AA155 /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293782AB45114002AA155 /* FoodListView.swift */; };
 		1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192937A2AB4513B002AA155 /* FoodDetailView.swift */; };
@@ -18,8 +17,11 @@
 		119293842AB451F3002AA155 /* TargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293832AB451F3002AA155 /* TargetCardView.swift */; };
 		119293862AB45215002AA155 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293852AB45215002AA155 /* CircleProgressView.swift */; };
 		119293882AB45259002AA155 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293872AB45259002AA155 /* FoodListViewModel.swift */; };
+		84A2F3AA2AB4705B00FBB5D0 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2F3A92AB4705B00FBB5D0 /* OnboardingModel.swift */; };
+		84A2F3AC2AB4708A00FBB5D0 /* SingleOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2F3AB2AB4708A00FBB5D0 /* SingleOnboardingView.swift */; };
+		84A2F3AE2AB470E700FBB5D0 /* MultipleOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2F3AD2AB470E700FBB5D0 /* MultipleOnboardingView.swift */; };
+		84A2F3B02AB4720300FBB5D0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84A2F3AF2AB4720300FBB5D0 /* FirebaseAuth */; };
 		84BE45CE2AB419B80088A60D /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45CD2AB419B80088A60D /* backButton.swift */; };
-		84BE45D12AB41A040088A60D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84BE45D02AB41A040088A60D /* FirebaseAuth */; };
 		84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45D92AB42F620088A60D /* LoginView.swift */; };
 		84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45DB2AB42F860088A60D /* RegistrationView.swift */; };
 		84BE45DE2AB42FAC0088A60D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45DD2AB42FAC0088A60D /* ProfileView.swift */; };
@@ -62,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		119293712AB44E4C002AA155 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
-		844DC7072AB4690500A8DD0F /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingModel.swift; path = ../../../../Pictures/OnboardingModel.swift; sourceTree = "<group>"; };
 		119293752AB450D9002AA155 /* FoodAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAnalysisView.swift; sourceTree = "<group>"; };
 		119293782AB45114002AA155 /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
 		1192937A2AB4513B002AA155 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
@@ -72,6 +73,9 @@
 		119293832AB451F3002AA155 /* TargetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCardView.swift; sourceTree = "<group>"; };
 		119293852AB45215002AA155 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		119293872AB45259002AA155 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
+		84A2F3A92AB4705B00FBB5D0 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		84A2F3AB2AB4708A00FBB5D0 /* SingleOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOnboardingView.swift; sourceTree = "<group>"; };
+		84A2F3AD2AB470E700FBB5D0 /* MultipleOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleOnboardingView.swift; sourceTree = "<group>"; };
 		84BE45CD2AB419B80088A60D /* backButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		84BE45D92AB42F620088A60D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		84BE45DB2AB42F860088A60D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -119,7 +123,7 @@
 				A2241E2A2AB0610300E06D8B /* FirebaseDatabase in Frameworks */,
 				A2241E2E2AB0610300E06D8B /* FirebaseFirestore in Frameworks */,
 				A2241E342AB0610300E06D8B /* FirebaseStorage in Frameworks */,
-				84BE45D12AB41A040088A60D /* FirebaseAuth in Frameworks */,
+				84A2F3B02AB4720300FBB5D0 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +186,8 @@
 			children = (
 				84BE45E92AB430C50088A60D /* WelcomeView.swift */,
 				84BE45E72AB4309A0088A60D /* SplashView.swift */,
+				84A2F3AB2AB4708A00FBB5D0 /* SingleOnboardingView.swift */,
+				84A2F3AD2AB470E700FBB5D0 /* MultipleOnboardingView.swift */,
 			);
 			name = Welcome;
 			sourceTree = "<group>";
@@ -192,7 +198,6 @@
 				A2241E4B2AB07C4C00E06D8B /* ViewModifiers.swift */,
 				A2241E492AB0795300E06D8B /* Extensions.swift */,
 				84BE45CD2AB419B80088A60D /* backButton.swift */,
-				844DC7072AB4690500A8DD0F /* OnboardingModel.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 		A20EE5952AB40B0500191FC6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				84A2F3A92AB4705B00FBB5D0 /* OnboardingModel.swift */,
 				A2241E592AB1A5C700E06D8B /* AppointmentViewModel.swift */,
 				A2241E3D2AB0648600E06D8B /* TrainerListViewModel.swift */,
 				84BE45E52AB430790088A60D /* AuthViewModel.swift */,
@@ -360,7 +366,7 @@
 				A2241E312AB0610300E06D8B /* FirebaseFirestoreSwift */,
 				A2241E332AB0610300E06D8B /* FirebaseStorage */,
 				A2241E352AB0610300E06D8B /* FirebaseStorageCombine-Community */,
-				84BE45D02AB41A040088A60D /* FirebaseAuth */,
+				84A2F3AF2AB4720300FBB5D0 /* FirebaseAuth */,
 			);
 			productName = MuscleDiscovery;
 			productReference = A2241E0E2AB05A4600E06D8B /* MuscleDiscovery.app */;
@@ -429,6 +435,7 @@
 				A2241E4C2AB07C4C00E06D8B /* ViewModifiers.swift in Sources */,
 				A2241E602AB20C4300E06D8B /* AppointmentListView.swift in Sources */,
 				119293882AB45259002AA155 /* FoodListViewModel.swift in Sources */,
+				84A2F3AA2AB4705B00FBB5D0 /* OnboardingModel.swift in Sources */,
 				A2241E542AB0D94500E06D8B /* AppointmentBookingView.swift in Sources */,
 				1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */,
 				1192937E2AB45179002AA155 /* FoodRowView.swift in Sources */,
@@ -439,13 +446,14 @@
 				119293792AB45114002AA155 /* FoodListView.swift in Sources */,
 				A2241E452AB0693B00E06D8B /* TrainerDetailView.swift in Sources */,
 				119293822AB451E3002AA155 /* TargetView.swift in Sources */,
+				84A2F3AC2AB4708A00FBB5D0 /* SingleOnboardingView.swift in Sources */,
 				A2241E212AB05C0D00E06D8B /* EmptyView.swift in Sources */,
 				84BE45E82AB4309A0088A60D /* SplashView.swift in Sources */,
 				84BE45EA2AB430C50088A60D /* WelcomeView.swift in Sources */,
 				84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */,
+				84A2F3AE2AB470E700FBB5D0 /* MultipleOnboardingView.swift in Sources */,
 				119293842AB451F3002AA155 /* TargetCardView.swift in Sources */,
 				A2241E402AB066F600E06D8B /* ColorConstants.swift in Sources */,
-				844DC7082AB4690500A8DD0F /* OnboardingModel.swift in Sources */,
 				119293722AB44E4C002AA155 /* Food.swift in Sources */,
 				A2241E3C2AB063D100E06D8B /* Trainer.swift in Sources */,
 				A2241E5A2AB1A5C700E06D8B /* AppointmentViewModel.swift in Sources */,
@@ -673,7 +681,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		84BE45D02AB41A040088A60D /* FirebaseAuth */ = {
+		84A2F3AF2AB4720300FBB5D0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2241E282AB0610300E06D8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
