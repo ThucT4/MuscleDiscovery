@@ -1,0 +1,47 @@
+//
+//  TrainerListViewModel.swift
+//  MuscleDiscovery
+//
+//  Created by Thuc on 12/9/2023.
+//
+
+import Foundation
+import FirebaseFirestore
+
+class TrainerViewModel: ObservableObject {
+    @Published var trainerList = [Trainer]()
+    
+    private var db = Firestore.firestore().collection("trainers")
+    
+    init() {
+        getAllTrainerData()
+    }
+    
+    func getAllTrainerData() {
+        db.addSnapshotListener{ (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No trainer data on database.")
+                return
+            }
+
+            self.trainerList = documents.map{ (queryDocumentSnapshot) -> Trainer in
+                let data = queryDocumentSnapshot.data()
+                let age = data["age"] as? Int ?? 1
+                let documentID = queryDocumentSnapshot.documentID
+                let experience = data["experience"] as? Int ?? 0
+                let gender = data["gender"] as? String ?? ""
+                let highlights = data["highlights"] as? [String] ?? [String]()
+                let imageURL = data["image"] as? String ?? ""
+                let introduction = data["introduction"] as? String ?? ""
+                let name = data["name"] as? String ?? ""
+                var rating = data["rating"] as? Double ?? 1
+
+                rating = Double(round(10*rating) / 10)
+
+
+                return Trainer(documentID: documentID, age: age, experience: experience, gender: gender, highlights: highlights, imageURL: imageURL, introduction: introduction, name: name, rating: rating)
+            }
+        }
+    }
+    
+}
