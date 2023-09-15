@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A20EE5AF2AB40F9100191FC6 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A20EE5AE2AB40F9100191FC6 /* .gitignore */; };
 		A2241E122AB05A4600E06D8B /* MuscleDiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E112AB05A4600E06D8B /* MuscleDiscoveryApp.swift */; };
 		A2241E142AB05A4600E06D8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E132AB05A4600E06D8B /* ContentView.swift */; };
 		A2241E162AB05A4800E06D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2241E152AB05A4800E06D8B /* Assets.xcassets */; };
@@ -40,7 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A20EE5AE2AB40F9100191FC6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A2241E0E2AB05A4600E06D8B /* MuscleDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2241E112AB05A4600E06D8B /* MuscleDiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleDiscoveryApp.swift; sourceTree = "<group>"; };
 		A2241E132AB05A4600E06D8B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 		A2241E052AB05A4600E06D8B = {
 			isa = PBXGroup;
 			children = (
-				A20EE5AE2AB40F9100191FC6 /* .gitignore */,
 				A2241E102AB05A4600E06D8B /* MuscleDiscovery */,
 				A2241E0F2AB05A4600E06D8B /* Products */,
 			);
@@ -296,7 +293,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A20EE5AF2AB40F9100191FC6 /* .gitignore in Resources */,
 				A2241E192AB05A4800E06D8B /* Preview Assets.xcassets in Resources */,
 				A2241E162AB05A4800E06D8B /* Assets.xcassets in Resources */,
 				A2241E382AB061B700E06D8B /* GoogleService-Info.plist in Resources */,
