@@ -60,6 +60,7 @@
 		A2241E5C2AB1C8E000E06D8B /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E5B2AB1C8E000E06D8B /* Appointment.swift */; };
 		A2241E5E2AB1CB8D00E06D8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E5D2AB1CB8D00E06D8B /* User.swift */; };
 		A2241E602AB20C4300E06D8B /* AppointmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E5F2AB20C4300E06D8B /* AppointmentListView.swift */; };
+		A9EB7D4A2AB491F80050B68D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D492AB491F80050B68D /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		A2241E5B2AB1C8E000E06D8B /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
 		A2241E5D2AB1CB8D00E06D8B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A2241E5F2AB20C4300E06D8B /* AppointmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListView.swift; sourceTree = "<group>"; };
+		A9EB7D492AB491F80050B68D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				A2241E242AB05CDD00E06D8B /* TrainerListView.swift */,
 				A2241E5F2AB20C4300E06D8B /* AppointmentListView.swift */,
 				A20EE5992AB40B6100191FC6 /* TrainerTab */,
+				A9EB7D4D2AB492630050B68D /* Settings */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -342,6 +345,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A9EB7D4D2AB492630050B68D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A9EB7D492AB491F80050B68D /* SettingsView.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -438,6 +449,7 @@
 				84A2F3AA2AB4705B00FBB5D0 /* OnboardingModel.swift in Sources */,
 				A2241E542AB0D94500E06D8B /* AppointmentBookingView.swift in Sources */,
 				1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */,
+				A9EB7D4A2AB491F80050B68D /* SettingsView.swift in Sources */,
 				1192937E2AB45179002AA155 /* FoodRowView.swift in Sources */,
 				84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */,
 				119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */,
