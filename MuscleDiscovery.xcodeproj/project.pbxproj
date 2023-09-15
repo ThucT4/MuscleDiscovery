@@ -61,6 +61,9 @@
 		A2241E5E2AB1CB8D00E06D8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E5D2AB1CB8D00E06D8B /* User.swift */; };
 		A2241E602AB20C4300E06D8B /* AppointmentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E5F2AB20C4300E06D8B /* AppointmentListView.swift */; };
 		A9EB7D4A2AB491F80050B68D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D492AB491F80050B68D /* SettingsView.swift */; };
+		A9EB7D4F2AB496460050B68D /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D4E2AB496460050B68D /* EditProfileView.swift */; };
+		A9EB7D512AB496610050B68D /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D502AB496610050B68D /* PrivacyPolicyView.swift */; };
+		A9EB7D532AB496980050B68D /* SettingsAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D522AB496980050B68D /* SettingsAppView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +114,9 @@
 		A2241E5D2AB1CB8D00E06D8B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A2241E5F2AB20C4300E06D8B /* AppointmentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentListView.swift; sourceTree = "<group>"; };
 		A9EB7D492AB491F80050B68D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A9EB7D4E2AB496460050B68D /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		A9EB7D502AB496610050B68D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		A9EB7D522AB496980050B68D /* SettingsAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +355,9 @@
 			isa = PBXGroup;
 			children = (
 				A9EB7D492AB491F80050B68D /* SettingsView.swift */,
+				A9EB7D4E2AB496460050B68D /* EditProfileView.swift */,
+				A9EB7D502AB496610050B68D /* PrivacyPolicyView.swift */,
+				A9EB7D522AB496980050B68D /* SettingsAppView.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -440,6 +449,7 @@
 				A2241E252AB05CDD00E06D8B /* TrainerListView.swift in Sources */,
 				119293802AB45196002AA155 /* BadgeView.swift in Sources */,
 				A2241E4E2AB0BF7D00E06D8B /* LinearConstants.swift in Sources */,
+				A9EB7D512AB496610050B68D /* PrivacyPolicyView.swift in Sources */,
 				A2241E142AB05A4600E06D8B /* ContentView.swift in Sources */,
 				A2241E5C2AB1C8E000E06D8B /* Appointment.swift in Sources */,
 				A2241E472AB06D8600E06D8B /* TrainerRow.swift in Sources */,
@@ -451,9 +461,11 @@
 				1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */,
 				A9EB7D4A2AB491F80050B68D /* SettingsView.swift in Sources */,
 				1192937E2AB45179002AA155 /* FoodRowView.swift in Sources */,
+				A9EB7D4F2AB496460050B68D /* EditProfileView.swift in Sources */,
 				84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */,
 				119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */,
 				84BE45E02AB42FE70088A60D /* SettingRowView.swift in Sources */,
+				A9EB7D532AB496980050B68D /* SettingsAppView.swift in Sources */,
 				A2241E582AB198E100E06D8B /* PaymentCompleteView.swift in Sources */,
 				119293792AB45114002AA155 /* FoodListView.swift in Sources */,
 				A2241E452AB0693B00E06D8B /* TrainerDetailView.swift in Sources */,
