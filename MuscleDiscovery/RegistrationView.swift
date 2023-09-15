@@ -21,7 +21,7 @@ struct RegistrationView: View {
                     .edgesIgnoringSafeArea(.all)
 
                 VStack {
-                    Spacer(minLength: 220)
+                    Spacer(minLength: 180)
                     
                     // -- WELCOME TEXT --
                     VStack(alignment: .leading, spacing: 20) {

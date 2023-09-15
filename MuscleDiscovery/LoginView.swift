@@ -120,8 +120,9 @@ struct LoginView: View {
                     
                     Spacer()
                 }
-            }
-        }
+            } // ZStack
+        } // NavigationView
+        .navigationBarHidden(true)
     }
 }
  
