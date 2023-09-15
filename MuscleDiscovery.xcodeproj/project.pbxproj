@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		119293722AB44E4C002AA155 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293712AB44E4C002AA155 /* Food.swift */; };
+		119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293752AB450D9002AA155 /* FoodAnalysisView.swift */; };
+		119293792AB45114002AA155 /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293782AB45114002AA155 /* FoodListView.swift */; };
+		1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192937A2AB4513B002AA155 /* FoodDetailView.swift */; };
+		1192937E2AB45179002AA155 /* FoodRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192937D2AB45179002AA155 /* FoodRowView.swift */; };
+		119293802AB45196002AA155 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192937F2AB45196002AA155 /* BadgeView.swift */; };
+		119293822AB451E3002AA155 /* TargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293812AB451E3002AA155 /* TargetView.swift */; };
+		119293842AB451F3002AA155 /* TargetCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293832AB451F3002AA155 /* TargetCardView.swift */; };
+		119293862AB45215002AA155 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293852AB45215002AA155 /* CircleProgressView.swift */; };
+		119293882AB45259002AA155 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293872AB45259002AA155 /* FoodListViewModel.swift */; };
 		84BE45CE2AB419B80088A60D /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45CD2AB419B80088A60D /* backButton.swift */; };
 		84BE45D12AB41A040088A60D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84BE45D02AB41A040088A60D /* FirebaseAuth */; };
 		84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45D92AB42F620088A60D /* LoginView.swift */; };
@@ -52,6 +61,15 @@
 
 /* Begin PBXFileReference section */
 		119293712AB44E4C002AA155 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		119293752AB450D9002AA155 /* FoodAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAnalysisView.swift; sourceTree = "<group>"; };
+		119293782AB45114002AA155 /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
+		1192937A2AB4513B002AA155 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
+		1192937D2AB45179002AA155 /* FoodRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRowView.swift; sourceTree = "<group>"; };
+		1192937F2AB45196002AA155 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		119293812AB451E3002AA155 /* TargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetView.swift; sourceTree = "<group>"; };
+		119293832AB451F3002AA155 /* TargetCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCardView.swift; sourceTree = "<group>"; };
+		119293852AB45215002AA155 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
+		119293872AB45259002AA155 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
 		84BE45CD2AB419B80088A60D /* backButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		84BE45D92AB42F620088A60D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		84BE45DB2AB42F860088A60D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -106,6 +124,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		119293732AB45086002AA155 /* FoodTab */ = {
+			isa = PBXGroup;
+			children = (
+				1192937C2AB4515C002AA155 /* Components */,
+				119293742AB450B6002AA155 /* FoodMainView */,
+			);
+			name = FoodTab;
+			sourceTree = "<group>";
+		};
+		119293742AB450B6002AA155 /* FoodMainView */ = {
+			isa = PBXGroup;
+			children = (
+				119293752AB450D9002AA155 /* FoodAnalysisView.swift */,
+				119293782AB45114002AA155 /* FoodListView.swift */,
+				1192937A2AB4513B002AA155 /* FoodDetailView.swift */,
+			);
+			name = FoodMainView;
+			sourceTree = "<group>";
+		};
+		1192937C2AB4515C002AA155 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1192937D2AB45179002AA155 /* FoodRowView.swift */,
+				1192937F2AB45196002AA155 /* BadgeView.swift */,
+				119293812AB451E3002AA155 /* TargetView.swift */,
+				119293832AB451F3002AA155 /* TargetCardView.swift */,
+				119293852AB45215002AA155 /* CircleProgressView.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		84BE45CF2AB41A040088A60D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +212,7 @@
 				A2241E592AB1A5C700E06D8B /* AppointmentViewModel.swift */,
 				A2241E3D2AB0648600E06D8B /* TrainerListViewModel.swift */,
 				84BE45E52AB430790088A60D /* AuthViewModel.swift */,
+				119293872AB45259002AA155 /* FoodListViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -170,6 +220,7 @@
 		A20EE5982AB40B4900191FC6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				119293732AB45086002AA155 /* FoodTab */,
 				84BE45EB2AB430F80088A60D /* Authentication */,
 				84BE45EC2AB431080088A60D /* Welcome */,
 				A2241E242AB05CDD00E06D8B /* TrainerListView.swift */,
@@ -367,21 +418,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2241E252AB05CDD00E06D8B /* TrainerListView.swift in Sources */,
+				119293802AB45196002AA155 /* BadgeView.swift in Sources */,
 				A2241E4E2AB0BF7D00E06D8B /* LinearConstants.swift in Sources */,
 				A2241E142AB05A4600E06D8B /* ContentView.swift in Sources */,
 				A2241E5C2AB1C8E000E06D8B /* Appointment.swift in Sources */,
 				A2241E472AB06D8600E06D8B /* TrainerRow.swift in Sources */,
 				A2241E4C2AB07C4C00E06D8B /* ViewModifiers.swift in Sources */,
 				A2241E602AB20C4300E06D8B /* AppointmentListView.swift in Sources */,
+				119293882AB45259002AA155 /* FoodListViewModel.swift in Sources */,
 				A2241E542AB0D94500E06D8B /* AppointmentBookingView.swift in Sources */,
+				1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */,
+				1192937E2AB45179002AA155 /* FoodRowView.swift in Sources */,
 				84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */,
+				119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */,
 				84BE45E02AB42FE70088A60D /* SettingRowView.swift in Sources */,
 				A2241E582AB198E100E06D8B /* PaymentCompleteView.swift in Sources */,
+				119293792AB45114002AA155 /* FoodListView.swift in Sources */,
 				A2241E452AB0693B00E06D8B /* TrainerDetailView.swift in Sources */,
+				119293822AB451E3002AA155 /* TargetView.swift in Sources */,
 				A2241E212AB05C0D00E06D8B /* EmptyView.swift in Sources */,
 				84BE45E82AB4309A0088A60D /* SplashView.swift in Sources */,
 				84BE45EA2AB430C50088A60D /* WelcomeView.swift in Sources */,
 				84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */,
+				119293842AB451F3002AA155 /* TargetCardView.swift in Sources */,
 				A2241E402AB066F600E06D8B /* ColorConstants.swift in Sources */,
 				119293722AB44E4C002AA155 /* Food.swift in Sources */,
 				A2241E3C2AB063D100E06D8B /* Trainer.swift in Sources */,
@@ -390,6 +449,7 @@
 				A2241E522AB0D46900E06D8B /* CircularProgress.swift in Sources */,
 				84BE45E22AB430120088A60D /* InputView.swift in Sources */,
 				84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */,
+				119293862AB45215002AA155 /* CircleProgressView.swift in Sources */,
 				84BE45DE2AB42FAC0088A60D /* ProfileView.swift in Sources */,
 				84BE45CE2AB419B80088A60D /* backButton.swift in Sources */,
 				A2241E122AB05A4600E06D8B /* MuscleDiscoveryApp.swift in Sources */,

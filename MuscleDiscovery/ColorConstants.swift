@@ -21,5 +21,7 @@ struct ColorConstant {
     static let black = Color(red: 0.11, green: 0.11, blue: 0.12)
     
     static let textGray = Color(red: 0.50, green: 0.51, blue: 0.52)
+    
+    static let textWarning = Color(red: 0.70, green: 0.23, blue: 0.23)
 }
 
