@@ -1,16 +1,21 @@
-//
-//  User.swift
-//  MuscleDiscovery
-//
-//  Created by Thuc on 13/9/2023.
-//
-
 import Foundation
-import FirebaseFirestoreSwift
 
-struct User: Codable {
-//    var id: String = UUID().uuidString
-    @DocumentID var documentID: String?
-    var name: String
-    var appointments: [Appointment]
+struct User: Identifiable, Codable {
+    let id: String
+    let fullname: String
+    let email: String
+        
+    var initials: String {
+        let formmater = PersonNameComponentsFormatter()
+        if let components = formmater.personNameComponents(from: fullname) {
+            formmater.style = .abbreviated
+            return formmater.string(from: components)
+        }
+        
+        return ""
+    }
+}
+
+extension User {
+    static var MOCK_USER = User(id: NSUUID().uuidString, fullname: "Iris Young", email: "iris.young@hotmail.com")
 }
