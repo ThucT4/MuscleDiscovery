@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		119293722AB44E4C002AA155 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293712AB44E4C002AA155 /* Food.swift */; };
+		844DC7082AB4690500A8DD0F /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844DC7072AB4690500A8DD0F /* OnboardingModel.swift */; };
 		84BE45CE2AB419B80088A60D /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45CD2AB419B80088A60D /* backButton.swift */; };
 		84BE45D12AB41A040088A60D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84BE45D02AB41A040088A60D /* FirebaseAuth */; };
 		84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45D92AB42F620088A60D /* LoginView.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		119293712AB44E4C002AA155 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		844DC7072AB4690500A8DD0F /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingModel.swift; path = ../../../../Pictures/OnboardingModel.swift; sourceTree = "<group>"; };
 		84BE45CD2AB419B80088A60D /* backButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		84BE45D92AB42F620088A60D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		84BE45DB2AB42F860088A60D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				A2241E4B2AB07C4C00E06D8B /* ViewModifiers.swift */,
 				A2241E492AB0795300E06D8B /* Extensions.swift */,
 				84BE45CD2AB419B80088A60D /* backButton.swift */,
+				844DC7072AB4690500A8DD0F /* OnboardingModel.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				84BE45EA2AB430C50088A60D /* WelcomeView.swift in Sources */,
 				84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */,
 				A2241E402AB066F600E06D8B /* ColorConstants.swift in Sources */,
+				844DC7082AB4690500A8DD0F /* OnboardingModel.swift in Sources */,
 				119293722AB44E4C002AA155 /* Food.swift in Sources */,
 				A2241E3C2AB063D100E06D8B /* Trainer.swift in Sources */,
 				A2241E5A2AB1A5C700E06D8B /* AppointmentViewModel.swift in Sources */,
