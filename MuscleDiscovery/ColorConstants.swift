@@ -12,6 +12,10 @@ import SwiftUI
 struct ColorConstant {
     static let gray = Color(red: 0.17, green: 0.17, blue: 0.18)
     
+    static let DARKGREY = Color(red: 96, green: 96, blue: 96)
+    
+    static let BACKGROUND = Color(red: 28, green: 28, blue: 30)
+    
     static let luminousGreen = Color(red: 0.82, green: 0.99, blue: 0.24)
     
     static let black = Color(red: 0.11, green: 0.11, blue: 0.12)

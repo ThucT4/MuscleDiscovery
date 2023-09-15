@@ -10,6 +10,8 @@ import Firebase
 
 @main
 struct MuscleDiscoveryApp: App {
+//    @StateObject var viewModel = AuthViewModel()
+
     init() {
         FirebaseApp.configure()
     }
@@ -17,6 +19,8 @@ struct MuscleDiscoveryApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//            SplashView()
+//                .environmentObject(viewModel)
         }
     }
 }
