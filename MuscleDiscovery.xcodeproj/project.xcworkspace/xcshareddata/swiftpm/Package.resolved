@@ -91,12 +91,39 @@
       }
     },
     {
+      "identity" : "nuke",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Nuke.git",
+      "state" : {
+        "revision" : "93c8dc78fbc0aa3538a0db460eb389d4180af242",
+        "version" : "11.3.1"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
         "revision" : "e70e889c0196c76d22759eb50d6a0270ca9f1d9e",
         "version" : "2.3.1"
+      }
+    },
+    {
+      "identity" : "specs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/webrtc-sdk/Specs.git",
+      "state" : {
+        "revision" : "b9fad4ae1913ad13ecce37926bb2e7c9a470ca69",
+        "version" : "114.5735.4"
+      }
+    },
+    {
+      "identity" : "stream-video-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GetStream/stream-video-swift",
+      "state" : {
+        "revision" : "2c890e8e9b06c0b83312cd76346113c4abfa51d1",
+        "version" : "0.3.0"
       }
     },
     {
