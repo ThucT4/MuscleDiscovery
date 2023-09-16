@@ -36,6 +36,11 @@ class AppointmentViewModel: ObservableObject {
                 let trainerID = data["trainerID"] as? String ?? ""
                 let timeStamp = data["date"] as? Double ?? 0.0
                 let date = Date(timeIntervalSince1970: timeStamp)
+                
+                // If appointment is over
+                if ( date + 30*60 <= Date.now) {
+                    continue
+                }
 
                 self.queryTrainerData(trainerID: trainerID) { (trainer) in
                     if let trainer = trainer {

@@ -11,7 +11,7 @@ struct AppointmentDetailView: View {
     // Bind presentation mode of DetailView to  the PokeListView and will be used by the custome back button to dismiss the view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    var appointent: Appointment
+    var appointment: Appointment
     
     static let dateFormat: DateFormatter = {
         let formartter = DateFormatter()
@@ -64,7 +64,7 @@ struct AppointmentDetailView: View {
             
             // MARK: Appointment info VStack
             VStack {
-                TrainerRow(trainer: appointent.trainer!)
+                TrainerRow(trainer: appointment.trainer!)
                     .frame(maxWidth: width, alignment: .center)
                 
                 Divider()
@@ -80,7 +80,7 @@ struct AppointmentDetailView: View {
                             .frame(maxWidth: width, alignment: .leading)
 
                         
-                        Text("\(appointent.date!, formatter: Self.dateFormat)")
+                        Text("\(appointment.date!, formatter: Self.dateFormat)")
                             .font(.system(size: 15, weight: .semibold))
                             .frame(maxWidth: width, alignment: .leading)
                     } // end Date VStack
@@ -91,7 +91,7 @@ struct AppointmentDetailView: View {
                             .font(.system(size: 15, weight: .medium))
                             .frame(maxWidth: UIScreen.main.bounds.width*0.85, alignment: .leading)
                         
-                        Text("\(appointent.date!, formatter: Self.timeFormat)")
+                        Text("\(appointment.date!, formatter: Self.timeFormat) - \(appointment.date! + 30*60, formatter: Self.timeFormat)")
                             .font(.system(size: 15, weight: .semibold))
                             .frame(maxWidth: width, alignment: .leading)
                     }
@@ -110,6 +110,7 @@ struct AppointmentDetailView: View {
                     .frame(width: width)
                     .cornerRadius(20)
             )
+            .frame(maxHeight: .infinity, alignment: .top)
             
             ZStack {
                 NavigationLink(destination: VideoCallView()) {
@@ -119,7 +120,7 @@ struct AppointmentDetailView: View {
                         Text("Join The Call")
                             
                     }
-                    .font(.system(size: 16, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.black)
                     .padding()
                     .background(

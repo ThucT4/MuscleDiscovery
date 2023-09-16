@@ -19,24 +19,41 @@ struct AppointmentListView: View {
                 ColorConstant.black
                     .edgesIgnoringSafeArea(.all)
                 
-                List {
-                    ForEach(appointmentViewModel.userAppointments) {appointment in
-                        ZStack {
-                            AppointmentRow(appointment: appointment)
-                            
-                            NavigationLink(destination: AppointmentDetailView(appointent: appointment)) {
+                // MARK: VStack for list
+                VStack {
+                    Text("UPCOMING APPOINTMENTS")
+                        .foregroundColor(.white)
+                        .font(.system(size: 22, weight: .heavy))
+                    
+                    // If there is atleast 1 appointment
+                    if (appointmentViewModel.userAppointments.count > 0) {
+                        List {
+                            ForEach(appointmentViewModel.userAppointments) {appointment in
+                                ZStack {
+                                    AppointmentRow(appointment: appointment)
+                                    
+                                    NavigationLink(destination: AppointmentDetailView(appointment: appointment)) {
 
+                                    }
+                                    .opacity(0)
+                                }
                             }
-                            .opacity(0)
+                            .onAppear {
+                                self.appointmentViewModel.sortByDate()
+                            }
+                            .listRowBackground(ColorConstant.black)
                         }
+                        .listStyle(PlainListStyle())
+                        .background(ColorConstant.black)
+                        .padding(.top)
                     }
-                    .onAppear {
-                        self.appointmentViewModel.sortByDate()
+                    else {
+                        Text("No Upcoming Appointment.")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(ColorConstant.textGray)
                     }
-                    .listRowBackground(ColorConstant.black)
-                }
-                .listStyle(PlainListStyle())
-                .background(ColorConstant.black)
+                } // end VStack for list
+                .padding(.top)
                 
                 Button {
                     showing = true

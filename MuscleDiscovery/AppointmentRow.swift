@@ -74,7 +74,7 @@ struct AppointmentRow: View {
                     }
                     .foregroundColor(.white)
                     
-                    Text("\(appointment.date!, formatter: Self.dateTimeFormatter2)")
+                    Text("\(appointment.date!, formatter: Self.dateTimeFormatter2) - \(appointment.date! + 30*60, formatter: Self.dateTimeFormatter2)")
                         .font(.system(size: 14, weight: .bold))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
