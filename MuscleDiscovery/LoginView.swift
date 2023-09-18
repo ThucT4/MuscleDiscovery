@@ -5,11 +5,7 @@ struct LoginView: View {
     @State var password: String = ""
     @State var fullname: String = ""
     @State var confirmedPassword : String = ""
-    
-    
-    @State private var isSignupActive = false
-    @State private var isLoginActive = true
-    
+
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
@@ -19,7 +15,7 @@ struct LoginView: View {
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-
+                
                 
                 VStack {
                     // -- HEADER --
@@ -58,7 +54,6 @@ struct LoginView: View {
                     .padding(.top, 12)
                     .padding(.vertical, 30)
                     
-                    // ======= FIX ======
                     HStack {
                         Spacer()
                         NavigationLink(destination: ForgotPasswordView(email: $email)) {
@@ -121,11 +116,11 @@ struct LoginView: View {
                     Spacer()
                 }
             } // ZStack
-        } // NavigationView
+        }
         .navigationBarHidden(true)
-    }
+    } // NavigationView
 }
- 
+
 extension LoginView: AuthenticationFormProtocol {
     // Allow to sign in if
     // 1. Email is not empty

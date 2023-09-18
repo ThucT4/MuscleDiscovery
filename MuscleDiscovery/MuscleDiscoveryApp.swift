@@ -18,10 +18,10 @@ struct MuscleDiscoveryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
 //            VideoCallView()
-//            SplashView()
-//                .environmentObject(viewModel)
+            SplashView()
+                .environmentObject(viewModel)
         }
     }
 }
