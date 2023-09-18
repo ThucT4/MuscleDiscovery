@@ -32,7 +32,7 @@ struct MultipleOnboardingView: View {
                             if page == pages.last {
 
                                 NavigationLink {
-                                    LoginView()
+                                    SessionCheckView()
                                 } label: {
                                     HStack(spacing: 20) {
                                         Text("Start now")
