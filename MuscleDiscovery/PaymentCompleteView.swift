@@ -91,7 +91,7 @@ struct PaymentCompleteView: View {
                                 .font(.system(size: 15, weight: .medium))
                                 .frame(maxWidth: UIScreen.main.bounds.width*0.85, alignment: .leading)
                             
-                            Text("\(date, formatter: Self.timeFormat)")
+                            Text("\(date, formatter: Self.timeFormat) - \(date + 30*60, formatter: Self.timeFormat)")
                                 .font(.system(size: 15, weight: .semibold))
                                 .frame(maxWidth: width, alignment: .leading)
                         }
@@ -119,7 +119,6 @@ struct PaymentCompleteView: View {
                 .padding()
                 .background(
                     Button(action: {
-                        print("ENtered")
                         self.showing = false
                     }, label: {
                         Rectangle()

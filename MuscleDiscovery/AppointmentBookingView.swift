@@ -15,7 +15,9 @@ struct AppointmentBookingView: View {
     
     var trainer: Trainer
     
-    @State private var selectedDate = Date.now.round(precision: 15)
+    @State private var selectedDate = Date.now.round(precision: 30)
+    
+    @State var isValid: Bool = true
     
     @Binding var showing: Bool
     
@@ -60,58 +62,46 @@ struct AppointmentBookingView: View {
                     .colorScheme(.dark)
                     .onAppear{
                         // Set time interval for time picker
-                        UIDatePicker.appearance().minuteInterval = 15
+                        UIDatePicker.appearance().minuteInterval = 30
                     }
                 
+                Text("\(isValid ? "" : "You had an appoint in this time!")")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundColor(.red)
+                
                 Spacer()
-                
-//                Button {
-//                    self.appointmentViewModel.bookAppointment(customerID: "729ZaGcDAd29nCk8pEU4", trainerID: trainer.documentID!, date: self.selectedDate)
-//                    path.append(4)
-//                } label: {
-//
-//                    Text("Next")
-//                        .font(.system(size: 14, weight: .semibold))
-//                        .foregroundColor(.black)
-//                        .padding()
-//                        .background(
-//                            Rectangle()
-//                                .fill(ColorConstant.luminousGreen)
-//                                .cornerRadius(25)
-//                                .frame(width: UIScreen.main.bounds.width*0.7)
-//                                .shadow(color: .white.opacity(0.4), radius: 4)
-//                        )
-//                }
-//                .frame(maxHeight: UIScreen.main.bounds.height, alignment: .bottom)
-//                .navigationDestination(for: Int.self) { int in
-//                    PaymentCompleteView(path: $path, date: selectedDate, trainer: trainer)
-//
-//                }
-                
-                Text("Next")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.black)
-                    .padding()
-                    .background(
-                        // MARK: Button to Navigate to booking view
-                        NavigationLink(destination: PaymentCompleteView(date: selectedDate, trainer: trainer, showing: self.$showing)) {
-                            Rectangle()
-                            .fill(ColorConstant.luminousGreen)
-                            .cornerRadius(25)
-                            .frame(width: UIScreen.main.bounds.width*0.7)
-                            .shadow(color: .white.opacity(0.4), radius: 4)
-
-                        }
-                            .simultaneousGesture(TapGesture().onEnded({
-                                self.appointmentViewModel.bookAppointment(customerID: "729ZaGcDAd29nCk8pEU4", trainerID: trainer.documentID!, date: self.selectedDate)
-                            }))
-                    )
-                
                 
             } // end Main VStack
             .padding(.top)
             
+            Text("Next")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.black)
+                .padding()
+                .background(
+                    // MARK: Button to Navigate to booking view
+                    NavigationLink(destination: PaymentCompleteView(date: selectedDate, trainer: trainer, showing: self.$showing)) {
+                        Rectangle()
+                        .fill(ColorConstant.luminousGreen)
+                        .cornerRadius(25)
+                        .frame(width: UIScreen.main.bounds.width*0.7)
+                        .shadow(color: .white.opacity(0.4), radius: 4)
+                        .opacity(isValid ? 1 : 0.5)
+
+                    }
+                    .disabled(!isValid)
+                    .simultaneousGesture(TapGesture().onEnded({
+                        if (isValid) {
+                            self.appointmentViewModel.bookAppointment(customerID: "729ZaGcDAd29nCk8pEU4", trainerID: trainer.documentID!, date: self.selectedDate)
+                        }
+                    }))
+                )
+                .frame(maxHeight: .infinity, alignment: .bottom)
+            
         } // end Main ZStack for background
+        .onChange(of: selectedDate) {newValue in
+            isValid = appointmentViewModel.userAppointments.filter { $0.date! == selectedDate}.isEmpty
+        }
         // MARK: Hide default Back Button
         .navigationBarBackButtonHidden(true)
         .toolbar {

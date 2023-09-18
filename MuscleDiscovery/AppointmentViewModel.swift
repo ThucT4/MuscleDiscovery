@@ -36,6 +36,11 @@ class AppointmentViewModel: ObservableObject {
                 let trainerID = data["trainerID"] as? String ?? ""
                 let timeStamp = data["date"] as? Double ?? 0.0
                 let date = Date(timeIntervalSince1970: timeStamp)
+                
+                // If appointment is over
+                if ( date + 30*60 <= Date.now) {
+                    continue
+                }
 
                 self.queryTrainerData(trainerID: trainerID) { (trainer) in
                     if let trainer = trainer {
@@ -48,13 +53,10 @@ class AppointmentViewModel: ObservableObject {
     
     func sortByDate() {
         self.userAppointments = self.userAppointments.sorted{$0.date!.timeIntervalSince1970 < $1.date!.timeIntervalSince1970}
-        
-        for a in userAppointments {
-            print(a.date!.timeIntervalSince1970)
-        }
     }
     
     func queryTrainerData(trainerID: String, completion: @escaping (Trainer?) -> Void) {
+        
         return self.db.collection("trainers").document(trainerID).getDocument { (document, error) -> Void in
             if let error = error as NSError? {
                 print("\(error.localizedDescription)")
@@ -71,7 +73,7 @@ class AppointmentViewModel: ObservableObject {
                     let introduction = data["introduction"] as? String ?? ""
                     let name = data["name"] as? String ?? ""
                     var rating = data["rating"] as? Double ?? 1
-
+                    
                     rating = Double(round(10*rating) / 10)
 
                     let trainer = Trainer(documentID: documentID, age: age, experience: experience, gender: gender, highlights: highlights, imageURL: imageURL, introduction: introduction, name: name, rating: rating)
