@@ -8,47 +8,44 @@
 import SwiftUI
 
 struct TargetCardView: View {
-    var Foods: [Food]
+    @StateObject var Foods = FoodListViewModel()
+//    var Foods: [Food] = FoodListViewModel().foodList
     var type: String
     var imageName: String
-    
-    private var imageURL: URL {
-        return URL(string: imageName)!
-    }
     
     @State private var foodListName: [String] = [String]()
     @State private var isPresented = false
     
     //passing data between screens
     @Binding var selectionList: [Food]
+    @Binding var showPicker: Bool
     @State private var singleSelectionList: [Food] = [Food]()
     var body: some View {
         VStack(){
             HStack(){
-                AsyncImage(url: imageURL) {image in
-                    image
+                    Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                         .padding(.horizontal, 10)
-                } placeholder: {
-                    
-                }
-                .frame(width: 80, height: 80)
+                        .frame(width: 80, height: 80)
                 VStack(alignment: .leading){
                     Text(type)
                         .bold()
                         .font(.headline)
-                    Text((foodListName.count == 0) ? "1/3 kcal of aim" : foodListName.joined(separator: ", "))
+                    Text((foodListName.count == 0) ? "1/3 cal of aim" : foodListName.joined(separator: ", "))
                         .lineLimit(1)
                         .font(.subheadline)
                 }
                 Spacer()
                 Button() {
                     isPresented.toggle()
+                    if(showPicker){
+                       showPicker = false
+                    }
                 } label: {
                     Text(Image(systemName: "plus"))
-                        .font(.system(size: 24))
+                        .font(.title3)
                         .padding(.all, 12)
                         .bold()
                         .foregroundColor(.white)
@@ -56,14 +53,14 @@ struct TargetCardView: View {
                         .clipShape(Circle())
                 }
                 .fullScreenCover(isPresented: $isPresented){
-                    FoodListView(FoodData: Foods, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
+                    FoodListView(FoodData: Foods.foodList, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
                 }
             }
 
             if(foodListName.count != 0){
                 Divider()
                     .background(ColorConstant.textWarning)
-                Text("\(calculateAllCalo(singleSelectionList), specifier: "%.1f") kcal")
+                Text("\(calculateAllCalo(singleSelectionList), specifier: "%.1f") cal")
                     .foregroundColor(ColorConstant.luminousGreen)
                     .bold()
             }

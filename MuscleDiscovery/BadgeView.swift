@@ -19,7 +19,7 @@ struct BadgeView: View {
 //                        .foregroundColor(Color(.white))
 //                        .padding(.leading, 3)
                     Text(tag)
-                        .font(.system(size: 12))
+                        .font(.system(.caption2))
                         .bold()
                         .foregroundColor(ColorConstant.black)
                         .textCase(.uppercase)

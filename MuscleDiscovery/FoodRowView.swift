@@ -14,7 +14,7 @@ struct FoodRowView: View {
         return URL(string: FoodItem.image)!
     }
     var body: some View {
-        HStack(){
+        HStack(spacing: 40){
             AsyncImage(url: imageURL) {image in
                 image
                     .resizable()
@@ -28,12 +28,12 @@ struct FoodRowView: View {
                 VStack(alignment: .leading){
                     Text(FoodItem.name)
                         .bold()
-                    Text(FoodItem.description)
-                        .lineLimit(1)
                     Text(Image(systemName: "figure.gymnastics"))
-                        .font(.system(size: 12))
+                        .font(.caption2)
+                        .bold()
                     + Text("\(FoodItem.calo, specifier: "%.1f") kcal")
-                        .font(.system(size: 14))
+                        .font(.caption2)
+                        .bold()
                 }
                 .foregroundColor(.white)
                 HStack(){
@@ -43,6 +43,7 @@ struct FoodRowView: View {
             }
             .padding(.trailing, 10)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 12)
         .background(ColorConstant.gray)
         .cornerRadius(20)

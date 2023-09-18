@@ -23,6 +23,8 @@ struct FoodDetailView: View {
         return URL(string: FoodItem.image)!
     }
     
+    @State var targetCalo: CGFloat = 0.0
+    
     var backButton: some View {
         Button(action: {
             withAnimation() {
@@ -35,7 +37,7 @@ struct FoodDetailView: View {
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.system(.caption2, weight: .medium))
                     
                 })
                 .foregroundColor(.black)
@@ -61,33 +63,33 @@ struct FoodDetailView: View {
                     .padding(.bottom, 20)
                     VStack(alignment: .leading, spacing: 5){
                         Text(FoodItem.name)
-                            .font(.system(size: 24))
+                            .font(.system(.title3))
                             .bold()
                         Text(FoodItem.description)
-                            .font(.system(size: 18))
+                            .font(.system(.body))
                             .fontWeight(.medium)
                         Text("Calculate the nutrition **per item**")
                             .padding(.top, 20)
-                            .font(.system(size: 24))
+                            .font(.system(.title3))
                             .bold()
                     }
                     HStack(spacing: 20){
                         VStack(){
-                            CircleProgressView(progress: FoodItem.carbs/total*100, isPercent: true, size: 6.0)
+                            CircleProgressView(progress: FoodItem.carbs/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
                                 .frame(width: 80, height: 80)
                             Text("Carbs")
                                 .font(.subheadline)
                         }
                         Spacer()
                         VStack(){
-                            CircleProgressView(progress: FoodItem.protein/total*100, isPercent: true, size: 6.0)
+                            CircleProgressView(progress: FoodItem.protein/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
                                 .frame(width: 80, height: 80)
                             Text("Protein")
                                 .font(.subheadline)
                         }
                         Spacer()
                         VStack(){
-                            CircleProgressView(progress: FoodItem.fat/total*100, isPercent: true, size: 6.0)
+                            CircleProgressView(progress: FoodItem.fat/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
                                 .frame(width: 80, height: 80)
                             Text("Fat")
                                 .font(.subheadline)
@@ -98,44 +100,44 @@ struct FoodDetailView: View {
                             .background(ColorConstant.luminousGreen)
                         HStack(){
                             Text("Calories")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                             Spacer()
                             Text("\(FoodItem.calo, specifier: "%.1f") cal")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                         }
                         Divider()
                             .background(ColorConstant.luminousGreen)
                         HStack(){
                             Text("Carbs")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                             Spacer()
                             Text("\(FoodItem.carbs, specifier: "%.1f") g")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                         }
                         Divider()
                             .background(ColorConstant.luminousGreen)
                         HStack(){
                             Text("Protein")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                             Spacer()
                             Text("\(FoodItem.protein, specifier: "%.1f") g")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                         }
                         Divider()
                             .background(ColorConstant.luminousGreen)
                         HStack(){
                             Text("Fat")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                             Spacer()
                             Text("\(FoodItem.fat, specifier: "%.1f") g")
-                                .font(.system(size: 24))
+                                .font(.system(.title3))
                                 .bold()
                         }
                     }
