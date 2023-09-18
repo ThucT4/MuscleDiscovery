@@ -38,7 +38,8 @@ class AuthViewModel: ObservableObject {
             let encodedUser = try Firestore.Encoder().encode(user)
             
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-            
+            print("Create new user success.")
+
             // Fetch after creating new user session
             await fetchUser()
         } catch {

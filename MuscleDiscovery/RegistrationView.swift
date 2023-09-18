@@ -13,94 +13,99 @@ struct RegistrationView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Image("signup-wallpaper")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
+//        NavigationStack {
+//        } // NavigationView
+//        .navigationBarBackButtonHidden(true)
+//        .navigationBarItems(leading: backButton())
+        
+        ZStack {
+            Image("signup-wallpaper")
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
 
-                VStack {
-                    Spacer(minLength: 180)
+            VStack {
+                Spacer(minLength: 180)
+                
+                // -- WELCOME TEXT --
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("HELLO ROOKIES,")
+                        .foregroundColor(.white)
+                        .font(.system(size: 40))
+                        .fontWeight(.bold)
+                        .padding(.trailing, 20)
                     
-                    // -- WELCOME TEXT --
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("HELLO ROOKIES,")
-                            .foregroundColor(.white)
-                            .font(.system(size: 40))
-                            .fontWeight(.bold)
-                            .padding(.trailing, 20)
+                    Text("Enter your informations below or \nlogin with a other account")
+                        .foregroundColor(.white)
+                        .font(.system(size: 12))
+                        .fontWeight(.regular)
+                        .lineSpacing(5)
+                        .textCase(.uppercase)
+                }
+                .padding(.leading)
+                
+                Spacer(minLength: 60)
+                
+                // -- INPUT FORM --
+                VStack(spacing: 24) {
+                    InputView(text: $email, title: "Email", placeholder: "example@hotmail.com")
+                        .textInputAutocapitalization(.never)
+                    
+                    InputView(text: $fullname, title: "Fullname", placeholder: "Enter your name")
+                    
+                    InputView(text: $password, title: "Password", placeholder: "Enter your password...")
+                    
+                    ZStack(alignment: .trailing) {
+                        InputView(text: $confirmedPassword, title: "Password again", placeholder: "Enter password again")
                         
-                        Text("Enter your informations below or \nlogin with a other account")
-                            .foregroundColor(.white)
-                            .font(.system(size: 12))
-                            .fontWeight(.regular)
-                            .lineSpacing(5)
-                            .textCase(.uppercase)
+                        if (!password.isEmpty && !confirmedPassword.isEmpty) {
+                            if (password == confirmedPassword) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .imageScale(.large)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.green)
+                            } else {
+                                Image(systemName: "x.circle.fill")
+                                    .imageScale(.large)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.red)
+                            }
+                        }
                     }
-                    .padding(.leading)
-                    
-                    Spacer(minLength: 60)
-                    
-                    // -- INPUT FORM --
-                    VStack(spacing: 24) {
-                        InputView(text: $email, title: "Email", placeholder: "example@hotmail.com")
-                            .textInputAutocapitalization(.never)
-                        
-                        InputView(text: $fullname, title: "Fullname", placeholder: "Enter your name")
-                        
-                        InputView(text: $password, title: "Password", placeholder: "Enter your password...")
-                        
-                        ZStack(alignment: .trailing) {
-                            InputView(text: $confirmedPassword, title: "Password again", placeholder: "Enter password again")
-                            
-                            if (!password.isEmpty && !confirmedPassword.isEmpty) {
-                                if (password == confirmedPassword) {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .imageScale(.large)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.green)
-                                } else {
-                                    Image(systemName: "x.circle.fill")
-                                        .imageScale(.large)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.red)
-                                }
-                            }
-                        }
-                    } // VStack - Input
-                    .padding(.horizontal, 40)
-                    .padding(.bottom)
-                                        
-                    // -- SIGNUP --
-                    HStack {
-                        Spacer()
-                        
-                        Button {
-                            Task {
-                                try await viewModel.createUser(email: email, password: password, fullname: fullname)
-                            }
-                        } label: {
-                            HStack(spacing: 15) {
-                                Text("Sign up")
-                                    .fontWeight(.semibold)
-                                
-                                Image(systemName: "arrowtriangle.forward.fill")
-                            }
-                            .foregroundColor(.black)
-                            .frame(width: 125, height: 50)
-                        }
-                        .disabled(!formIsActive)
-                        .background(Color("Neon"))
-                        .opacity(formIsActive ? 1.0 : 0.3)
-                        .cornerRadius(48)
-                        .padding(.trailing, 30)
-                    } // HStack - SIGNUP
-                    
+                } // VStack - Input
+                .padding(.horizontal, 40)
+                .padding(.bottom)
+                                    
+                // -- SIGNUP --
+                HStack {
                     Spacer()
-                } // VStack
-            } // ZStack
-        } // NavigationView
+                    
+                    Button {
+                        Task {
+                            try await viewModel.createUser(email: email, password: password, fullname: fullname)
+                        }
+                        
+                        dismiss()
+                     } label: {
+                        HStack(spacing: 15) {
+                            Text("Sign up")
+                                .fontWeight(.semibold)
+                            
+                            Image(systemName: "arrowtriangle.forward.fill")
+                        }
+                        .foregroundColor(.black)
+                        .frame(width: 125, height: 50)
+                    }
+                    .disabled(!formIsActive)
+                    .background(Color("Neon"))
+                    .opacity(formIsActive ? 1.0 : 0.3)
+                    .cornerRadius(48)
+                    .padding(.trailing, 30)
+                } // HStack - SIGNUP
+                
+                Spacer()
+            } // VStack
+        } // ZStack
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton())
     }
