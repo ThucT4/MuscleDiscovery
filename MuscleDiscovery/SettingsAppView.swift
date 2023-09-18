@@ -72,7 +72,7 @@ struct SettingsAppView: View {
                     
                     Divider()
                         .background(.gray)
-                }
+                }   
                 .padding(.bottom, 15)
                 
                 Spacer()
