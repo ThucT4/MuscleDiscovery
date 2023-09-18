@@ -52,18 +52,24 @@ struct FoodDetailView: View {
                     AsyncImage(url: imageURL) {image in
                         image
                             .resizable()
+                            .frame(width: .infinity, height: 200)
                             .aspectRatio(contentMode: .fill)
                             .clipShape(Rectangle())
                     } placeholder: {
                         
                     }
-                    .frame(width: .infinity, height: 200)
+                    .padding(.bottom, 20)
                     VStack(alignment: .leading, spacing: 5){
                         Text(FoodItem.name)
                             .font(.system(size: 24))
                             .bold()
+                        Text(FoodItem.description)
+                            .font(.system(size: 18))
+                            .fontWeight(.medium)
                         Text("Calculate the nutrition **per item**")
-                            .font(.subheadline)
+                            .padding(.top, 20)
+                            .font(.system(size: 24))
+                            .bold()
                     }
                     HStack(spacing: 20){
                         VStack(){
@@ -180,10 +186,6 @@ struct FoodDetailView: View {
                 ToolbarItem(placement: .principal) {
                     HStack (spacing: 20) {
                         backButton
-
-                        Text("FOOD LIST")
-                            .foregroundColor(.white)
-                            .font(.system(size: 22, weight: .heavy))
                     }
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 }

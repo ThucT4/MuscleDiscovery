@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		114EFDD62AB8201000DEACA3 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 114EFDD52AB8201000DEACA3 /* WrappingHStack */; };
 		119293722AB44E4C002AA155 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293712AB44E4C002AA155 /* Food.swift */; };
 		119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293752AB450D9002AA155 /* FoodAnalysisView.swift */; };
 		119293792AB45114002AA155 /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293782AB45114002AA155 /* FoodListView.swift */; };
@@ -135,6 +136,7 @@
 				A2241E362AB0610300E06D8B /* FirebaseStorageCombine-Community in Frameworks */,
 				A2241E2C2AB0610300E06D8B /* FirebaseDatabaseSwift in Frameworks */,
 				A2241E302AB0610300E06D8B /* FirebaseFirestoreCombine-Community in Frameworks */,
+				114EFDD62AB8201000DEACA3 /* WrappingHStack in Frameworks */,
 				A2241E2A2AB0610300E06D8B /* FirebaseDatabase in Frameworks */,
 				A2241E2E2AB0610300E06D8B /* FirebaseFirestore in Frameworks */,
 				A2241E342AB0610300E06D8B /* FirebaseStorage in Frameworks */,
@@ -415,6 +417,7 @@
 				84A2F3AF2AB4720300FBB5D0 /* FirebaseAuth */,
 				A27A745C2AB5C18600796661 /* StreamVideo */,
 				A27A745E2AB5C18600796661 /* StreamVideoSwiftUI */,
+				114EFDD52AB8201000DEACA3 /* WrappingHStack */,
 			);
 			productName = MuscleDiscovery;
 			productReference = A2241E0E2AB05A4600E06D8B /* MuscleDiscovery.app */;
@@ -447,6 +450,7 @@
 			packageReferences = (
 				A2241E282AB0610300E06D8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A27A745B2AB5C18600796661 /* XCRemoteSwiftPackageReference "stream-video-swift" */,
+				114EFDD42AB8201000DEACA3 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = A2241E0F2AB05A4600E06D8B /* Products */;
 			projectDirPath = "";
@@ -731,6 +735,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		114EFDD42AB8201000DEACA3 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		A2241E282AB0610300E06D8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -750,6 +762,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		114EFDD52AB8201000DEACA3 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 114EFDD42AB8201000DEACA3 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		84A2F3AF2AB4720300FBB5D0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A2241E282AB0610300E06D8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

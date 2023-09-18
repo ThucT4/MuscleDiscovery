@@ -7,8 +7,9 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
-var badgeItems = ["Italian", "FastFood", "Japanese", "Vegan"]
+var badgeItems = ["Italian", "FastFood", "Japanese", "Vegan", "American", "Snack", "Chicken", "Fruit", "Egypt"]
 
 struct FoodListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -46,8 +47,8 @@ struct FoodListView: View {
     var body: some View {
         NavigationView(){
             List {
-                HStack(){
-                    ForEach(badgeItems, id: \.self) { item in
+                WrappingHStack(badgeItems, id: \.self){ item in
+//                    ForEach() { item in
                         Button {
                             if(filtered == item){
                                 filtered = ""
@@ -65,8 +66,9 @@ struct FoodListView: View {
                                 )
                                 .background((filtered == item) ? ColorConstant.luminousGreen : ColorConstant.gray)
                         }
+                        .padding(3)
                         .buttonStyle(PlainButtonStyle())
-                    }
+//                    }
                 }
                 .padding(.bottom, 10)
                 ForEach(searchingResult) {item in
