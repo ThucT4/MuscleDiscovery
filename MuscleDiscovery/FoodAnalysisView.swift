@@ -77,14 +77,19 @@ struct FoodAnalysisView: View {
                         Text("TODAY ")
                         Text("\(date.formatted(.dateTime.day().month().year()))").textCase(.uppercase)
                     }
-                    TargetCardView(type: "Breakfast", imageName: "meal1", selectionList: $selectionList)
-                    TargetCardView(type: "Lunch", imageName: "meal2", selectionList: $selectionList)
-                    TargetCardView(type: "Dinner", imageName: "meal3", selectionList: $selectionList)
+                    TargetCardView(type: "Breakfast", imageName: "meal1", selectionList: $selectionList, showPicker: $showPicker)
+                    TargetCardView(type: "Lunch", imageName: "meal2", selectionList: $selectionList, showPicker: $showPicker)
+                    TargetCardView(type: "Dinner", imageName: "meal3", selectionList: $selectionList, showPicker: $showPicker)
                 }
                 .frame(maxWidth: .infinity)
             }
         }
         .preferredColorScheme(.dark)
+        .onTapGesture {
+            if(self.showPicker){
+                self.showPicker = false
+            }
+        }
         .onChange(of: selectionList){newValue in
             self.progress = calculateAllCalo(selectionList)/targetCalo*100
             self.currentCarbs = calculateAllCarbs(selectionList)

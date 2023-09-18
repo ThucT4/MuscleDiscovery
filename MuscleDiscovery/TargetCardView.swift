@@ -18,6 +18,7 @@ struct TargetCardView: View {
     
     //passing data between screens
     @Binding var selectionList: [Food]
+    @Binding var showPicker: Bool
     @State private var singleSelectionList: [Food] = [Food]()
     var body: some View {
         VStack(){
@@ -39,6 +40,9 @@ struct TargetCardView: View {
                 Spacer()
                 Button() {
                     isPresented.toggle()
+                    if(showPicker){
+                       showPicker = false
+                    }
                 } label: {
                     Text(Image(systemName: "plus"))
                         .font(.title3)
