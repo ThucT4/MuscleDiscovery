@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-var badgeItems = ["Italian", "FastFood", "Japanese", "Vegan"]
+var badgeItems = ["Italian", "FastFood", "Japanese", "Vegan", "American", "Snack", "Chicken", "Fruit", "Egypt"]
 
 struct FoodListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
