@@ -11,7 +11,7 @@ struct CircleProgressView: View {
     var progress: CGFloat = 55.6
     var isPercent: Bool = false
     var size: CGFloat = 0.0
-    var targetCalo: CGFloat = 0.0
+    @Binding var targetCalo: CGFloat
     
     var body: some View {
         ZStack {
@@ -34,13 +34,25 @@ struct CircleProgressView: View {
                     .animation(.easeOut, value:  progress / 100)
              }
             VStack(){
-                Text("\(!isPercent ? targetCalo : progress, specifier: "%.\(!isPercent ? 0 : 2)f")\(isPercent ? "%" : "")")
-                    .font(size != 0 ? .subheadline : .largeTitle)
-                    .bold()
-                if(!isPercent){
-                    Text("cal left")
+                if(targetCalo < 0){
+                    Text("\(!isPercent ? -targetCalo : progress, specifier: "%.\(!isPercent ? 0 : 2)f")\(isPercent ? "%" : "")")
+                        .font(size != 0 ? .subheadline : .largeTitle)
                         .bold()
-                        .font(.subheadline)
+                    if(!isPercent){
+                        Text("cal over")
+                            .bold()
+                            .font(.subheadline)
+                    }
+                }
+                else{
+                    Text("\(!isPercent ? targetCalo : progress, specifier: "%.\(!isPercent ? 0 : 2)f")\(isPercent ? "%" : "")")
+                        .font(size != 0 ? .subheadline : .largeTitle)
+                        .bold()
+                    if(!isPercent){
+                        Text("cal left")
+                            .bold()
+                            .font(.subheadline)
+                    }
                 }
             }
         }

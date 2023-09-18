@@ -9,10 +9,7 @@ import SwiftUI
 
 var aimedCalo: [CGFloat] = [300, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000]
 
-var imageIconUrl = ["https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/meal1.png?alt=media&token=98441881-9290-453d-81a9-53c292ae9f7f", "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/meal2.png?alt=media&token=2d73c87e-aa12-4da5-b2e7-0b6e57f0e27c", "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/meal3.png?alt=media&token=37d4b99a-80f7-486d-9eed-997e2106e9ed"]
-
 struct FoodAnalysisView: View {
-    @StateObject var foodListModel = FoodListViewModel()
     
     @State private var progress = 0.0
     private var date = Date()
@@ -23,6 +20,7 @@ struct FoodAnalysisView: View {
     @State private var currentProtein: CGFloat = 0.0
     @State private var currentFat: CGFloat = 0.0
     @State private var showPicker: Bool = false
+    @State private var eatenCalo: CGFloat = 0.0
     var body: some View {
         ZStack(){
             ScrollView {
@@ -32,7 +30,7 @@ struct FoodAnalysisView: View {
                     } label: {
                         HStack(){
                             Text(Image(systemName: "figure.gymnastics"))
-                                .font(.system(size: 12))
+                                .font(.callout)
                             Text("Choose target")
                         }
                         .font(.subheadline)
@@ -49,27 +47,21 @@ struct FoodAnalysisView: View {
                         .pickerStyle(.wheel)
                         .onChange(of: targetCalo){newValue in
                             self.showPicker = false
+                            self.eatenCalo = self.targetCalo-calculateAllCalo(selectionList)
+                            self.progress = calculateAllCalo(selectionList)/targetCalo*100
                         }
                     }
-                    HStack(){
+                    VStack(){
                         VStack(){
                             Text("\(calculateAllCalo(selectionList), specifier: "%.1f")")
                             Text("Eaten")
                         }
-                        .padding(.trailing, 10)
+                        .padding(.bottom, 10)
                         .textCase(.uppercase)
                         .bold()
                         .font(.headline)
-                        CircleProgressView(progress: progress, targetCalo: targetCalo-calculateAllCalo(selectionList))
+                        CircleProgressView(progress: progress, targetCalo: $eatenCalo)
                             .frame(width: 200, height: .infinity)
-                        VStack(){
-                            Text("0")
-                            Text("Burn")
-                        }
-                        .padding(.leading, 10)
-                        .textCase(.uppercase)
-                        .bold()
-                        .font(.headline)
                     }
                     .frame(maxWidth: .infinity)
                     HStack(){
@@ -85,9 +77,9 @@ struct FoodAnalysisView: View {
                         Text("TODAY ")
                         Text("\(date.formatted(.dateTime.day().month().year()))").textCase(.uppercase)
                     }
-                    TargetCardView(Foods: foodListModel.foodList, type: "Breakfast", imageName: imageIconUrl[0], selectionList: $selectionList)
-                    TargetCardView(Foods: foodListModel.foodList, type: "Lunch", imageName: imageIconUrl[1], selectionList: $selectionList)
-                    TargetCardView(Foods: foodListModel.foodList, type: "Dinner", imageName: imageIconUrl[2], selectionList: $selectionList)
+                    TargetCardView(type: "Breakfast", imageName: "meal1", selectionList: $selectionList)
+                    TargetCardView(type: "Lunch", imageName: "meal2", selectionList: $selectionList)
+                    TargetCardView(type: "Dinner", imageName: "meal3", selectionList: $selectionList)
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -98,6 +90,10 @@ struct FoodAnalysisView: View {
             self.currentCarbs = calculateAllCarbs(selectionList)
             self.currentProtein = calculateAllProtein(selectionList)
             self.currentFat = calculateAllFat(selectionList)
+            self.eatenCalo = self.targetCalo-calculateAllCalo(selectionList)
+        }
+        .onAppear(){
+            self.eatenCalo = self.targetCalo-calculateAllCalo(selectionList)
         }
     }
     func calculateAllCalo(_ foodList: [Food]) -> CGFloat {

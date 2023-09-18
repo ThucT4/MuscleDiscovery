@@ -34,7 +34,7 @@ struct FoodListView: View {
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.system(.caption2, weight: .medium))
                     
                 })
                 .foregroundColor(.black)
@@ -83,6 +83,7 @@ struct FoodListView: View {
                     .padding(.all, 0)
                 }
             }
+            .listRowSeparator(.hidden)
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -91,7 +92,7 @@ struct FoodListView: View {
 
                         Text("FOOD LIST")
                             .foregroundColor(.white)
-                            .font(.system(size: 22, weight: .heavy))
+                            .font(.system(.title3, weight: .heavy))
                     }
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 }
