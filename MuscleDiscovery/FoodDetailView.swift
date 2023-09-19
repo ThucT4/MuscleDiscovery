@@ -54,13 +54,14 @@ struct FoodDetailView: View {
                     AsyncImage(url: imageURL) {image in
                         image
                             .resizable()
-                            .frame(width: .infinity, height: 200)
                             .aspectRatio(contentMode: .fill)
+                            .frame(height: 200)
                             .clipShape(Rectangle())
+                            .padding(.bottom, 20)
                     } placeholder: {
                         
                     }
-                    .padding(.bottom, 20)
+                    .frame(width: .infinity, height: 200)
                     VStack(alignment: .leading, spacing: 5){
                         Text(FoodItem.name)
                             .font(.system(.title3))
