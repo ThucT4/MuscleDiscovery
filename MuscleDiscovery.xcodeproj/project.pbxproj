@@ -24,7 +24,6 @@
 		84A2F3AE2AB470E700FBB5D0 /* MultipleOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2F3AD2AB470E700FBB5D0 /* MultipleOnboardingView.swift */; };
 		84A2F3B02AB4720300FBB5D0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84A2F3AF2AB4720300FBB5D0 /* FirebaseAuth */; };
 		84AF3E162AB8115A008225D8 /* SessionCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3E152AB8115A008225D8 /* SessionCheckView.swift */; };
-		84AF3E182AB85DAF008225D8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF3E172AB85DAF008225D8 /* LoadingView.swift */; };
 		84BE45CE2AB419B80088A60D /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45CD2AB419B80088A60D /* backButton.swift */; };
 		84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45D92AB42F620088A60D /* LoginView.swift */; };
 		84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45DB2AB42F860088A60D /* RegistrationView.swift */; };
@@ -89,7 +88,6 @@
 		84A2F3AB2AB4708A00FBB5D0 /* SingleOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleOnboardingView.swift; sourceTree = "<group>"; };
 		84A2F3AD2AB470E700FBB5D0 /* MultipleOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleOnboardingView.swift; sourceTree = "<group>"; };
 		84AF3E152AB8115A008225D8 /* SessionCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCheckView.swift; sourceTree = "<group>"; };
-		84AF3E172AB85DAF008225D8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		84BE45CD2AB419B80088A60D /* backButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		84BE45D92AB42F620088A60D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		84BE45DB2AB42F860088A60D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -184,14 +182,6 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
-		84AF3E1A2AB85DBE008225D8 /* Extra */ = {
-			isa = PBXGroup;
-			children = (
-				84AF3E172AB85DAF008225D8 /* LoadingView.swift */,
-			);
-			name = Extra;
-			sourceTree = "<group>";
-		};
 		84BE45CF2AB41A040088A60D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,7 +255,6 @@
 				84BE45EC2AB431080088A60D /* Welcome */,
 				A20EE5992AB40B6100191FC6 /* TrainerTab */,
 				A9EB7D4D2AB492630050B68D /* Settings */,
-				84AF3E1A2AB85DBE008225D8 /* Extra */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -505,7 +494,6 @@
 				A2241E4C2AB07C4C00E06D8B /* ViewModifiers.swift in Sources */,
 				A2241E602AB20C4300E06D8B /* AppointmentListView.swift in Sources */,
 				119293882AB45259002AA155 /* FoodListViewModel.swift in Sources */,
-				84AF3E182AB85DAF008225D8 /* LoadingView.swift in Sources */,
 				84A2F3AA2AB4705B00FBB5D0 /* OnboardingModel.swift in Sources */,
 				A2241E542AB0D94500E06D8B /* AppointmentBookingView.swift in Sources */,
 				1192937B2AB4513B002AA155 /* FoodDetailView.swift in Sources */,

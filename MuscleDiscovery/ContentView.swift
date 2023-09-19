@@ -15,6 +15,11 @@ struct ContentView: View {
                     Label("Trainers", systemImage: "figure.strengthtraining.traditional")
                 }
             
+            FoodAnalysisView()
+                .tabItem {
+                    Label("Nutrition", systemImage: "chart.pie.fill")
+                }
+            
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
@@ -26,7 +31,7 @@ struct ContentView: View {
                 }
             
         }
-        .accentColor(.gray)
+        .toolbarColorScheme(.light, for: .tabBar)
     }
 }
 

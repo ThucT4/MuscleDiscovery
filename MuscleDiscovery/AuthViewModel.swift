@@ -12,12 +12,18 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     
+    /// The app will retrieve user data in firestore by id
+    /// and store them in current user every time the app run
     init() {
         Task {
             await fetchUser()
         }
     }
     
+    /// Sign up with email and password
+    /// - Parameters:
+    ///   - email: Registered email
+    ///   - password: Email password
     func signIn(email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -28,6 +34,12 @@ class AuthViewModel: ObservableObject {
         }
     }
      
+    
+    /// Create new user info and store them in Firestore
+    /// - Parameters:
+    ///   - email: Registerd email
+    ///   - password: Email password
+    ///   - fullname: Registered user's name
     func createUser(email: String, password: String, fullname: String) async throws {
         do {
             // Create Firebase u ser
@@ -45,9 +57,10 @@ class AuthViewModel: ObservableObject {
         } catch {
             print("Failed to create user! \(error.localizedDescription )")
         }
-
     }
     
+    
+    /// Sign out current session
     func signOut() {
         do {
             try Auth.auth().signOut()
@@ -58,10 +71,22 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func deleteAccount() {
-        
-    }
     
+    /// Delete the user account
+//    func deleteAccount() {
+//        let db = Firestore.firestore()
+//        let userID = Auth.auth().currentUser!.uid
+//
+//        db.collection("users").document(userID).delete() { error in
+//            if error == nil {
+//                print("DEBUG: Failed to delete user!")
+//            } else {
+//                print("DEBUG: Delete user success.")
+//            }
+//        }
+//    }
+    
+    /// Get registerd user info from Firebase by their id
     func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
