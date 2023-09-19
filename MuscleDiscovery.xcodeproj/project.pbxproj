@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110635EC2AB9110A0055931A /* FoodInventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110635EB2AB9110A0055931A /* FoodInventoryView.swift */; };
 		114EFDD62AB8201000DEACA3 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 114EFDD52AB8201000DEACA3 /* WrappingHStack */; };
 		119293722AB44E4C002AA155 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293712AB44E4C002AA155 /* Food.swift */; };
 		119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119293752AB450D9002AA155 /* FoodAnalysisView.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		110635EB2AB9110A0055931A /* FoodInventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInventoryView.swift; sourceTree = "<group>"; };
 		119293712AB44E4C002AA155 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		119293752AB450D9002AA155 /* FoodAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAnalysisView.swift; sourceTree = "<group>"; };
 		119293782AB45114002AA155 /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				119293752AB450D9002AA155 /* FoodAnalysisView.swift */,
 				119293782AB45114002AA155 /* FoodListView.swift */,
 				1192937A2AB4513B002AA155 /* FoodDetailView.swift */,
+				110635EB2AB9110A0055931A /* FoodInventoryView.swift */,
 			);
 			name = FoodMainView;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				A2241E582AB198E100E06D8B /* PaymentCompleteView.swift in Sources */,
 				119293792AB45114002AA155 /* FoodListView.swift in Sources */,
 				A2241E452AB0693B00E06D8B /* TrainerDetailView.swift in Sources */,
+				110635EC2AB9110A0055931A /* FoodInventoryView.swift in Sources */,
 				119293822AB451E3002AA155 /* TargetView.swift in Sources */,
 				84A2F3AC2AB4708A00FBB5D0 /* SingleOnboardingView.swift in Sources */,
 				84BE45E82AB4309A0088A60D /* SplashView.swift in Sources */,

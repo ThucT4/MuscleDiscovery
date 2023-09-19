@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TargetCardView: View {
     @StateObject var Foods = FoodListViewModel()
-//    var Foods: [Food] = FoodListViewModel().foodList
     var type: String
     var imageName: String
     
     @State private var foodListName: [String] = [String]()
     @State private var isPresented = false
+    @State private var showInventory = false
     
     //passing data between screens
     @Binding var selectionList: [Food]
@@ -44,7 +44,7 @@ struct TargetCardView: View {
                        showPicker = false
                     }
                 } label: {
-                    Text(Image(systemName: "plus"))
+                    Image(systemName: "plus")
                         .font(.title3)
                         .padding(.all, 12)
                         .bold()
@@ -56,13 +56,20 @@ struct TargetCardView: View {
                     FoodListView(FoodData: Foods.foodList, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
                 }
             }
-
             if(foodListName.count != 0){
-                Divider()
-                    .background(ColorConstant.textWarning)
-                Text("\(calculateAllCalo(singleSelectionList), specifier: "%.1f") cal")
-                    .foregroundColor(ColorConstant.luminousGreen)
-                    .bold()
+                VStack{
+                    Divider()
+                        .background(ColorConstant.textWarning)
+                    Text("\(calculateAllCalo(singleSelectionList), specifier: "%.1f") cal")
+                        .foregroundColor(ColorConstant.luminousGreen)
+                        .bold()
+                }
+                .onTapGesture {
+                    self.showInventory = true
+                }
+                .fullScreenCover(isPresented: $showInventory){
+                    FoodInventoryView(type: type,FoodData: Foods.foodList, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
+                }
             }
 
         }

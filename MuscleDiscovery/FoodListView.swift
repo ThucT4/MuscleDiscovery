@@ -48,7 +48,6 @@ struct FoodListView: View {
         NavigationView(){
             List {
                 WrappingHStack(badgeItems, id: \.self){ item in
-//                    ForEach() { item in
                         Button {
                             if(filtered == item){
                                 filtered = ""
@@ -68,7 +67,6 @@ struct FoodListView: View {
                         }
                         .padding(3)
                         .buttonStyle(PlainButtonStyle())
-//                    }
                 }
                 .padding(.bottom, 10)
                 ForEach(searchingResult) {item in
