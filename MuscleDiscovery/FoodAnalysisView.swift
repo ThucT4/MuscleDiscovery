@@ -61,7 +61,7 @@ struct FoodAnalysisView: View {
                         .bold()
                         .font(.headline)
                         CircleProgressView(progress: progress, targetCalo: $eatenCalo)
-                            .frame(width: 200, height: .infinity)
+                            .frame(width: 200)
                     }
                     .frame(maxWidth: .infinity)
                     HStack(){
