@@ -11,12 +11,16 @@ protocol AuthenticationFormProtocol {
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
+    private var userListener: ListenerRegistration?
     
     /// The app will retrieve user data in firestore by id
     /// and store them in current user every time the app run
     init() {
         Task {
             await fetchUser()
+            
+            // Start listening for user document changes
+            startUserListener()
         }
     }
     
@@ -97,6 +101,66 @@ class AuthViewModel: ObservableObject {
         
         self.currentUser = try? snapshot.data(as: User.self)
     }
+    
+    /// Update current user infomation
+    /// - Parameters:
+    ///   - email: Registerd email
+    ///   - fullname: Registered user's name
+    func updateUser(fullname: String, email: String) async throws {
+        do {
+            guard let uid = Auth.auth().currentUser?.uid else {
+                return
+            }
+            
+            // Update user information in Firestore
+            let userData: [String: Any] = [
+                "fullname": fullname,
+                "email": email
+                // Add other fields you want to update here
+            ]
+            
+            try await Firestore.firestore().collection("users").document(uid).updateData(userData)
+            
+        } catch {
+            print("Failed to update user information: \(error.localizedDescription)")
+        }
+    }
+    
+    // Start listener
+    private func startUserListener() {
+           guard let uid = Auth.auth().currentUser?.uid else {
+               return
+           }
+           
+           let userDocRef = Firestore.firestore().collection("users").document(uid)
+           
+           userListener = userDocRef.addSnapshotListener { [weak self] documentSnapshot, error in
+               if let error = error {
+                   print("Error listening for user updates: \(error.localizedDescription)")
+                   return
+               }
+               
+               guard let document = documentSnapshot, document.exists else {
+                   print("User document does not exist")
+                   return
+               }
+               
+               do {
+                   if let user = try document.data(as: User?.self) {
+                       self?.currentUser = user
+                   } else {
+                       print("Failed to decode user document")
+                   }
+               } catch {
+                   print("Error decoding user document: \(error.localizedDescription)")
+               }
+           }
+       }
+       
+       deinit {
+           // Stop the user listener when the view model is deinitialized
+           userListener?.remove()
+       }
 }
 
 extension Encodable {

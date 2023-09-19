@@ -104,7 +104,7 @@ struct SettingsView: View {
                                 .padding(.bottom, 15)
                             
                             // Navigate to Edit Profile Page
-                            NavigationLink(destination: EditProfileView(user: user)) {
+                            NavigationLink(destination: EditProfileView()) {
                                 VStack {
                                     HStack {
                                         Text("Edit Profile")
@@ -260,5 +260,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(AuthViewModel()) // Provide an instance of AuthViewModel
     }
 }

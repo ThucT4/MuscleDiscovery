@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    var user: User
-
+    @State private var isEditingName = false
+    @State private var editedName = ""
+    
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // Back Button
     var backButton: some View {
@@ -35,146 +38,192 @@ struct EditProfileView: View {
     }
     
     var body: some View {
-        ZStack {
-            ColorConstant.black
-                .ignoresSafeArea()
-            
-            VStack {
-                Spacer()
-                // Profile Image and Button
-                ZStack {
-                    Text(user.initials)
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(width: 120, height: 120)
-                        .background(.gray)
-                        .clipShape(Circle())
-                    
-                    VStack {
-                        Spacer()
-                        HStack {
+        if let user = viewModel.currentUser {
+            ZStack {
+                ColorConstant.black
+                    .ignoresSafeArea()
+                
+                VStack {
+                    Spacer()
+                    // Profile Image and Button
+                    ZStack {
+                        Text("Profile-Picture") // user.initials
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(width: 120, height: 120)
+                            .background(.gray)
+                            .clipShape(Circle())
+                        
+                        VStack {
                             Spacer()
-                            ZStack {
-                                Circle()
-                                    .fill(Color.gray) // Fill color of the circle
-                                    .frame(width: 46, height: 46) // Size of the circle
-                                Image(systemName: "camera.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 23)
-                                    .foregroundColor(Color.white)
+                            HStack {
+                                Spacer()
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.gray) // Fill color of the circle
+                                        .frame(width: 46, height: 46) // Size of the circle
+                                    Image(systemName: "camera.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 23)
+                                        .foregroundColor(Color.white)
+                                }
+                                
                             }
                             
                         }
+                        .frame(width: 130, height: 130)
                         
                     }
-                    .frame(width: 130, height: 130)
+                    .padding(.bottom, 50)
                     
+                    // MARK: Information
+                    // Name
+                    //                VStack (alignment: .leading) {
+                    //                    Divider()
+                    //                        .background(Color.gray)
+                    //                        .padding(.bottom, 10)
+                    //
+                    //                    Text("Name")
+                    //                        .foregroundColor(ColorConstant.luminousGreen)
+                    //                        .padding(.bottom, 5)
+                    //                        .padding(.horizontal)
+                    //                    Text("user.fullname")
+                    //                        .font(.title2)
+                    //                        .bold()
+                    //                        .foregroundColor(Color.white)
+                    //                        .padding(.bottom, 15)
+                    //                        .padding(.horizontal)
+                    //
+                    //                    Divider()
+                    //                        .background(Color.gray)
+                    //                }
+                    //                .padding(.bottom, 10)
+                    // Name
+                    VStack(alignment: .leading) {
+                        Divider()
+                            .background(Color.gray)
+                            .padding(.bottom, 10)
+                        
+                        Text("Name")
+                            .foregroundColor(ColorConstant.luminousGreen)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal)
+                        
+                        if isEditingName {
+                            TextField("Enter name", text: $editedName, onCommit: {
+                                // Save the edited name or perform any necessary actions
+                                isEditingName = false
+                            })
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(.bottom, 15)
+                            .padding(.horizontal)
+                            .onTapGesture {
+                                // Do nothing when tapped inside the TextField
+                            }
+                            .background(Color.clear) // Hide TextField background
+                        } else {
+                            Text(user.fullname)
+                                .font(.title2)
+                                .bold()
+                                .foregroundColor(.white)
+                                .padding(.bottom, 15)
+                                .padding(.horizontal)
+                                .onTapGesture {
+                                    // Enable editing when tapped
+                                    editedName = user.fullname
+                                    isEditingName = true
+                                }
+                        }
+                        
+                        Divider()
+                            .background(Color.gray)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    // Age
+                    VStack (alignment: .leading) {
+                        Text("Age")
+                            .foregroundColor(ColorConstant.luminousGreen)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal)
+                        Text("23")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding(.bottom, 15)
+                            .padding(.horizontal)
+                        
+                        Divider()
+                            .background(Color.gray)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    // Height
+                    VStack (alignment: .leading) {
+                        Text("Height")
+                            .foregroundColor(ColorConstant.luminousGreen)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal)
+                        Text("174 cm")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color.white)
+                            .padding(.bottom, 15)
+                            .padding(.horizontal)
+                        
+                        Divider()
+                            .background(Color.gray)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    // Weight
+                    VStack (alignment: .leading) {
+                        Text("Weight")
+                            .foregroundColor(ColorConstant.luminousGreen)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal)
+                        Text("74 kg")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color.white)
+                            .padding(.bottom, 15)
+                            .padding(.horizontal)
+                        
+                        Divider()
+                            .background(Color.gray)
+                    }
+                    .padding(.bottom, 10)
+                    
+                    Spacer()
+                    
+                    Button {
+                        Task {
+                            try await viewModel.updateUser(fullname: editedName, email: user.email)
+                            }
+                    } label: {
+                        Text("Save")
+                            .foregroundColor(Color.black)
+                            .bold()
+                            .frame(width: 260, height: 50)
+                            .background(ColorConstant.luminousGreen)
+                            .cornerRadius(50)
+                            .padding(.bottom, 30)
+                    }
                 }
-                .padding(.bottom, 50)
-                
-                // MARK: Information
-                // Name
-                VStack (alignment: .leading) {
-                    Divider()
-                        .background(Color.gray)
-                        .padding(.bottom, 10)
-                    
-                    Text("Name")
-                        .foregroundColor(ColorConstant.luminousGreen)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal)
-                    Text(user.fullname)
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .padding(.bottom, 15)
-                        .padding(.horizontal)
-                    
-                    Divider()
-                        .background(Color.gray)
-                }
-                .padding(.bottom, 10)
-                
-                // Age
-                VStack (alignment: .leading) {
-                    Text("Age")
-                        .foregroundColor(ColorConstant.luminousGreen)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal)
-                    Text("23")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(.white)
-                        .padding(.bottom, 15)
-                        .padding(.horizontal)
-                    
-                    Divider()
-                        .background(Color.gray)
-                }
-                .padding(.bottom, 10)
-                
-                // Height
-                VStack (alignment: .leading) {
-                    Text("Height")
-                        .foregroundColor(ColorConstant.luminousGreen)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal)
-                    Text("174 cm")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .padding(.bottom, 15)
-                        .padding(.horizontal)
-                    
-                    Divider()
-                        .background(Color.gray)
-                }
-                .padding(.bottom, 10)
-                
-                // Weight
-                VStack (alignment: .leading) {
-                    Text("Weight")
-                        .foregroundColor(ColorConstant.luminousGreen)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal)
-                    Text("74 kg")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color.white)
-                        .padding(.bottom, 15)
-                        .padding(.horizontal)
-                    
-                    Divider()
-                        .background(Color.gray)
-                }
-                .padding(.bottom, 10)
-                
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Text("Save")
-                        .foregroundColor(Color.black)
-                        .bold()
-                        .frame(width: 260, height: 50)
-                        .background(ColorConstant.luminousGreen)
-                        .cornerRadius(50)
-                        .padding(.bottom, 30)
-                }
+                .frame(width: 330)
             }
-            .frame(width: 330)
-        }
-        // MARK: Hide default Back Button
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                HStack (spacing: 20) {
-                    backButton
+            // MARK: Hide default Back Button
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack (spacing: 20) {
+                        backButton
+                    }
+                    .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
             }
         }
     }
