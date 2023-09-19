@@ -30,7 +30,8 @@ struct AppointmentRow: View {
         // MARK: Appointment
         HStack {
             Text("\(appointment.date!, formatter: Self.dateTimeFormatter1)")
-                .font(.system(size: 12, weight: .bold))
+                .font(.caption)
+                .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .frame(width: UIScreen.main.bounds.width*0.15)
                 .foregroundColor(.white)
@@ -57,10 +58,12 @@ struct AppointmentRow: View {
                 VStack {
                     HStack (spacing: 5) {
                         Text(appointment.trainer!.name!)
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.title3)
+                            .fontWeight(.bold)
                         
                         Text("\(appointment.trainer!.rating!.clean)")
-                            .font(.system(size: 12, weight: .bold))
+                            .font(.caption)
+                            .fontWeight(.semibold)
                             .foregroundColor(.black)
                             .padding(4)
                             .background(
@@ -75,7 +78,8 @@ struct AppointmentRow: View {
                     .foregroundColor(.white)
                     
                     Text("\(appointment.date!, formatter: Self.dateTimeFormatter2) - \(appointment.date! + 30*60, formatter: Self.dateTimeFormatter2)")
-                        .font(.system(size: 14, weight: .bold))
+                        .font(.callout)
+                        .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, alignment: .leading)

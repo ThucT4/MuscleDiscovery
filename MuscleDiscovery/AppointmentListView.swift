@@ -23,7 +23,8 @@ struct AppointmentListView: View {
                 VStack {
                     Text("UPCOMING APPOINTMENTS")
                         .foregroundColor(.white)
-                        .font(.system(size: 22, weight: .heavy))
+                        .font(.title2)
+                        .fontWeight(.heavy)
                     
                     // If there is atleast 1 appointment
                     if (appointmentViewModel.userAppointments.count > 0) {
@@ -48,10 +49,14 @@ struct AppointmentListView: View {
                         .padding(.top)
                     }
                     else {
+                        Spacer()
+                        
                         Text("No Upcoming Appointment.")
-                            .font(.system(size: 20, weight: .semibold))
+                            .font(.headline)
                             .foregroundColor(ColorConstant.textGray)
                     }
+                    
+                    Spacer()
                 } // end VStack for list
                 .padding(.top)
                 
@@ -59,7 +64,7 @@ struct AppointmentListView: View {
                     showing = true
                 } label: {
                     Text("New Appointment")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.headline)
                         .foregroundColor(.black)
                         .padding()
                         .background(

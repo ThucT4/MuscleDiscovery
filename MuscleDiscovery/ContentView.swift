@@ -8,30 +8,39 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showingMainView: Bool = false
+    
     var body: some View {
-        TabView {
-            AppointmentListView()
-                .tabItem{
-                    Label("Trainers", systemImage: "figure.strengthtraining.traditional")
+        Group {
+            if showingMainView {
+                TabView {
+                    AppointmentListView()
+                        .tabItem{
+                            Label("Trainers", systemImage: "figure.strengthtraining.traditional")
+                        }
+                    
+                    FoodAnalysisView()
+                        .tabItem {
+                            Label("Nutrition", systemImage: "chart.pie.fill")
+                        }
+                    
+                    //            SettingsView()
+                    //                .tabItem {
+                    //                    Label("Settings", systemImage: "gearshape.fill")
+                    //                }
+                    
+                    //            EmptyView()
+                    //                .tabItem{
+                    //                    Label("Home", systemImage: "person")
+                    //                }
+                    
                 }
-            
-            FoodAnalysisView()
-                .tabItem {
-                    Label("Nutrition", systemImage: "chart.pie.fill")
-                }
-            
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape.fill")
-                }
-            
-            EmptyView()
-                .tabItem{
-                    Label("Home", systemImage: "person")
-                }
-            
-        }
-        .toolbarColorScheme(.light, for: .tabBar)
+                
+                .toolbarColorScheme(.light, for: .tabBar)
+            }
+            else {
+                AnimatedSplashView(showingMainView: self.$showingMainView)
+            }
     }
 }
 

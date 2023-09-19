@@ -15,6 +15,8 @@ struct TrainerListView: View {
     
     @Binding var showing: Bool
     
+    @State var searchText: String = ""
+    
     var backButton: some View {
         Button(action: {
             withAnimation() {
@@ -38,53 +40,51 @@ struct TrainerListView: View {
     }
     
     var body: some View {
-        // MARK: Main VStack
-        VStack {
-            // MARK: Main List
-            List {
-                // MARK: ForEach through each trainer in list
-                ForEach(trainerViewModel.trainerList) {trainer in
-                    ZStack {
-                        TrainerRow(trainer: trainer)
-                            .frame(maxWidth: .infinity)
-//                        Button {
-//                            print("Entered")
-//                            path.append(2)
-//                        } label: {
-//                            TrainerRow(trainer: trainer)
-//                                .frame(maxWidth: .infinity)
-//                        }
-//                        .navigationDestination(for: Int.self) { int in
-//                            TrainerDetailView(path: $path, trainer: trainer)
-//                        }
-                        
-                        NavigationLink(destination: TrainerDetailView(trainer: trainer, showing: self.$showing)) {
-
+        NavigationView {
+            // MARK: Main VStack
+            ZStack {
+                ColorConstant.black
+                    .ignoresSafeArea(.all)
+                
+                // MARK: Main List
+                List {
+                    // MARK: ForEach through each trainer in list
+                    ForEach(trainerViewModel.trainerList) {trainer in
+                        ZStack {
+                            TrainerRow(trainer: trainer)
+                                .frame(maxWidth: .infinity)
+                            
+                            NavigationLink(destination: TrainerDetailView(trainer: trainer, showing: self.$showing)) {
+                                    
+                            }
+                            .opacity(0)
                         }
-                        .opacity(0)
-                    }
-                    
-                } // end ForEach through each trainer in list
-                .listRowBackground(ColorConstant.black)
+                        .listRowBackground(ColorConstant.black)
+                        .listRowSeparator(.hidden)
+
+                    } // end ForEach through each trainer in list
+                } // end Main List
+                .listStyle(PlainListStyle())
+                .onChange(of: self.searchText) {newValue in
+                    self.trainerViewModel.getAllTrainerData(searchName: self.searchText)
+                }
                 
             } // end Main List
-            .listStyle(PlainListStyle())
-            .background(ColorConstant.black)
-            
-        } // end Main VStack
-        .background(ColorConstant.black)
+        }
+        .searchable(text: self.$searchText, prompt: "Search Trainer by Name")
         // MARK: Hide default Back Button
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .principal) {
+            ToolbarItem(placement: .navigationBarLeading) {
                 HStack (spacing: 20) {
                     backButton
 
                     Text("FITNESS TRAINERS")
                         .foregroundColor(.white)
-                        .font(.system(size: 22, weight: .heavy))
+                        .font(.title2)
+                        .fontWeight(.heavy)
                 }
-                .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
+//                .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
             }
 
         }

@@ -11,6 +11,8 @@ struct AppointmentDetailView: View {
     // Bind presentation mode of DetailView to  the PokeListView and will be used by the custome back button to dismiss the view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var appointmentViewModel: AppointmentViewModel
+    
     var appointment: Appointment
     
     static let dateFormat: DateFormatter = {
@@ -46,14 +48,13 @@ struct AppointmentDetailView: View {
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
                         .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
                     
                 })
                 .foregroundColor(.black)
                 .shadow(color: .white.opacity(0.35), radius: 7)
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
@@ -103,7 +104,6 @@ struct AppointmentDetailView: View {
                 
             } // end Appointment info VStack
             .frame(maxWidth: width, alignment: .leading)
-            .padding()
             .background(
                 Rectangle()
                     .fill(ColorConstant.gray)
@@ -111,8 +111,11 @@ struct AppointmentDetailView: View {
                     .cornerRadius(20)
             )
             .frame(maxHeight: .infinity, alignment: .top)
+            .padding(.top)
             
-            ZStack {
+            HStack {
+                Spacer()
+                
                 NavigationLink(destination: VideoCallView()) {
                     HStack {
                         Image(systemName: "phone.fill")
@@ -120,18 +123,49 @@ struct AppointmentDetailView: View {
                         Text("Join The Call")
                             
                     }
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.headline)
                     .foregroundColor(.black)
                     .padding()
                     .background(
                         Rectangle()
                         .fill(ColorConstant.luminousGreen)
                         .cornerRadius(25)
-                        .frame(width: UIScreen.main.bounds.width*0.7)
+                        .frame(width: UIScreen.main.bounds.width*0.4)
                         .shadow(color: .white.opacity(0.4), radius: 4)
                     )
                 }
-//                .opacity(0)
+                .padding(.leading)
+                
+                Spacer()
+                
+                Button(action: {
+                    appointmentViewModel.removeAppointment(documentID: self.appointment.documentID!)
+                    withAnimation() {
+                        self.showingTabBar = true
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }, label: {
+                    HStack {
+                        Image(systemName: "xmark")
+                        
+                        Text("Cancel")
+                            
+                    }
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding()
+                    .background(
+                        Rectangle()
+                            .fill(LinearConstant.linearOrange)
+                        .cornerRadius(25)
+                        .frame(width: UIScreen.main.bounds.width*0.4)
+                        .shadow(color: .white.opacity(0.4), radius: 4)
+                    )
+                })
+                .frame(width: UIScreen.main.bounds.width*0.4)
+                
+                Spacer()
+                
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
             

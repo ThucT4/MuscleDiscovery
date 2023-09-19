@@ -14,10 +14,10 @@ class TrainerViewModel: ObservableObject {
     private var db = Firestore.firestore().collection("trainers")
     
     init() {
-        getAllTrainerData()
+        getAllTrainerData(searchName: "")
     }
     
-    func getAllTrainerData() {
+    func getAllTrainerData(searchName: String) {
         db.addSnapshotListener{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No trainer data on database.")
@@ -38,8 +38,13 @@ class TrainerViewModel: ObservableObject {
 
                 rating = Double(round(10*rating) / 10)
 
-
                 return Trainer(documentID: documentID, age: age, experience: experience, gender: gender, highlights: highlights, imageURL: imageURL, introduction: introduction, name: name, rating: rating)
+            }
+            
+            if (!searchName.isEmpty) {
+                self.trainerList = self.trainerList.filter {trainer in
+                                    trainer.name!.lowercased().contains(searchName.lowercased())
+                                }
             }
         }
     }

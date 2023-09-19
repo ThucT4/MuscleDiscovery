@@ -77,27 +77,29 @@ struct TrainerDetailView: View {
                         
                         VStack (spacing: 15) {
                             Text(trainer.name!)
-                                .font(.system(size: 22, weight: .bold))
+                                .font(.title)
+                                .fontWeight(.bold)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Text("\(trainer.experience!) year\( trainer.experience! > 1 ? "s" : "") experience")
-                                .font(.system(size: 15, weight: .medium))
+                                .font(.headline)
                                 .foregroundColor(ColorConstant.textGray)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
-                            
-                            Rectangle()
-                                .fill(ColorConstant.black)
-                                .frame(width: 200, height: 50)
-                                .cornerRadius(7)
-                                .overlay(alignment: .center, content: {
-                                    Text("Professional Coach")
-                                        .font(.system(size: 20, weight: .semibold))
-                                        .foregroundColor(ColorConstant.luminousGreen)
-                                })
+                            Text("Professional Coach")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(ColorConstant.luminousGreen)
+                                .padding()
+                                .background(
+                                    Rectangle()
+                                        .fill(ColorConstant.black)
+                                        .cornerRadius(10)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .shadow(color: .white.opacity(0.5), radius: blinking ? 3 : 7)
+                                )
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .shadow(color: .white.opacity(0.5), radius: blinking ? 3 : 7)
                                 .onAppear {
                                     // Create animation to blink the button and make it repeate forever
                                     let animation = Animation.easeInOut(duration: 1).repeatForever(autoreverses:true)
@@ -114,25 +116,28 @@ struct TrainerDetailView: View {
                     // MARK: VStack for introduction
                     VStack (spacing: 10) {
                         Text("Introduction")
-                            .font(.system(size: 22, weight: .bold))
+                            .font(.title2)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                         
                         Text(trainer.introduction!)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.body)
                             .foregroundColor(ColorConstant.textGray)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .lineSpacing(7)
                     }
                     .padding(.leading)
+                    .padding(.trailing)
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     
                         
                     // MARK: VStack for highlight information
                     VStack (spacing: 10) {
                         Text("Highlights")
-                            .font(.system(size: 22, weight: .bold))
+                            .font(.title2)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                             .padding(.leading)
@@ -142,7 +147,7 @@ struct TrainerDetailView: View {
                             HStack (spacing: 20) {
                                 ForEach(trainer.highlights!, id:\.self) {info in
                                     Text(info)
-                                        .font(.system(size: 14, weight: .semibold))
+                                        .font(.headline)
                                         .foregroundColor(Color(red: 0.48, green: 0.47, blue: 0.47))
                                         .padding()
                                         .background(
@@ -160,7 +165,6 @@ struct TrainerDetailView: View {
                             .padding(.leading)
                             .frame(height: 70)
                             
-                            
                         } // end ScrollView highlights
                         .frame(height: 70)
                     }
@@ -169,7 +173,8 @@ struct TrainerDetailView: View {
                     // MARK: Rating
                     VStack (spacing: 10) {
                         Text("Rating")
-                            .font(.system(size:22, weight: .bold))
+                            .font(.title2)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                             .padding(.leading)
@@ -179,7 +184,8 @@ struct TrainerDetailView: View {
                             CircularProgress(percent: trainer.rating! / 5)
                             
                             Text("\(rating.clean) / 5.0")
-                                .font(.system(size:26, weight: .bold))
+                                .font(.title)
+                                .fontWeight(.bold)
                                 .gradientForeground(linearColor: LinearConstant.linearOrange)
                                 .onAppear {
                                     self.runCounter(counter: self.$rating, start: 0.0, end: trainer.rating!, speed: 0.04)
@@ -195,30 +201,10 @@ struct TrainerDetailView: View {
                 }
             } // end Main ScrollView
             
-//            Button {
-//                path.append(3)
-//            } label: {
-//                Text("Book an Appointment")
-//                    .font(.system(size: 14, weight: .semibold))
-//                    .foregroundColor(.black)
-//                    .padding()
-//                    .background(
-//                        Rectangle()
-//                        .fill(ColorConstant.luminousGreen)
-//                        .cornerRadius(25)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .shadow(color: .white.opacity(0.4), radius: 4)
-//                    )
-//            }
-//            .frame(maxHeight: UIScreen.main.bounds.height, alignment: .bottom)
-//            .navigationDestination(for: Int.self) { int in
-//                AppointmentBookingView(trainer: trainer, path: $path)
-//            }
-            
             // MARK: Button to Navigate to booking view
             NavigationLink(destination: AppointmentBookingView(trainer: trainer, showing: self.$showing)) {
                 Text("Book an Appointment")
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.headline)
                     .foregroundColor(.black)
                     .padding()
                     .background(

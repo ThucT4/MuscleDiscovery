@@ -36,7 +36,8 @@ struct TrainerRow: View {
             
             VStack (spacing: 10) {
                 Text(trainer.name!)
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.title2)
+                    .fontWeight(.semibold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Rectangle()
@@ -45,13 +46,14 @@ struct TrainerRow: View {
                     .frame(width: 40, height: 25)
                     .overlay(alignment: .center, content: {
                         Text("\(trainer.rating!.clean)")
-                            .font(.system(size: 12, weight: .bold))
+                            .font(.caption)
+                            .fontWeight(.bold)
                             .foregroundColor(.black)
                     })
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Text("\(trainer.experience!) year\( trainer.experience! > 1 ? "s" : "") experience")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.body)
                     .foregroundColor(ColorConstant.luminousGreen)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

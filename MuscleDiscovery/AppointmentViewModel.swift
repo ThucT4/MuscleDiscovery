@@ -39,7 +39,8 @@ class AppointmentViewModel: ObservableObject {
                 
                 // If appointment is over
                 if ( date + 30*60 <= Date.now) {
-                    continue
+                    self.removeAppointment(documentID: documentID)
+                    break
                 }
 
                 self.queryTrainerData(trainerID: trainerID) { (trainer) in
@@ -88,4 +89,14 @@ class AppointmentViewModel: ObservableObject {
         db.collection("appointments").addDocument(data: ["customerID": customerID, "trainerID": trainerID, "date": date.timeIntervalSince1970])
     }
     
+    func removeAppointment(documentID: String) {
+        db.collection("appointments").document(documentID).delete { (err) in
+            if let err = err {
+                print("Error while removing document: \(err)")
+            }
+            else {
+                print("Appointment successfully removed!")
+            }
+        }
+    }
 }

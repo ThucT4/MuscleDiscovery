@@ -46,11 +46,13 @@ struct PaymentCompleteView: View {
                 // MARK: Payment completet HStack
                 HStack {
                     Image(systemName: "checkmark.square.fill")
-                        .font(.system(size: 20, weight: .bold))
+                        .font(.title2)
+                        .fontWeight(.bold)
                         .foregroundColor(ColorConstant.luminousGreen)
                     
                     Text("Payment Completed!")
-                        .font(.system(size: 20, weight: .bold))
+                        .font(.title2)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                     
                 } // endPayment completet HStack
@@ -58,7 +60,7 @@ struct PaymentCompleteView: View {
                 
                 Text("You've book a new appointment with your trainer.")
                     .multilineTextAlignment(.leading)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.headline)
                     .foregroundColor(ColorConstant.textGray)
                     .frame(maxWidth: width, alignment: .leading)
                 
@@ -76,23 +78,23 @@ struct PaymentCompleteView: View {
                         // MARK: Date VStack
                         VStack {
                             Text("Date")
-                                .font(.system(size: 15, weight: .medium))
+                                .font(.body)
                                 .frame(maxWidth: width, alignment: .leading)
 
                             
                             Text("\(date, formatter: Self.dateFormat)")
-                                .font(.system(size: 15, weight: .semibold))
+                                .font(.headline)
                                 .frame(maxWidth: width, alignment: .leading)
                         } // end Date VStack
                         
                         // MARK: Time VStack
                         VStack {
                             Text("Time")
-                                .font(.system(size: 15, weight: .medium))
+                                .font(.body)
                                 .frame(maxWidth: UIScreen.main.bounds.width*0.85, alignment: .leading)
                             
                             Text("\(date, formatter: Self.timeFormat) - \(date + 30*60, formatter: Self.timeFormat)")
-                                .font(.system(size: 15, weight: .semibold))
+                                .font(.headline)
                                 .frame(maxWidth: width, alignment: .leading)
                         }
 
@@ -114,7 +116,7 @@ struct PaymentCompleteView: View {
             } // end Main VStack
             
             Text("Done")
-                .font(.system(size: 14, weight: .semibold))
+                .font(.headline)
                 .foregroundColor(.black)
                 .padding()
                 .background(

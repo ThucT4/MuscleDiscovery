@@ -15,7 +15,7 @@ struct AppointmentBookingView: View {
     
     var trainer: Trainer
     
-    @State private var selectedDate = Date.now.round(precision: 30)
+    @State private var selectedDate = Date.now.ceil(precision: 30)
     
     @State var isValid: Bool = true
     
@@ -66,7 +66,7 @@ struct AppointmentBookingView: View {
                     }
                 
                 Text("\(isValid ? "" : "You had an appoint in this time!")")
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.body)
                     .foregroundColor(.red)
                 
                 Spacer()
@@ -75,18 +75,18 @@ struct AppointmentBookingView: View {
             .padding(.top)
             
             Text("Next")
-                .font(.system(size: 14, weight: .semibold))
+                .font(.headline)
                 .foregroundColor(.black)
                 .padding()
                 .background(
                     // MARK: Button to Navigate to booking view
                     NavigationLink(destination: PaymentCompleteView(date: selectedDate, trainer: trainer, showing: self.$showing)) {
                         Rectangle()
-                        .fill(ColorConstant.luminousGreen)
-                        .cornerRadius(25)
-                        .frame(width: UIScreen.main.bounds.width*0.7)
-                        .shadow(color: .white.opacity(0.4), radius: 4)
-                        .opacity(isValid ? 1 : 0.5)
+                            .fill(ColorConstant.luminousGreen)
+                            .cornerRadius(25)
+                            .frame(width: UIScreen.main.bounds.width*0.7)
+                            .shadow(color: .white.opacity(0.4), radius: 4)
+                            .opacity(isValid ? 1 : 0.5)
 
                     }
                     .disabled(!isValid)
@@ -110,7 +110,8 @@ struct AppointmentBookingView: View {
                     backButton
 
                     Text("APPOINTMENT")
-                        .font(.system(size: 20, weight: .heavy))
+                        .font(.title2)
+                        .fontWeight(.heavy)
                         .foregroundColor(.white)
                 }
                 .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
