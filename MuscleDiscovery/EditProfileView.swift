@@ -10,6 +10,9 @@ import SwiftUI
 struct EditProfileView: View {
     @State private var isEditingName = false
     @State private var editedName = ""
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     
     @EnvironmentObject var viewModel: AuthViewModel
     
@@ -79,27 +82,6 @@ struct EditProfileView: View {
                     .padding(.bottom, 50)
                     
                     // MARK: Information
-                    // Name
-                    //                VStack (alignment: .leading) {
-                    //                    Divider()
-                    //                        .background(Color.gray)
-                    //                        .padding(.bottom, 10)
-                    //
-                    //                    Text("Name")
-                    //                        .foregroundColor(ColorConstant.luminousGreen)
-                    //                        .padding(.bottom, 5)
-                    //                        .padding(.horizontal)
-                    //                    Text("user.fullname")
-                    //                        .font(.title2)
-                    //                        .bold()
-                    //                        .foregroundColor(Color.white)
-                    //                        .padding(.bottom, 15)
-                    //                        .padding(.horizontal)
-                    //
-                    //                    Divider()
-                    //                        .background(Color.gray)
-                    //                }
-                    //                .padding(.bottom, 10)
                     // Name
                     VStack(alignment: .leading) {
                         Divider()
@@ -201,21 +183,40 @@ struct EditProfileView: View {
                     
                     Button {
                         Task {
-                            try await viewModel.updateUser(fullname: editedName, email: user.email)
+                            do {
+                                let success = try await viewModel.updateUser(fullname: editedName, email: user.email)
+                                
+                                if success {
+                                    // Update was successful, show the alert
+                                    self.alertMessage = "Update user information successfully"
+                                    self.showAlert.toggle()
+                                    
+                                    // Set a timer to automatically dismiss the alert after 3 seconds
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        self.showAlert = false
+                                    }
+                                } else {
+                                    // Handle the case where the update was not successful
+                                    print("User update failed.")
+                                }
+                            } catch {
+                                // Handle error if the update fails
+                                print("Failed to update user information: \(error.localizedDescription)")
                             }
-                    } label: {
-                        Text("Save")
-                            .foregroundColor(Color.black)
-                            .bold()
-                            .frame(width: 260, height: 50)
-                            .background(ColorConstant.luminousGreen)
-                            .cornerRadius(50)
-                            .padding(.bottom, 30)
-                    }
+                        }
+                } label: {
+                    Text("Save")
+                        .foregroundColor(Color.black)
+                        .bold()
+                        .frame(width: 260, height: 50)
+                        .background(ColorConstant.luminousGreen)
+                        .cornerRadius(50)
+                        .padding(.bottom, 30)
                 }
-                .frame(width: 330)
             }
-            // MARK: Hide default Back Button
+            .frame(width: 330)
+        }
+        // MARK: Hide default Back Button
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -225,8 +226,14 @@ struct EditProfileView: View {
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 }
             }
-        }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Success"),
+                    message: Text(alertMessage)
+                )
+            }
     }
+}
 }
 
 //struct EditProfileView_Previews: PreviewProvider {
