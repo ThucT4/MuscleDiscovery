@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct EditProfileView: View {
-    
+    var user: User
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // Back Button
     var backButton: some View {
@@ -42,9 +43,14 @@ struct EditProfileView: View {
                 Spacer()
                 // Profile Image and Button
                 ZStack {
-                    Image("Profile-Picture")
-                        .resizable()
+                    Text(user.initials)
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
                         .frame(width: 120, height: 120)
+                        .background(.gray)
+                        .clipShape(Circle())
+                    
                     VStack {
                         Spacer()
                         HStack {
@@ -79,7 +85,7 @@ struct EditProfileView: View {
                         .foregroundColor(ColorConstant.luminousGreen)
                         .padding(.bottom, 5)
                         .padding(.horizontal)
-                    Text("Sarah Wegan")
+                    Text(user.fullname)
                         .font(.title2)
                         .bold()
                         .foregroundColor(Color.white)
@@ -174,8 +180,8 @@ struct EditProfileView: View {
     }
 }
 
-struct EditProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditProfileView()
-    }
-}
+//struct EditProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditProfileView()
+//    }
+//}

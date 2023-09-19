@@ -15,6 +15,11 @@ struct ContentView: View {
                     Label("Trainers", systemImage: "figure.strengthtraining.traditional")
                 }
             
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
+            
             EmptyView()
                 .tabItem{
                     Label("Home", systemImage: "person")
