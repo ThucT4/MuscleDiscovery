@@ -66,6 +66,7 @@
 		A27A745D2AB5C18600796661 /* StreamVideo in Frameworks */ = {isa = PBXBuildFile; productRef = A27A745C2AB5C18600796661 /* StreamVideo */; };
 		A27A745F2AB5C18600796661 /* StreamVideoSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A27A745E2AB5C18600796661 /* StreamVideoSwiftUI */; };
 		A27A74632AB5EA2900796661 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A27A74622AB5EA2900796661 /* GoogleService-Info.plist */; };
+		A282DA532AB98127005CFC6F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A282DA522AB98127005CFC6F /* SDWebImageSwiftUI */; };
 		A29E21D02AB97F3A001F6403 /* IntegralCF-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A29E21CF2AB97F37001F6403 /* IntegralCF-ExtraBold.otf */; };
 		A29E21D22AB97F4E001F6403 /* fitness.gif in Resources */ = {isa = PBXBuildFile; fileRef = A29E21D12AB97F4E001F6403 /* fitness.gif */; };
 		A29E21D42AB97FE7001F6403 /* AnimatedSplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29E21D32AB97FE7001F6403 /* AnimatedSplashView.swift */; };
@@ -125,6 +126,7 @@
 		A27A74562AB5BE4A00796661 /* AppointmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRow.swift; sourceTree = "<group>"; };
 		A27A74592AB5C10500796661 /* VideoCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCallView.swift; sourceTree = "<group>"; };
 		A27A74622AB5EA2900796661 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A282DA542AB9816A005CFC6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A29E21CF2AB97F37001F6403 /* IntegralCF-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-ExtraBold.otf"; sourceTree = "<group>"; };
 		A29E21D12AB97F4E001F6403 /* fitness.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fitness.gif; sourceTree = "<group>"; };
 		A29E21D32AB97FE7001F6403 /* AnimatedSplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedSplashView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A282DA532AB98127005CFC6F /* SDWebImageSwiftUI in Frameworks */,
 				A27A745D2AB5C18600796661 /* StreamVideo in Frameworks */,
 				A2241E322AB0610300E06D8B /* FirebaseFirestoreSwift in Frameworks */,
 				A2241E362AB0610300E06D8B /* FirebaseStorageCombine-Community in Frameworks */,
@@ -352,6 +355,7 @@
 		A2241E102AB05A4600E06D8B /* MuscleDiscovery */ = {
 			isa = PBXGroup;
 			children = (
+				A282DA542AB9816A005CFC6F /* Info.plist */,
 				A29E21CE2AB97F0F001F6403 /* Fonts */,
 				A29E21CD2AB9781A001F6403 /* Gif */,
 				A20EE5912AB40A8700191FC6 /* Helpers */,
@@ -446,6 +450,7 @@
 				A27A745C2AB5C18600796661 /* StreamVideo */,
 				A27A745E2AB5C18600796661 /* StreamVideoSwiftUI */,
 				114EFDD52AB8201000DEACA3 /* WrappingHStack */,
+				A282DA522AB98127005CFC6F /* SDWebImageSwiftUI */,
 			);
 			productName = MuscleDiscovery;
 			productReference = A2241E0E2AB05A4600E06D8B /* MuscleDiscovery.app */;
@@ -479,6 +484,7 @@
 				A2241E282AB0610300E06D8B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A27A745B2AB5C18600796661 /* XCRemoteSwiftPackageReference "stream-video-swift" */,
 				114EFDD42AB8201000DEACA3 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				A282DA512AB98127005CFC6F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = A2241E0F2AB05A4600E06D8B /* Products */;
 			projectDirPath = "";
@@ -690,8 +696,9 @@
 				DEVELOPMENT_TEAM = QZ5G3XLVYQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuscleDiscovery/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -722,8 +729,9 @@
 				DEVELOPMENT_TEAM = QZ5G3XLVYQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MuscleDiscovery/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = 1.0;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -791,6 +799,14 @@
 				minimumVersion = 0.3.0;
 			};
 		};
+		A282DA512AB98127005CFC6F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -848,6 +864,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A27A745B2AB5C18600796661 /* XCRemoteSwiftPackageReference "stream-video-swift" */;
 			productName = StreamVideoSwiftUI;
+		};
+		A282DA522AB98127005CFC6F /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A282DA512AB98127005CFC6F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
