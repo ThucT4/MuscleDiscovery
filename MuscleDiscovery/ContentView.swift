@@ -24,10 +24,10 @@ struct ContentView: View {
                             Label("Nutrition", systemImage: "chart.pie.fill")
                         }
                     
-                    //            SettingsView()
-                    //                .tabItem {
-                    //                    Label("Settings", systemImage: "gearshape.fill")
-                    //                }
+                    SettingsView()
+                        .tabItem {
+                            Label("Settings", systemImage: "gearshape.fill")
+                        }
                     
                     //            EmptyView()
                     //                .tabItem{
@@ -41,6 +41,7 @@ struct ContentView: View {
             else {
                 AnimatedSplashView(showingMainView: self.$showingMainView)
             }
+        }
     }
 }
 
