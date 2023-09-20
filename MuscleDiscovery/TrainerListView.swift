@@ -78,8 +78,8 @@ struct TrainerListView: View {
                 
             } // end Main List
         }
-        .searchable(text: self.$searchText, prompt: "Search Trainer by Name")
         // MARK: Hide default Back Button
+        .searchable(text: self.$searchText, prompt: "Search Trainer by Name")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -94,6 +94,7 @@ struct TrainerListView: View {
             }
 
         }
+        .environmentObject(trainerViewModel)
         
     }
 }

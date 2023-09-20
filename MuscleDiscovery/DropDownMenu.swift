@@ -23,10 +23,10 @@ struct DropDownMenu: View {
                 Button(action: {// When the button is clicked
                     // Change the filterType value to let the filteredList filter pokemons
                     if (option.contains("Rating")) {
-                        trainerListViewModel.sortByRating(desc: option.contains("0-9") ? false : true)
+                        trainerListViewModel.sortByRating(desc: option.contains("0-9") ? true : false)
                     }
                     else {
-                        trainerListViewModel.sortByExperience(desc: option.contains("0-9") ? false : true)
+                        trainerListViewModel.sortByExperience(desc: option.contains("0-9") ? true : false)
                     }
                     
                     // Change the selectedOption to let the dropdownMenu update the background color
@@ -39,26 +39,25 @@ struct DropDownMenu: View {
             }
         }label: { // The label of Menu
             // Display horizontally
-            HStack {
+            HStack (spacing: 20) {
                 // Display current selected option
                 Text(selectedOption)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                
-                Spacer()
+//                    .frame(maxWidth: .infinity, alignment: .center)
                 
                 // An decoration arrow
                 Text("⌵")
                     .offset(y: -4)
-                    .padding(.trailing, 15)
             }
-            // Change text color based on the selected type (element)
-            .foregroundColor(ColorConstant.black)
+            .padding()
             .font(.headline)
-            .frame(width: 150, height: 42)
-            // Change background color based on the selected type (element)
-            .background(Color("Neon"))
-            // Rounded the corners
-            .cornerRadius(49)
+            .foregroundColor(ColorConstant.black)
+            .background(
+                Rectangle()
+                    .fill(Color("Neon"))
+                    .frame(height: 42)
+                    // Rounded the corners
+                    .cornerRadius(49)
+            )
         }
         .padding(.horizontal)
     }

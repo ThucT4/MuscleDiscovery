@@ -46,6 +46,8 @@ class TrainerViewModel: ObservableObject {
                                     trainer.name!.lowercased().contains(searchName.lowercased())
                                 }
             }
+            
+            self.sortByRating(desc: false)
         }
     }
     
