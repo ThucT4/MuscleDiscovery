@@ -7,17 +7,15 @@ struct RegistrationView: View {
     @State var confirmedPassword : String = ""
     
     @State private var isLoginActive = true
+    @State private var isShowingAlert = false
+    
+    @State var signUpSuccess = false
     
     @EnvironmentObject var viewModel: AuthViewModel
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-//        NavigationStack {
-//        } // NavigationView
-//        .navigationBarBackButtonHidden(true)
-//        .navigationBarItems(leading: backButton())
-        
         ZStack {
             Image("signup-wallpaper")
                 .resizable()
@@ -78,6 +76,17 @@ struct RegistrationView: View {
                                     
                 // -- SIGNUP --
                 HStack {
+                    // Login message after pressing the login button
+                    if viewModel.isSignupSuccess {
+                        Text("Signup Success ✅")
+                        .foregroundColor(.green)
+                        .padding(.leading, 30)
+                    } else {
+                        Text("Signup not done! ❌")
+                        .foregroundColor(.red)
+                        .padding(.leading, 30)
+                    }
+                    
                     Spacer()
                     
                     Button {
@@ -85,7 +94,6 @@ struct RegistrationView: View {
                             try await viewModel.createUser(email: email, password: password, fullname: fullname)
                         }
                         
-                        dismiss()
                      } label: {
                         HStack(spacing: 15) {
                             Text("Sign up")

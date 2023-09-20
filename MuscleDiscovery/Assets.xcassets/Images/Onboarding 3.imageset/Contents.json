@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Onboarding 6 (1).jpg",
+      "filename" : "Onboarding 6 (2).jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Onboarding 6 (2)@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Onboarding 6 (2)@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

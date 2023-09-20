@@ -13,18 +13,13 @@ struct SessionCheckView: View {
     
     var body: some View {
         Group {
-            if viewModel.userSession != nil {
+            if viewModel.isLoggedIn {
                 ContentView()
                     .navigationBarBackButtonHidden(true)
             } else {
                 LoginView()
             }
         }
-    }
-    
-    private func delay() async {
-        try? await Task.sleep(nanoseconds: 2_000_000_000)
-        isLoading.toggle()
     }
 }
 

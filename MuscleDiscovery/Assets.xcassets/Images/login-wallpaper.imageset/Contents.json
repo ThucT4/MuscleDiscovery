@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "login-wallpaper.jpg",
+      "filename" : "login-wallpaper (1).jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "login-wallpaper (1)@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "login-wallpaper (1)@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

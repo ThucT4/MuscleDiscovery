@@ -9,6 +9,7 @@ struct LoginView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
+        
         NavigationView {
             ZStack {
                 Image("login-wallpaper")
@@ -69,25 +70,25 @@ struct LoginView: View {
                     
                     // -- LOGIN --
                     HStack {
-                        HStack(spacing: 20) {
-                            // Apple icon
-                            Image(systemName: "apple.logo")
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color("Dark grey"))
-                                .clipShape(Circle())
-                            
-                            // Google icon
-                            Image("google.logo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20)
-                                .padding()
-                                .background(Color("Dark grey"))
-                                .clipShape(Circle())
-                        }
-                        .padding(.top, 12)
-                        .padding(.leading, 35)
+//                        HStack(spacing: 20) {
+//                            // Apple icon
+//                            Image(systemName: "apple.logo")
+//                                .foregroundColor(.white)
+//                                .padding()
+//                                .background(Color("Dark grey"))
+//                                .clipShape(Circle())
+//
+//                            // Google icon
+//                            Image("google.logo")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 20)
+//                                .padding()
+//                                .background(Color("Dark grey"))
+//                                .clipShape(Circle())
+//                        }
+//                        .padding(.top, 12)
+//                        .padding(.leading, 35)
                         
                         Spacer()
                         
@@ -116,9 +117,10 @@ struct LoginView: View {
                     Spacer()
                 }
             } // ZStack
-        }
+        } // NavigationView
         .navigationBarHidden(true)
-    } // NavigationView
+        
+    }
 }
 
 extension LoginView: AuthenticationFormProtocol {
