@@ -46,28 +46,35 @@ struct TrainerListView: View {
                 ColorConstant.black
                     .ignoresSafeArea(.all)
                 
-                // MARK: Main List
-                List {
-                    // MARK: ForEach through each trainer in list
-                    ForEach(trainerViewModel.trainerList) {trainer in
-                        ZStack {
-                            TrainerRow(trainer: trainer)
-                                .frame(maxWidth: .infinity)
-                            
-                            NavigationLink(destination: TrainerDetailView(trainer: trainer, showing: self.$showing)) {
-                                    
+                VStack {
+                    DropDownMenu()
+                        .frame(maxWidth: UIScreen.main.bounds.width*0.9, alignment: .trailing)
+                    
+                    // MARK: Main List
+                    List {
+                        // MARK: ForEach through each trainer in list
+                        ForEach(trainerViewModel.trainerList) {trainer in
+                            ZStack {
+                                TrainerRow(trainer: trainer)
+                                    .frame(maxWidth: .infinity)
+                                
+                                NavigationLink(destination: TrainerDetailView(trainer: trainer, showing: self.$showing)) {
+                                        
+                                }
+                                .opacity(0)
                             }
-                            .opacity(0)
-                        }
-                        .listRowBackground(ColorConstant.black)
-                        .listRowSeparator(.hidden)
+                            .listRowBackground(ColorConstant.black)
+                            .listRowSeparator(.hidden)
 
-                    } // end ForEach through each trainer in list
-                } // end Main List
-                .listStyle(PlainListStyle())
-                .onChange(of: self.searchText) {newValue in
-                    self.trainerViewModel.getAllTrainerData(searchName: self.searchText)
+                        } // end ForEach through each trainer in list
+                    } // end Main List
+                    .listStyle(PlainListStyle())
+                    .onChange(of: self.searchText) {newValue in
+                        self.trainerViewModel.getAllTrainerData(searchName: self.searchText)
+                    }
                 }
+                
+                
                 
             } // end Main List
         }
@@ -84,7 +91,6 @@ struct TrainerListView: View {
                         .font(.title2)
                         .fontWeight(.heavy)
                 }
-//                .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
             }
 
         }

@@ -88,7 +88,7 @@ struct TrainerDetailView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Text("Professional Coach")
-                                .font(.title2)
+                                .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(ColorConstant.luminousGreen)
                                 .padding()

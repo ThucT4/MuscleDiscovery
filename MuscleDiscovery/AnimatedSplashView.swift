@@ -27,11 +27,11 @@ struct AnimatedSplashView: View {
                 
                 VStack (spacing: 0) {
                     Text("Muscles")
-                        .font(.custom("FONTSPRINGDEMO-IntegralCFExtraBoldRegular", size: 60))
+                        .font(.custom("Integral CF", size: 60))
                         .fontWeight(.heavy)
                     
                     Text("Discovery")
-                        .font(.custom("FONTSPRINGDEMO-IntegralCFExtraBoldRegular", size: 40))
+                        .font(.custom("Integral CF", size: 40))
                 }
                 .foregroundColor(ColorConstant.luminousGreen)
                 .offset(y: animating ? -35 : 35)

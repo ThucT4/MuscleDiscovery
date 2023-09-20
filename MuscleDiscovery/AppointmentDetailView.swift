@@ -77,23 +77,23 @@ struct AppointmentDetailView: View {
                     // MARK: Date VStack
                     VStack {
                         Text("Date")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.body)
                             .frame(maxWidth: width, alignment: .leading)
 
                         
                         Text("\(appointment.date!, formatter: Self.dateFormat)")
-                            .font(.system(size: 15, weight: .semibold))
+                            .font(.headline)
                             .frame(maxWidth: width, alignment: .leading)
                     } // end Date VStack
                     
                     // MARK: Time VStack
                     VStack {
                         Text("Time")
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.body)
                             .frame(maxWidth: UIScreen.main.bounds.width*0.85, alignment: .leading)
                         
                         Text("\(appointment.date!, formatter: Self.timeFormat) - \(appointment.date! + 30*60, formatter: Self.timeFormat)")
-                            .font(.system(size: 15, weight: .semibold))
+                            .font(.headline)
                             .frame(maxWidth: width, alignment: .leading)
                     }
 

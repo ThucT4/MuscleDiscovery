@@ -49,4 +49,20 @@ class TrainerViewModel: ObservableObject {
         }
     }
     
+    func sortByRating(desc: Bool) {
+        self.trainerList = self.trainerList.sorted{$0.rating! < $1.rating!}
+        
+        if (!desc) {
+            self.trainerList = self.trainerList.reversed()
+        }
+    }
+    
+    func sortByExperience(desc: Bool) {
+        self.trainerList = self.trainerList.sorted{$0.experience! < $1.experience!}
+        
+        if (!desc) {
+            self.trainerList = self.trainerList.reversed()
+        }
+    }
+    
 }
