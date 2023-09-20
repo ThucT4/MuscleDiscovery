@@ -106,10 +106,10 @@ class AuthViewModel: ObservableObject {
     /// - Parameters:
     ///   - email: Registerd email
     ///   - fullname: Registered user's name
-    func updateUser(fullname: String, email: String) async throws {
+    func updateUser(fullname: String, email: String) async throws -> Bool {
         do {
             guard let uid = Auth.auth().currentUser?.uid else {
-                return
+                return false
             }
             
             // Update user information in Firestore
@@ -121,8 +121,11 @@ class AuthViewModel: ObservableObject {
             
             try await Firestore.firestore().collection("users").document(uid).updateData(userData)
             
+            return true
+            
         } catch {
             print("Failed to update user information: \(error.localizedDescription)")
+            return false
         }
     }
     
