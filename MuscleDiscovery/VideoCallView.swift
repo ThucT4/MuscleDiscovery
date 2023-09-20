@@ -23,7 +23,7 @@ struct VideoCallView: View {
     
     @State var ringing: Bool = false
     
-    init() {
+    init(appointment: Appointment) {
         // Initialize Stream Video client
         self.client = StreamVideo(
             apiKey: apiKey,
@@ -31,7 +31,9 @@ struct VideoCallView: View {
             token: .init(stringLiteral: token)
         )
         
-        self.callID = "PTMeetingOf"
+        self.callID = appointment.documentID!
+        
+        print(callID)
     }
     
     var body: some View {
@@ -68,6 +70,7 @@ struct VideoCallView: View {
         .onAppear {
             Task {
                 guard videoCallViewModel.call == nil else { return }
+//                videoCallViewModel.start(callType: callID, callId: callID)
                 videoCallViewModel.startCall(callType: .default, callId: callID, members: [])
             }
         }

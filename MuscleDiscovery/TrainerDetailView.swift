@@ -90,6 +90,7 @@ struct TrainerDetailView: View {
                             Text("Professional Coach")
                                 .font(.title3)
                                 .fontWeight(.semibold)
+                                .multilineTextAlignment(.center)
                                 .foregroundColor(ColorConstant.luminousGreen)
                                 .padding()
                                 .background(

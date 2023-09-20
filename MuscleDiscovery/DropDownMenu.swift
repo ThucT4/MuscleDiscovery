@@ -13,7 +13,7 @@ struct DropDownMenu: View {
     @State var selectedOption: String = "Rating 0-9"
     
     // All sorting type will be displayed as option for user
-    var sortType: [String] = ["Rating 0-9", "Rating 9-0", "Experience 0-9", "Experience 9-0"]
+    var sortType: [String] = [ "Rating 9-0", "Rating 0-9", "Experience 9-0", "Experience 0-9"]
     
     var body: some View {
         Menu {

@@ -116,7 +116,7 @@ struct AppointmentDetailView: View {
             HStack {
                 Spacer()
                 
-                NavigationLink(destination: VideoCallView()) {
+                NavigationLink(destination: VideoCallView(appointment: appointment)) {
                     HStack {
                         Image(systemName: "phone.fill")
                         
@@ -130,7 +130,7 @@ struct AppointmentDetailView: View {
                         Rectangle()
                         .fill(ColorConstant.luminousGreen)
                         .cornerRadius(25)
-                        .frame(width: UIScreen.main.bounds.width*0.4)
+                        .frame(maxWidth: UIScreen.main.bounds.width*0.4)
                         .shadow(color: .white.opacity(0.4), radius: 4)
                     )
                 }
@@ -158,7 +158,7 @@ struct AppointmentDetailView: View {
                         Rectangle()
                             .fill(LinearConstant.linearOrange)
                         .cornerRadius(25)
-                        .frame(width: UIScreen.main.bounds.width*0.4)
+                        .frame(maxWidth: UIScreen.main.bounds.width*0.4)
                         .shadow(color: .white.opacity(0.4), radius: 4)
                     )
                 })
