@@ -184,9 +184,12 @@ struct EditProfileView: View {
                     Button {
                         Task {
                             do {
+                                //                                try await viewModel.updateUser(fullname: editedName, email: user.email)
                                 let success = try await viewModel.updateUser(fullname: editedName, email: user.email)
                                 
                                 if success {
+                                    print("Update user information successfully")
+                                    
                                     // Update was successful, show the alert
                                     self.alertMessage = "Update user information successfully"
                                     self.showAlert.toggle()

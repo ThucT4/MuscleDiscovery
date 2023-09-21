@@ -13,11 +13,11 @@ class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     private var userListener: ListenerRegistration?
-            
+    
     @Published var isLoggedIn = false
     @Published var isSignupSuccess = false
     @Published var isBusy = false
-
+    
     
     /// The app will retrieve user data in firestore by id
     /// and store them in current user every time the app run
@@ -41,12 +41,12 @@ class AuthViewModel: ObservableObject {
             self.isLoggedIn = true
             await fetchUser()
             print("Login success!")
-
+            
         } catch {
             print("Failed to login! \(error.localizedDescription )")
         }
     }
-     
+    
     
     /// Create new user info and store them in Firestore
     /// - Parameters:
@@ -56,7 +56,7 @@ class AuthViewModel: ObservableObject {
     func createUser(email: String, password: String, fullname: String) async throws {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
-//                self.authenticationState = .FAILED
+                //                self.authenticationState = .FAILED
                 print(error?.localizedDescription ?? "")
                 
             } else {
@@ -77,25 +77,25 @@ class AuthViewModel: ObservableObject {
         }
         
         // -- OLD WORKS --
-//        do {
-//            // Create Firebase user
-//            let result = try await Auth.auth().createUser(withEmail: email, password: password)
-//            self.userSession = result.user
-//            let user = User(id: result.user.uid , fullname: fullname, email: email)
-//
-//            let encodedUser = try Firestore.Encoder().encode(user)
-//
-//            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-//            self.authenticationState = .SUCCESS
-//
-//            print("Create new user success.")
-//
-//            // Fetch after creating new user session
-//            await fetchUser()
-//        } catch {
-//            self.authenticationState = .FAILED
-//            print("Failed to create user! \(error.localizedDescription )")
-//        }
+        //        do {
+        //            // Create Firebase user
+        //            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+        //            self.userSession = result.user
+        //            let user = User(id: result.user.uid , fullname: fullname, email: email)
+        //
+        //            let encodedUser = try Firestore.Encoder().encode(user)
+        //
+        //            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+        //            self.authenticationState = .SUCCESS
+        //
+        //            print("Create new user success.")
+        //
+        //            // Fetch after creating new user session
+        //            await fetchUser()
+        //        } catch {
+        //            self.authenticationState = .FAILED
+        //            print("Failed to create user! \(error.localizedDescription )")
+        //        }
     }
     
     
@@ -165,43 +165,43 @@ class AuthViewModel: ObservableObject {
     
     // Start listener
     private func startUserListener() {
-           guard let uid = Auth.auth().currentUser?.uid else {
-               return
-           }
-           
-           let userDocRef = Firestore.firestore().collection("users").document(uid)
-           
-           userListener = userDocRef.addSnapshotListener { [weak self] documentSnapshot, error in
-               if let error = error {
-                   print("Error listening for user updates: \(error.localizedDescription)")
-                   return
-               }
-               
-               guard let document = documentSnapshot, document.exists else {
-                   print("User document does not exist")
-                   return
-               }
-               
-               do {
-                   if let user = try document.data(as: User?.self) {
-                       self?.currentUser = user
-                   } else {
-                       print("Failed to decode user document")
-                   }
-               } catch {
-                   print("Error decoding user document: \(error.localizedDescription)")
-               }
-           }
-       }
-       
-       deinit {
-           // Stop the user listener when the view model is deinitialized
-           userListener?.remove()
-       }
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let userDocRef = Firestore.firestore().collection("users").document(uid)
+        
+        userListener = userDocRef.addSnapshotListener { [weak self] documentSnapshot, error in
+            if let error = error {
+                print("Error listening for user updates: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                print("User document does not exist")
+                return
+            }
+            
+            do {
+                if let user = try document.data(as: User?.self) {
+                    self?.currentUser = user
+                } else {
+                    print("Failed to decode user document")
+                }
+            } catch {
+                print("Error decoding user document: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    deinit {
+        // Stop the user listener when the view model is deinitialized
+        userListener?.remove()
+    }
 }
 
 extension Encodable {
     var dictionary: [String: Any]? {
-       return try? Firestore.Encoder().encode(self)
+        return try? Firestore.Encoder().encode(self)
     }
 }
