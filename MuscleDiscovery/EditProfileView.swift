@@ -204,19 +204,19 @@ struct EditProfileView: View {
                                 print("Failed to update user information: \(error.localizedDescription)")
                             }
                         }
-                } label: {
-                    Text("Save")
-                        .foregroundColor(Color.black)
-                        .bold()
-                        .frame(width: 260, height: 50)
-                        .background(ColorConstant.luminousGreen)
-                        .cornerRadius(50)
-                        .padding(.bottom, 30)
+                    } label: {
+                        Text("Save")
+                            .foregroundColor(Color.black)
+                            .bold()
+                            .frame(width: 260, height: 50)
+                            .background(ColorConstant.luminousGreen)
+                            .cornerRadius(50)
+                            .padding(.bottom, 30)
+                    }
                 }
+                .frame(width: 330)
             }
-            .frame(width: 330)
-        }
-        // MARK: Hide default Back Button
+            // MARK: Hide default Back Button
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -232,8 +232,8 @@ struct EditProfileView: View {
                     message: Text(alertMessage)
                 )
             }
+        }
     }
-}
 }
 
 //struct EditProfileView_Previews: PreviewProvider {
