@@ -22,6 +22,7 @@ struct FoodInventoryView: View {
     @Binding var selectionList: [Food]
     @Binding var singleSelectionList: [Food]
     
+    // MARK: Cutomer back button for view
     var backButton: some View {
         Button(action: {
             withAnimation() {
@@ -44,14 +45,16 @@ struct FoodInventoryView: View {
     
     var body: some View {
         NavigationView(){
+            // MARK: Main ZStack for background
             ZStack {
                 Color("Background")
                     .ignoresSafeArea(.all)
-                
+                // MARK: Main List for display item
                 List {
                     ForEach(searchingResult) {item in
                         HStack(spacing: 0) {
                             FoodRowView(FoodItem: item)
+                            // MARK: Button to remove item from current list
                             Button{
                                 removeItemFromList(item)
                             } label: {
@@ -83,6 +86,7 @@ struct FoodInventoryView: View {
                     }
                 }
                 .listStyle(PlainListStyle())
+                // MARK: End of Main List
             }
             
         }
@@ -107,4 +111,5 @@ struct FoodInventoryView: View {
         }
     }
 }
+
 

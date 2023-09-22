@@ -27,6 +27,7 @@ struct FoodDetailView: View {
     
     @State var targetCalo: CGFloat = 0.0
     
+    // MARK: Cutomer back button for view
     var backButton: some View {
         Button(action: {
             withAnimation() {
@@ -48,13 +49,15 @@ struct FoodDetailView: View {
     }
     
     var body: some View {
+        // MARK: Main ZStack for background
         ZStack {
             Color("Background")
                 .ignoresSafeArea(.all)
-            
+            // MARK: Main ScrollView to display information
             ScrollView {
                 ZStack(){
                     VStack(alignment: .leading, spacing: 20){
+                        // MARK: Food Image
                         AsyncImage(url: imageURL) {image in
                             image
                                 .resizable()
@@ -66,7 +69,7 @@ struct FoodDetailView: View {
                             ProgressView()
                         }
                         .frame(width: UIScreen.main.bounds.width*0.8, height: 200, alignment: .center)
-                        
+                        // MARK: Food information
                         VStack(alignment: .leading, spacing: 5){
                             Text(FoodItem.name)
                                 .font(.system(.title3))
@@ -81,7 +84,7 @@ struct FoodDetailView: View {
                                 .font(.system(.title3))
                                 .bold()
                         }
-                        
+                        // MARK: Food nutrition information and calculation
                         HStack(spacing: 20){
                             VStack(){
                                 CircleProgressView(progress: FoodItem.carbs/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
@@ -170,9 +173,6 @@ struct FoodDetailView: View {
                     }
                     .padding(.leading)
                     .padding(.trailing)
-//                    .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
-                    
-                   
                 }
                 .padding(.top)
                 .navigationTitle(FoodItem.name)
@@ -186,7 +186,7 @@ struct FoodDetailView: View {
                         .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     }
                 }
-                
+                // MARK: Action to specific item (Add or Remove)
                 VStack(){
                     Button{
                         self.addItemToList(FoodItem)
@@ -210,6 +210,7 @@ struct FoodDetailView: View {
             }
         }
     }
+    // MARK: End of ZStack
     
     func isItemInTheList(_ foodItem: Food) -> Bool {
         if singleSelectionList.firstIndex(where: {$0.id == foodItem.id}) != nil{
@@ -232,4 +233,5 @@ struct FoodDetailView: View {
         }
     }
 }
+
 

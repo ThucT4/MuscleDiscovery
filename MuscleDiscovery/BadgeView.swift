@@ -9,15 +9,13 @@ import SwiftUI
 
 struct BadgeView: View {
     var tags: [String]
+    
+    // MARK: This components is constructed to show the badge with its name
+    
     var body: some View {
         HStack(){
             ForEach(tags, id: \.self){tag in
                 HStack(spacing: 0){
-//                    Text(Image(systemName: ))
-//                        .frame(height: 12)
-//                        .bold()
-//                        .foregroundColor(Color(.white))
-//                        .padding(.leading, 3)
                     Text(tag)
                         .font(.system(.caption2))
                         .bold()
@@ -30,4 +28,5 @@ struct BadgeView: View {
         }
     }
 }
+
 

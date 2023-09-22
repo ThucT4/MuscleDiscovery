@@ -13,8 +13,12 @@ struct CircleProgressView: View {
     var size: CGFloat = 0.0
     @Binding var targetCalo: CGFloat
     
+    // MARK: This component constructed to show the circle progress (in percent or progress (float))
+    
     var body: some View {
+        // MARK: Main ZStack for background
         ZStack {
+            // MARK: Another ZStack to set Circle as background
             ZStack {
                 Circle()
                     .stroke(
@@ -33,6 +37,7 @@ struct CircleProgressView: View {
                     .rotationEffect(.degrees(-90))
                     .animation(.easeOut, value:  progress / 100)
              }
+            // MARK: VStack is displayed in middle of circle to show info
             VStack(){
                 if(targetCalo < 0){
                     Text("\(!isPercent ? -targetCalo : progress, specifier: "%.\(!isPercent ? 0 : 2)f")\(isPercent ? "%" : "")")
@@ -55,7 +60,8 @@ struct CircleProgressView: View {
                     }
                 }
             }
-        }
+        }//end of ZStack
     }
 }
+
 

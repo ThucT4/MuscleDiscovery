@@ -11,7 +11,11 @@ struct TargetView: View {
     var name: String
     var current: CGFloat
     var max: CGFloat
+    
+    // MARK: This components constructed to show the information of current carbs, fat and protein of all meals
+    
     var body: some View {
+        // MARK: Main VStack for background
         VStack(){
             Text(name)
                         .bold()
@@ -25,7 +29,7 @@ struct TargetView: View {
                 .foregroundColor(current > max ? ColorConstant.textWarning : .white)
             + Text("/\(max, specifier: "%.0f")")
                 .bold()
-        }
+        }//end of VStack
     }
 }
 

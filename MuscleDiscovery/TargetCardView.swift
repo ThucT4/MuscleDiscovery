@@ -20,8 +20,13 @@ struct TargetCardView: View {
     @Binding var selectionList: [Food]
     @Binding var showPicker: Bool
     @State private var singleSelectionList: [Food] = [Food]()
+    
+    // MARK: This component constructed to display the current information of breakfast, lunch and dinner including add/remove food
+    
     var body: some View {
+        // MARK: Main VStack
         VStack(){
+            // MARK: Display the icon of meal
             HStack(){
                     Image(imageName)
                         .resizable()
@@ -38,7 +43,7 @@ struct TargetCardView: View {
                         .font(.subheadline)
                 }
                 Spacer()
-                
+                // MARK: Show the button to navigate to add/remove food list
                 Button() {
                     isPresented.toggle()
                     if(showPicker){
@@ -57,6 +62,7 @@ struct TargetCardView: View {
                     FoodListView(FoodData: Foods.foodList, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
                 }
             }
+            // MARK: Show the calories calculation if there is at least one food item in the whole list
             if(foodListName.count != 0){
                 VStack{
                     Divider()
@@ -83,8 +89,9 @@ struct TargetCardView: View {
             for i in 0..<singleSelectionList.count{
                 foodListName.append(singleSelectionList[i].name)
             }
-        }
+        }//end of VStack
     }
+    // MARK: Function to calculate the current calories based on added/removed food
     func calculateAllCalo(_ foodList: [Food]) -> CGFloat {
         var total: CGFloat = 0.0
         for i in 0..<foodList.count{
@@ -93,4 +100,5 @@ struct TargetCardView: View {
         return total
     }
 }
+
 
