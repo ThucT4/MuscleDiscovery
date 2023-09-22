@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AppointmentDetailView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
     // Bind presentation mode of DetailView to  the PokeListView and will be used by the custome back button to dismiss the view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -43,16 +45,14 @@ struct AppointmentDetailView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
                         .font(.headline)
-                    
+                        .foregroundColor(isDarkMode ? .white : .black)
                 })
-                .foregroundColor(.black)
-                .shadow(color: .white.opacity(0.35), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
     }
@@ -60,7 +60,7 @@ struct AppointmentDetailView: View {
     var body: some View {
         // MARK: Main ZStack for background
         ZStack {
-            ColorConstant.black
+            Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
             // MARK: Appointment info VStack
@@ -69,7 +69,7 @@ struct AppointmentDetailView: View {
                     .frame(maxWidth: width, alignment: .center)
                 
                 Divider()
-                    .background(ColorConstant.textGray)
+                    .background(Color("Text gray"))
                     .frame(width: width, alignment: .center)
                 
                 // MARK: Date Time info VStack
@@ -99,14 +99,13 @@ struct AppointmentDetailView: View {
 
                 } // end Date Time info VStack
                 .frame(maxWidth: width, alignment: .leading)
-                .foregroundColor(.white)
                 .padding()
                 
             } // end Appointment info VStack
             .frame(maxWidth: width, alignment: .leading)
             .background(
                 Rectangle()
-                    .fill(ColorConstant.gray)
+                    .fill(Color("Dark grey"))
                     .frame(width: width)
                     .cornerRadius(20)
             )
@@ -132,6 +131,7 @@ struct AppointmentDetailView: View {
                         .cornerRadius(25)
                         .frame(maxWidth: UIScreen.main.bounds.width*0.4)
                         .shadow(color: .white.opacity(0.4), radius: 4)
+                        .modifier(Shadown3DModifier())
                     )
                 }
                 .padding(.leading)
@@ -159,7 +159,7 @@ struct AppointmentDetailView: View {
                             .fill(LinearConstant.linearOrange)
                         .cornerRadius(25)
                         .frame(maxWidth: UIScreen.main.bounds.width*0.4)
-                        .shadow(color: .white.opacity(0.4), radius: 4)
+                        .modifier(Shadown3DModifier())
                     )
                 })
                 .frame(width: UIScreen.main.bounds.width*0.4)
@@ -176,10 +176,3 @@ struct AppointmentDetailView: View {
         .toolbar(showingTabBar ? .visible : .hidden, for: .tabBar)
     }
 }
-
-//struct AppointmentDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppointmentDetailView()
-//            .en
-//    }
-//}

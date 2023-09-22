@@ -10,6 +10,7 @@ import SwiftUI
 var aimedCalo: [CGFloat] = [300, 400, 500, 600, 700, 800, 900, 1000, 1250, 1500, 1750, 2000, 2500, 3000]
 
 struct FoodAnalysisView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     
     @State private var progress = 0.0
     private var date = Date()
@@ -23,6 +24,9 @@ struct FoodAnalysisView: View {
     @State private var eatenCalo: CGFloat = 0.0
     var body: some View {
         ZStack(){
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
             ScrollView {
                 VStack(spacing: 20){
                     Button{
@@ -35,7 +39,7 @@ struct FoodAnalysisView: View {
                         }
                         .font(.subheadline)
                         .bold()
-                        .foregroundColor(ColorConstant.luminousGreen)
+                        .foregroundColor(Color("Neon"))
                     }
                     
                     if(showPicker){
@@ -51,6 +55,7 @@ struct FoodAnalysisView: View {
                             self.progress = calculateAllCalo(selectionList)/targetCalo*100
                         }
                     }
+                    
                     VStack(){
                         VStack(){
                             Text("\(calculateAllCalo(selectionList), specifier: "%.1f")")
@@ -60,18 +65,21 @@ struct FoodAnalysisView: View {
                         .textCase(.uppercase)
                         .bold()
                         .font(.headline)
+                        
                         CircleProgressView(progress: progress, targetCalo: $eatenCalo)
                             .frame(width: 200)
                     }
                     .frame(maxWidth: .infinity)
+                    
                     HStack(){
                         TargetView(name: "Carbs", current: currentCarbs, max: targetCalo*0.1)
                         TargetView(name: "Protein", current: currentProtein, max: targetCalo*0.075)
                         TargetView(name: "Fat", current: currentFat, max: targetCalo*0.03)
                     }
                     .padding(.vertical, 20)
-                    .background(ColorConstant.gray)
+                    .background(Color("Dark grey"))
                     .cornerRadius(15)
+                    
                     HStack(){
                         Image(systemName: "calendar")
                         Text("TODAY ")
@@ -84,7 +92,7 @@ struct FoodAnalysisView: View {
                 .frame(maxWidth: .infinity)
             }
         }
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
         .onTapGesture {
             if(self.showPicker){
                 self.showPicker = false

@@ -19,7 +19,7 @@ struct TrainerRow: View {
         HStack {
             // Circle to take space while waiting for image loading
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(width: 80)
                 .overlay(alignment: .center, content: {
                     AsyncImage(url: imageURL) {image in
@@ -29,7 +29,8 @@ struct TrainerRow: View {
                             .clipShape(Circle())
                             .frame(width: 80)
                     } placeholder: {
-                        
+                        ProgressView()
+                            .tint(Color("Neon"))
                     }
                 })
                 .padding()
@@ -41,7 +42,7 @@ struct TrainerRow: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Rectangle()
-                    .fill(ColorConstant.luminousGreen)
+                    .fill(Color("Neon"))
                     .cornerRadius(5)
                     .frame(width: 40, height: 25)
                     .overlay(alignment: .center, content: {
@@ -54,21 +55,14 @@ struct TrainerRow: View {
                 
                 Text("\(trainer.experience!) year\( trainer.experience! > 1 ? "s" : "") experience")
                     .font(.body)
-                    .foregroundColor(ColorConstant.luminousGreen)
+                    .foregroundColor(Color("Neon"))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .foregroundColor(.white)
             
             Spacer()
             
         } // end Main HStack
-        .background(ColorConstant.gray)
+        .background(Color("Dark grey"))
         .clipShape(RoundedRectangle(cornerRadius: 20))  // Rounded corner
     }
 }
-
-//struct TrainerRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TrainerRow()
-//    }
-//}

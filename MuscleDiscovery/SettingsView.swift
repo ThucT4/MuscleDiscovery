@@ -52,11 +52,7 @@ struct SettingsView: View {
                 NavigationView {
                     ZStack {
                         // Background Color
-                        isDarkMode ?
-                        ColorConstant.black
-                            .ignoresSafeArea(.all)
-                        :
-                        Color.white
+                        Color("Background")
                             .ignoresSafeArea(.all)
                         
                         VStack (alignment: .leading) {
@@ -171,10 +167,10 @@ struct SettingsView: View {
                                             isDarkMode.toggle()
                                         } label: {
                                             
-                                            Image(systemName: isDarkMode == true ? "moon.circle.fill" : "moon.circle")
+                                            Image(systemName: isDarkMode ? "moon.circle.fill" : "sun.max.circle")
                                                 .resizable()
                                                 .scaledToFit()
-                                                .foregroundColor(isDarkMode == true ? ColorConstant.luminousGreen : .black)
+                                                .foregroundColor(isDarkMode ? Color("Neon") : .black)
                                                 .frame(width: 30)
                                         }
                                         
@@ -226,6 +222,7 @@ struct SettingsView: View {
                     }
                     .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                 }
+                .preferredColorScheme(isDarkMode ? .dark : .light)
                 
             }
         }

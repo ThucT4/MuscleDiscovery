@@ -9,6 +9,8 @@ import SwiftUI
 import WrappingHStack
 
 struct FoodInventoryView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var type: String
     var FoodData: [Food]
@@ -27,63 +29,65 @@ struct FoodInventoryView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(.caption2, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
         NavigationView(){
-            List {
-                ForEach(searchingResult) {item in
-                    HStack(spacing: 0) {
-                        FoodRowView(FoodItem: item)
-                        Button{
-                            removeItemFromList(item)
-                        } label: {
-                            Image(systemName: "minus")
-                                .font(.title3)
-                                .padding(.all, 12)
-                                .bold()
-                                .foregroundColor(.white)
-                                .background(ColorConstant.luminousGreen.opacity(0.7))
-                                .clipShape(Circle())
+            ZStack {
+                Color("Background")
+                    .ignoresSafeArea(.all)
+                
+                List {
+                    ForEach(searchingResult) {item in
+                        HStack(spacing: 0) {
+                            FoodRowView(FoodItem: item)
+                            Button{
+                                removeItemFromList(item)
+                            } label: {
+                                Image(systemName: "minus")
+                                    .font(.title3)
+                                    .padding(.all, 12)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(ColorConstant.luminousGreen.opacity(0.7))
+                                    .clipShape(Circle())
+                            }
                         }
+                        .padding(.all, 0)
                     }
-                    .padding(.all, 0)
                 }
-            }
-            .listRowSeparator(.hidden)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack (spacing: 20) {
-                        backButton
+                .listRowSeparator(.hidden)
+                .navigationBarBackButtonHidden(true)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack (spacing: 20) {
+                            backButton
 
-                        Text(type)
-                            .textCase(.uppercase)
-                            .foregroundColor(.white)
-                            .font(.system(.title3, weight: .heavy))
+                            Text(type)
+                                .textCase(.uppercase)
+                                .foregroundColor(.white)
+                                .font(.system(.title3, weight: .heavy))
+                        }
+                        .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     }
-                    .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 }
+                .listStyle(PlainListStyle())
             }
-            .listStyle(PlainListStyle())
             
         }
         .searchable(text: $searchText,
                placement: .navigationBarDrawer(displayMode: .always))
-        .preferredColorScheme(.dark)
 
     }
     

@@ -16,7 +16,7 @@ struct CircularProgress: View {
         ZStack {
             Circle()
                 .stroke(
-                    Color(red: 0.24, green: 0.24, blue: 0.24),
+                    Color("Dark grey"),
                     lineWidth: 20
                 )
                 .frame(width: 150, height: 150)
@@ -34,6 +34,7 @@ struct CircularProgress: View {
                 .rotationEffect(.degrees(-90))
                 .animation(.easeOut(duration: 2), value: progress)
         }
+        .modifier(Shadown3DModifier())
         .onAppear {
             self.progress = percent
         }

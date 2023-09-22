@@ -10,7 +10,7 @@ import SwiftUI
 struct DropDownMenu: View {
     @EnvironmentObject var trainerListViewModel: TrainerViewModel
     
-    @State var selectedOption: String = "Rating 0-9"
+    @State var selectedOption: String = "Rating 9-0"
     
     // All sorting type will be displayed as option for user
     var sortType: [String] = [ "Rating 9-0", "Rating 0-9", "Experience 9-0", "Experience 0-9"]
@@ -33,16 +33,34 @@ struct DropDownMenu: View {
                     selectedOption = option
                 }
                 ) {
-                    // Display type as label of button
-                    Text(option)
+                    HStack (spacing : 0) {
+                        // Display type as label of button
+                        if (option.contains("0-9")) {
+                            Text("\(option.replacingOccurrences(of: "0-9", with: ""))")
+                            
+                            Image(systemName: "arrow.up.circle.fill")
+                        }
+                        else {
+                            Text("\(option.replacingOccurrences(of: "9-0", with: ""))")
+                            
+                            Image(systemName: "arrow.down.circle.fill")
+                        }
+                        
+                        Spacer()
+                    }
                 }
+                .foregroundColor(.black)
             }
         }label: { // The label of Menu
             // Display horizontally
             HStack (spacing: 20) {
                 // Display current selected option
-                Text(selectedOption)
-//                    .frame(maxWidth: .infinity, alignment: .center)
+                if (selectedOption.contains("0-9")) {
+                    Text("\(selectedOption.replacingOccurrences(of: "0-9", with: "")) \(Image(systemName: "arrow.up.circle.fill"))")
+                }
+                else {
+                    Text("\(selectedOption.replacingOccurrences(of: "9-0", with: "")) \(Image(systemName: "arrow.down.circle.fill"))")
+                }
                 
                 // An decoration arrow
                 Text("⌵")
@@ -50,7 +68,7 @@ struct DropDownMenu: View {
             }
             .padding()
             .font(.headline)
-            .foregroundColor(ColorConstant.black)
+            .foregroundColor(.black)
             .background(
                 Rectangle()
                     .fill(Color("Neon"))

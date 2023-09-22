@@ -18,13 +18,13 @@ struct CircleProgressView: View {
             ZStack {
                 Circle()
                     .stroke(
-                        Color.pink.opacity(0.5),
+                        LinearConstant.linearOrange.opacity(0.5),
                         lineWidth: size != 0 ? size : 15
                     )
                 Circle()
                     .trim(from: 0, to: progress / 100)
                     .stroke(
-                        Color.pink,
+                        LinearConstant.linearOrange,
                         style: StrokeStyle(
                             lineWidth: size != 0 ? size : 15,
                             lineCap: .round
@@ -58,10 +58,4 @@ struct CircleProgressView: View {
         }
     }
 }
-
-//struct CircleProgressView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CircleProgressView()
-//    }
-//}
 

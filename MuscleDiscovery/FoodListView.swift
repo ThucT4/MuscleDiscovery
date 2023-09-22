@@ -12,7 +12,10 @@ import WrappingHStack
 var badgeItems = ["Italian", "FastFood", "Japanese", "Vegan", "American", "Snack", "Chicken", "Fruit", "Egypt"]
 
 struct FoodListView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
+    @Environment(\.dismiss) var dismiss
+    
     var FoodData: [Food]
     @State private var searchText = ""
     @State private var isDark = false
@@ -25,100 +28,89 @@ struct FoodListView: View {
     var backButton: some View {
         Button(action: {
             withAnimation() {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(.caption2, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
         NavigationView(){
-            List {
-                WrappingHStack(badgeItems, id: \.self){ item in
-                        Button {
-                            if(filtered == item){
-                                filtered = ""
+            ZStack {
+                Color("Background")
+                    .ignoresSafeArea(.all)
+                
+                List {
+                    WrappingHStack(badgeItems, id: \.self){ item in
+                            Button {
+                                if(filtered == item){
+                                    filtered = ""
+                                }
+                                else{
+                                    filtered = item
+                                }
+                            } label: {
+                                Text(item)
+                                    .padding(.all, 3)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .stroke(Color("Neon"), lineWidth: 1)
+                                    )
+                                    .background((filtered == item) ? Color("Neon") : Color("Dark grey"))
                             }
-                            else{
-                                filtered = item
+                            .padding(3)
+                            .buttonStyle(PlainButtonStyle())
+                    }
+                    .padding(.bottom, 10)
+                    LazyVStack(){
+                        ForEach(searchingResult) {item in
+                            HStack(spacing: 0) {
+                                FoodRowView(FoodItem: item)
+                                    .modifier(Shadown3DModifier())
+                                
+                                NavigationLink(destination: FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)) {
+                                    FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
+                                }
+                                .frame(width: 0, height: 0)
+                                .opacity(0)
                             }
-                        } label: {
-                            Text(item)
-                                .padding(.all, 3)
-                                .foregroundColor(!(filtered == item) ? .white : ColorConstant.gray)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
-                                        .stroke(ColorConstant.luminousGreen, lineWidth: 1)
-                                )
-                                .background((filtered == item) ? ColorConstant.luminousGreen : ColorConstant.gray)
+                            .padding(.all, 0)
                         }
-                        .padding(3)
-                        .buttonStyle(PlainButtonStyle())
-                }
-                .padding(.bottom, 10)
-                LazyVStack(){
-                    ForEach(searchingResult) {item in
-                        HStack(spacing: 0) {
-                            FoodRowView(FoodItem: item)
-                            NavigationLink(destination: FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)) {
-                                FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
-                            }
-                            .frame(width: 0, height: 0)
-                            .opacity(0)
-                        }
-                        .padding(.all, 0)
                     }
                 }
-            }
-            .listRowSeparator(.hidden)
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack (spacing: 20) {
-                        backButton
+                .listRowSeparator(.hidden)
+                .listStyle(PlainListStyle())
+                .navigationBarBackButtonHidden(true)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack (spacing: 20) {
+                            backButton
 
-                        Text("FOOD LIST")
-                            .foregroundColor(.white)
-                            .font(.system(.title3, weight: .heavy))
+                            Text("FOOD LIST")
+                                .font(.system(.title3, weight: .heavy))
+                        }
+                        .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     }
-                    .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                 }
-            }
-            .listStyle(PlainListStyle())
+                
+            }// end ZStack
             
-        }
+        } // end NavigationView
         .searchable(text: $searchText,
                placement: .navigationBarDrawer(displayMode: .always))
-        .preferredColorScheme(.dark)
 
     }
-    
-//    var btnBack : some View { Button(action: {
-//            self.presentationMode.wrappedValue.dismiss()
-//            }) {
-//                HStack {
-//                Text(Image(systemName: "x.circle"))
-//                    .padding(.all, 6)
-//                    .bold()
-//                    .foregroundColor(.white)
-//                    .background(ColorConstant.gray)
-//                    .clipShape(Circle())
-//                }
-//            }
-//        }
     
     var searchingResult: [Food]{
         if(!searchText.isEmpty && !filtered.isEmpty){
@@ -135,9 +127,3 @@ struct FoodListView: View {
         return FoodData
     }
 }
-//
-//struct FoodListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FoodListView(FoodData: Foods)
-//    }
-//}

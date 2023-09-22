@@ -42,7 +42,7 @@ struct PaymentCompleteView: View {
     var body: some View {
         // MARK: Main ZStack for background
         ZStack {
-            ColorConstant.black
+            Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
             // MARK: Main VStack
@@ -52,12 +52,11 @@ struct PaymentCompleteView: View {
                     Image(systemName: "checkmark.square.fill")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(ColorConstant.luminousGreen)
+                        .foregroundColor(Color("Neon"))
                     
                     Text("Payment Completed!")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
                     
                 } // endPayment completet HStack
                 .frame(maxWidth: width, alignment: .leading)
@@ -65,7 +64,7 @@ struct PaymentCompleteView: View {
                 Text("You've book a new appointment with your trainer.")
                     .multilineTextAlignment(.leading)
                     .font(.headline)
-                    .foregroundColor(ColorConstant.textGray)
+                    .foregroundColor(Color("Text gray"))
                     .frame(maxWidth: width, alignment: .leading)
                 
                 // MARK: Appointment info VStack
@@ -74,7 +73,7 @@ struct PaymentCompleteView: View {
                         .frame(maxWidth: width, alignment: .center)
                     
                     Divider()
-                        .background(ColorConstant.textGray)
+                        .background(Color("Text gray"))
                         .frame(width: width, alignment: .center)
                     
                     // MARK: Date Time info VStack
@@ -104,7 +103,6 @@ struct PaymentCompleteView: View {
 
                     } // end Date Time info VStack
                     .frame(maxWidth: width, alignment: .leading)
-                    .foregroundColor(.white)
                     .padding()
                     
                 } // end Appointment info VStack
@@ -112,7 +110,7 @@ struct PaymentCompleteView: View {
                 .padding()
                 .background(
                     Rectangle()
-                        .fill(ColorConstant.gray)
+                        .fill(Color("Dark grey"))
                         .frame(width: width)
                         .cornerRadius(20)
                 )
@@ -136,6 +134,7 @@ struct PaymentCompleteView: View {
                     
                 )
                 .frame(maxHeight: .infinity, alignment: .bottom)
+                .modifier(Shadown3DModifier())
             
         } // end Main ZStack for background
         .navigationBarBackButtonHidden(true)

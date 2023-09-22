@@ -38,6 +38,7 @@ struct TargetCardView: View {
                         .font(.subheadline)
                 }
                 Spacer()
+                
                 Button() {
                     isPresented.toggle()
                     if(showPicker){
@@ -61,7 +62,7 @@ struct TargetCardView: View {
                     Divider()
                         .background(ColorConstant.textWarning)
                     Text("\(calculateAllCalo(singleSelectionList), specifier: "%.1f") cal")
-                        .foregroundColor(ColorConstant.luminousGreen)
+                        .foregroundColor(Color("Neon"))
                         .bold()
                 }
                 .onTapGesture {
@@ -75,7 +76,7 @@ struct TargetCardView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.all, 20)
-        .background(ColorConstant.gray)
+        .background(Color("Dark grey"))
         .cornerRadius(15)
         .onChange(of: singleSelectionList){newValue in
             self.foodListName = [String]()
@@ -92,14 +93,4 @@ struct TargetCardView: View {
         return total
     }
 }
-
-
-//
-//struct TargetCardView_Previews: PreviewProvider {
-//    @State private var selectionList: [Food] = [Food]()
-//    static var previews: some View {
-//        TargetCardView(type: "Breakfast", imageName: "meal1", selectionList: $selectionList)
-//            .preferredColorScheme(.dark)
-//    }
-//}
 

@@ -49,6 +49,8 @@ class AppointmentViewModel: ObservableObject {
                     }
                 }
             }
+            
+            self.sortByDate()
         }
     }
     

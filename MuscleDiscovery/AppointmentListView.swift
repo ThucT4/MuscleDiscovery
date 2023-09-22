@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AppointmentListView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
     @StateObject var appointmentViewModel = AppointmentViewModel(customerID: "729ZaGcDAd29nCk8pEU4")
     
     @State var showing: Bool = false
@@ -16,13 +18,12 @@ struct AppointmentListView: View {
         // MARK: Main NavigationView
         NavigationStack {
             ZStack {
-                ColorConstant.black
+                Color("Background")
                     .edgesIgnoringSafeArea(.all)
                 
                 // MARK: VStack for list
                 VStack {
                     Text("UPCOMING APPOINTMENTS")
-                        .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.heavy)
                     
@@ -38,14 +39,15 @@ struct AppointmentListView: View {
                                     }
                                     .opacity(0)
                                 }
+                                .listRowSeparator(.hidden)
                             }
                             .onAppear {
                                 self.appointmentViewModel.sortByDate()
                             }
-                            .listRowBackground(ColorConstant.black)
+                            .listRowBackground(Color("Background"))
                         }
                         .listStyle(PlainListStyle())
-                        .background(ColorConstant.black)
+                        .background( Color("Background"))
                         .padding(.top)
                     }
                     else {
@@ -69,7 +71,7 @@ struct AppointmentListView: View {
                         .padding()
                         .background(
                             Rectangle()
-                            .fill(ColorConstant.luminousGreen)
+                            .fill(Color("Neon"))
                             .cornerRadius(25)
                             .frame(width: UIScreen.main.bounds.width*0.7)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -77,14 +79,17 @@ struct AppointmentListView: View {
                         )
                 }
                 .frame(maxHeight: UIScreen.main.bounds.height, alignment: .bottom)
+                .padding(.bottom)
                 .navigationDestination(isPresented: $showing) {
                     TrainerListView(showing: self.$showing)
                 }
+                .modifier(Shadown3DModifier())
                 
             } // end ZStack
             
         } // end Main NavigationView
         .environmentObject(appointmentViewModel)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 

@@ -24,7 +24,10 @@ struct FoodRowView: View {
                     .padding(.leading, 10)
             } placeholder: {
                 ProgressView()
-            }.frame(width: 80, height: 80)
+            }
+            .frame(width: 80, height: 80)
+            .padding(.leading)
+            
             VStack(alignment: .leading, spacing: 8){
                 VStack(alignment: .leading){
                     Text(FoodItem.name)
@@ -36,7 +39,7 @@ struct FoodRowView: View {
                         .font(.caption2)
                         .bold()
                 }
-                .foregroundColor(.white)
+                
                 HStack(){
                     BadgeView(tags: FoodItem.tags)
                 }
@@ -46,15 +49,8 @@ struct FoodRowView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 12)
-        .background(ColorConstant.gray)
+        .background(Color("Dark grey"))
         .cornerRadius(20)
     }
 }
-
-//struct FoodRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FoodRowView(FoodItem: Foods[0])
-//            .preferredColorScheme(.dark)
-//    }
-//}
 

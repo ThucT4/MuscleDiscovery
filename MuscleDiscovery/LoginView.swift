@@ -5,6 +5,8 @@ struct LoginView: View {
     @State var password: String = ""
     @State var fullname: String = ""
     @State var confirmedPassword : String = ""
+    
+    @State var message: String = ""
 
     @EnvironmentObject var viewModel: AuthViewModel
     
@@ -54,40 +56,43 @@ struct LoginView: View {
                     .padding(.top, 12)
                     .padding(.vertical, 30)
                     
-//                    HStack {
-//                        Spacer()
-//                        NavigationLink(destination: ForgotPasswordView(email: $email)) {
-//                            Text("Forget Password")
-//                                .font(.system(size: 13))
-//                        }
-//                    }
-//                    .fontWeight(.semibold)
-//                    .foregroundColor(Color("Neon"))
-//                    .padding(.horizontal, 42)
-                    
                     Spacer()
+                    
+                    Text(message)
+                        .font(.body)
+                        .foregroundColor(.red)
                     
                     // -- LOGIN --
                     HStack {
-//                        HStack(spacing: 20) {
-//                            // Apple icon
-//                            Image(systemName: "apple.logo")
-//                                .foregroundColor(.white)
-//                                .padding()
-//                                .background(Color("Dark grey"))
-//                                .clipShape(Circle())
-//
-//                            // Google icon
-//                            Image("google.logo")
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 20)
-//                                .padding()
-//                                .background(Color("Dark grey"))
-//                                .clipShape(Circle())
-//                        }
-//                        .padding(.top, 12)
-//                        .padding(.leading, 35)
+                        Spacer()
+                        
+                        Button(action: {
+                            let email = UserDefaults.standard.string(forKey: "email")
+                            let password = UserDefaults.standard.string(forKey: "password")
+                            
+                            print (email!, password!)
+                            
+                            Task {
+                                let result = await viewModel.authenticate()
+                                
+                                if (result == 1) {
+                                    try await viewModel.signIn(email: email!, password: password!)
+                                }
+                                else if (result == -1) {
+                                    self.message = "Your device does not suppot Face ID!"
+                                }
+                            }
+                        }, label: {
+                            Image(systemName: "faceid")
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(
+                                    Circle()
+                                        .fill(Color("Neon"))
+                                )
+                        })
+                        .disabled(UserDefaults.standard.string(forKey: "email") == nil)
+                        .opacity(UserDefaults.standard.string(forKey: "email") == nil ? 0.3 : 1.0)
                         
                         Spacer()
                         

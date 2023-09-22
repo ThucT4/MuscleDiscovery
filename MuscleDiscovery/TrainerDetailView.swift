@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TrainerDetailView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
     // Bind presentation mode of DetailView to  the PokeListView and will be used by the custome back button to dismiss the view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -30,25 +32,23 @@ struct TrainerDetailView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: .white.opacity(0.35), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
         // MARK: ZStack for background color
         ZStack {
-            ColorConstant.black
+            Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
             // MARK: Main ScrollView
@@ -59,7 +59,7 @@ struct TrainerDetailView: View {
                     HStack (spacing: 25) {
                         // MARK: Avatar image
                         Circle()
-                            .fill(.white)
+                            .fill(Color("Background"))
                             .frame(width: 125)
                             .overlay(alignment: .center, content: {
                                 AsyncImage(url: URL(string: trainer.imageURL!)) {image in
@@ -69,7 +69,8 @@ struct TrainerDetailView: View {
                                         .clipShape(Circle())
                                         .frame(width: 120)
                                 } placeholder: {
-                                    
+                                    ProgressView()
+                                        .tint(Color("Neon"))
                                 }
                             })
                             .padding(.leading, 20)
@@ -79,26 +80,25 @@ struct TrainerDetailView: View {
                             Text(trainer.name!)
                                 .font(.title)
                                 .fontWeight(.bold)
-                                .foregroundColor(.white)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Text("\(trainer.experience!) year\( trainer.experience! > 1 ? "s" : "") experience")
                                 .font(.headline)
-                                .foregroundColor(ColorConstant.textGray)
+                                .foregroundColor(Color("Text gray"))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Text("Professional Coach")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(ColorConstant.luminousGreen)
+                                .foregroundColor(Color("Neon"))
                                 .padding()
                                 .background(
                                     Rectangle()
-                                        .fill(ColorConstant.black)
+                                        .fill(Color("Background"))
                                         .cornerRadius(10)
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                        .shadow(color: .white.opacity(0.5), radius: blinking ? 3 : 7)
+                                        .shadow(color: Color("BlackTransparent"), radius: blinking ? 3 : 7)
                                 )
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .onAppear {
@@ -119,12 +119,11 @@ struct TrainerDetailView: View {
                         Text("Introduction")
                             .font(.title2)
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                         
                         Text(trainer.introduction!)
                             .font(.body)
-                            .foregroundColor(ColorConstant.textGray)
+                            .foregroundColor(Color("Text gray"))
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .lineSpacing(7)
@@ -139,7 +138,6 @@ struct TrainerDetailView: View {
                         Text("Highlights")
                             .font(.title2)
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                             .padding(.leading)
                         
@@ -149,14 +147,14 @@ struct TrainerDetailView: View {
                                 ForEach(trainer.highlights!, id:\.self) {info in
                                     Text(info)
                                         .font(.headline)
-                                        .foregroundColor(Color(red: 0.48, green: 0.47, blue: 0.47))
+                                        .foregroundColor(Color("Text gray"))
                                         .padding()
                                         .background(
                                             Rectangle()
-                                            .fill(ColorConstant.black)
+                                            .fill( Color("Background"))
                                             .cornerRadius(25)
                                             .frame(maxWidth: .infinity, alignment: .leading)
-                                            .shadow(color: .white.opacity(0.4), radius: 4)
+                                            .modifier(Shadown3DModifier())
                                         )
                                     
                                 } // end ForEach
@@ -176,7 +174,6 @@ struct TrainerDetailView: View {
                         Text("Rating")
                             .font(.title2)
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
                             .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                             .padding(.leading)
                         
@@ -217,6 +214,7 @@ struct TrainerDetailView: View {
                     )
 
             }
+            .modifier(Shadown3DModifier())
             .frame(maxHeight: UIScreen.main.bounds.height, alignment: .bottom)
                 
         } // end ZStack for background color
@@ -224,6 +222,8 @@ struct TrainerDetailView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
         .toolbar(showingTabBar ? .visible : .hidden, for: .tabBar)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+
     }
     
     func runCounter(counter: Binding<Double>, start: Double, end: Double, speed: Double) {

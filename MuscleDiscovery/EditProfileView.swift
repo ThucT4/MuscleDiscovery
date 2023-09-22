@@ -29,30 +29,24 @@ struct EditProfileView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
         if let user = viewModel.currentUser {
             ZStack {
                 // Background Color
-                isDarkMode ?
-                ColorConstant.black
-                    .ignoresSafeArea(.all)
-                :
-                Color.white
+                Color("Background")
                     .ignoresSafeArea(.all)
                 
                 VStack {
@@ -129,7 +123,6 @@ struct EditProfileView: View {
                             .padding(.bottom, 10)
                         
                         Text("Name")
-                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
                             .font(.title3)
                             .bold()
                             .padding(.bottom, 5)

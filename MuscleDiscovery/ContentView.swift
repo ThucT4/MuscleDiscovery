@@ -16,6 +16,7 @@ struct ContentView: View {
         Group {
             if showingMainView {
                 SessionCheckView()
+//                MainMenuView()
             }
             else {
                 AnimatedSplashView(showingMainView: self.$showingMainView)

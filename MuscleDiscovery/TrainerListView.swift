@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TrainerListView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
     // Bind presentation mode of DetailView to  the PokeListView and will be used by the custome back button to dismiss the view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -24,30 +26,29 @@ struct TrainerListView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
         NavigationView {
             // MARK: Main VStack
             ZStack {
-                ColorConstant.black
+                Color("Background")
                     .ignoresSafeArea(.all)
                 
                 VStack {
                     DropDownMenu()
+                        .modifier(Shadown3DModifier())
                         .frame(maxWidth: UIScreen.main.bounds.width*0.9, alignment: .trailing)
                     
                     // MARK: Main List
@@ -56,6 +57,7 @@ struct TrainerListView: View {
                         ForEach(trainerViewModel.trainerList) {trainer in
                             ZStack {
                                 TrainerRow(trainer: trainer)
+                                    .modifier(Shadown3DModifier())
                                     .frame(maxWidth: .infinity)
                                 
                                 NavigationLink(destination: TrainerDetailView(trainer: trainer, showing: self.$showing)) {
@@ -63,7 +65,7 @@ struct TrainerListView: View {
                                 }
                                 .opacity(0)
                             }
-                            .listRowBackground(ColorConstant.black)
+                            .listRowBackground(Color("Background"))
                             .listRowSeparator(.hidden)
 
                         } // end ForEach through each trainer in list
@@ -79,7 +81,7 @@ struct TrainerListView: View {
             } // end Main List
         }
         // MARK: Hide default Back Button
-        .searchable(text: self.$searchText, prompt: "Search Trainer by Name")
+        .searchable(text: self.$searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search Trainer by Name")
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -87,7 +89,6 @@ struct TrainerListView: View {
                     backButton
 
                     Text("FITNESS TRAINERS")
-                        .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.heavy)
                 }

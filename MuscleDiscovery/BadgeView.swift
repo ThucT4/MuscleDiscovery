@@ -21,20 +21,13 @@ struct BadgeView: View {
                     Text(tag)
                         .font(.system(.caption2))
                         .bold()
-                        .foregroundColor(ColorConstant.black)
                         .textCase(.uppercase)
                         .padding(.all, 4)
                 }
-                .background(ColorConstant.luminousGreen)
+                .background(Color("Neon"))
                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
             }
         }
     }
 }
-
-//struct BadgeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BadgeView(tags: Foods[0].tags)
-//    }
-//}
 

@@ -11,6 +11,8 @@ struct AppointmentBookingView: View {
     // Bind presentation mode of DetailView to  the PokeListView and will be used by the custome back button to dismiss the view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
     @EnvironmentObject var appointmentViewModel: AppointmentViewModel
     
     var trainer: Trainer
@@ -28,25 +30,23 @@ struct AppointmentBookingView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
-        .padding(.trailing, 20)
     }
     
     var body: some View {
         // MARK: Main ZStack for background
         ZStack {
-            ColorConstant.black
+            Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
             //MARK: Main VStack
@@ -57,9 +57,9 @@ struct AppointmentBookingView: View {
                 DatePicker("", selection: self.$selectedDate, in: Date.now.round(precision: 15)...)
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .frame(maxWidth: UIScreen.main.bounds.width*0.9)
-                    .background(ColorConstant.gray, in: RoundedRectangle(cornerRadius: 15))
-                    .accentColor(ColorConstant.luminousGreen)
-                    .colorScheme(.dark)
+                    .background(Color("Dark grey"), in: RoundedRectangle(cornerRadius: 15))
+                    .accentColor(Color("Neon"))
+                    .preferredColorScheme(isDarkMode ? .dark : .light)
                     .onAppear{
                         // Set time interval for time picker
                         UIDatePicker.appearance().minuteInterval = 30
@@ -87,6 +87,7 @@ struct AppointmentBookingView: View {
                             .frame(width: UIScreen.main.bounds.width*0.7)
                             .shadow(color: .white.opacity(0.4), radius: 4)
                             .opacity(isValid ? 1 : 0.5)
+                            .modifier(Shadown3DModifier())
 
                     }
                     .disabled(!isValid)
@@ -112,7 +113,6 @@ struct AppointmentBookingView: View {
                     Text("APPOINTMENT")
                         .font(.title2)
                         .fontWeight(.heavy)
-                        .foregroundColor(.white)
                 }
                 .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
             }
