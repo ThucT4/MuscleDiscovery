@@ -13,6 +13,7 @@ struct FoodRowView: View {
     private var imageURL: URL {
         return URL(string: FoodItem.image)!
     }
+    
     var body: some View {
         HStack(spacing: 40){
             AsyncImage(url: imageURL) {image in
