@@ -127,8 +127,8 @@ class AuthViewModel: ObservableObject {
             
             // Update user information in Firestore
             let userData: [String: Any] = [
-                "fullname": fullname,
-                "email": email
+                "fullname": fullname != "" ? fullname : currentUser?.fullname as Any,
+                "email": email != "" ? email : currentUser?.email as Any
                 // Add other fields you want to update here
             ]
             

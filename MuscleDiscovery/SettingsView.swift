@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+enum Theme {
+    static let darkMode = false
+}
+
 struct SettingsView: View {
     @EnvironmentObject var viewModel: AuthViewModel
+    // Save systemTheme to AppStorage to save user option for the next using and access from other view
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     
     @State private var premium: Bool = false
-
+    
     private var imageURL: URL {
         return URL(string: viewModel.currentUser?.imageUrl ?? "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")!
     }
@@ -45,7 +51,12 @@ struct SettingsView: View {
             if let user = viewModel.currentUser {
                 NavigationView {
                     ZStack {
+                        // Background Color
+                        isDarkMode ?
                         ColorConstant.black
+                            .ignoresSafeArea(.all)
+                        :
+                        Color.white
                             .ignoresSafeArea(.all)
                         
                         VStack (alignment: .leading) {
@@ -59,10 +70,10 @@ struct SettingsView: View {
                                             LinearGradient(gradient: Gradient(colors: [Color.red, Color.yellow, Color.green]), startPoint: .topLeading, endPoint: .bottomTrailing),
                                             lineWidth: 3
                                         )
-                                        .frame(width: 100, height: 100)
+                                        .frame(width: 120, height: 120)
                                         .rotationEffect(.degrees(-90)) // Rotate to start at the top
                                     
-//                                    URL(string: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")
+                                    //                                    URL(string: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")
                                     
                                     
                                     AsyncImage(url: imageURL) {image in
@@ -76,7 +87,7 @@ struct SettingsView: View {
                                             .tint(Color("Neon"))
                                     }
                                 }
-                                .padding(.trailing, 65)
+                                .padding(.trailing)
                                 
                                 Divider()
                                     .background(.gray)
@@ -84,26 +95,17 @@ struct SettingsView: View {
                                 
                                 // Profile Information
                                 VStack (alignment: .leading) {
-                                    Text("Joined")
-                                        .foregroundColor(.gray)
-                                    Text("2 month ago")
-                                        .foregroundColor(.white)
+                                    Text(user.fullname.split(separator: " ").first ?? "John")
+                                        .font(.title)
+                                        .foregroundColor(isDarkMode ? Color.white : Color.black)
+                                    Text(user.fullname.split(separator: " ").last ?? "Doe")
+                                        .font(.title)
+                                        .foregroundColor(isDarkMode ? Color.white : Color.black)
                                 }
                                 .frame(width: 120, height: 100)
                                 
                             }
-                            
-                            // User Name
-                            VStack {
-                                Text(user.fullname.split(separator: " ").first ?? "John")
-                                    .font(.title)
-                                    .bold()
-                                    .foregroundColor(.white)
-                                Text(user.fullname.split(separator: " ").last ?? "Doe")
-                                    .font(.title)
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.vertical)
+                            .padding(.bottom, 50)
                             
                             // Navigation Button
                             VStack {
@@ -118,12 +120,12 @@ struct SettingsView: View {
                                             Text("Edit Profile")
                                                 .font(.title3)
                                                 .bold()
-                                                .foregroundColor(.white)
+                                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                                             
                                             Spacer()
                                             
                                             Image(systemName: "arrow.right")
-                                                .foregroundColor(.white)
+                                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                                         }
                                         .padding(.bottom, 15)
                                         
@@ -140,12 +142,12 @@ struct SettingsView: View {
                                             Text("Privacy Policy")
                                                 .font(.title3)
                                                 .bold()
-                                                .foregroundColor(.white)
+                                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                                             
                                             Spacer()
                                             
                                             Image(systemName: "arrow.right")
-                                                .foregroundColor(.white)
+                                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                                         }
                                         .padding(.bottom, 15)
                                         
@@ -155,108 +157,77 @@ struct SettingsView: View {
                                     .padding(.bottom, 15)
                                 }
                                 
-                                // Navigate to Settings App Page
-                                NavigationLink (destination: SettingsAppView()) {
-                                    VStack {
-                                        HStack {
-                                            Text("Settings")
-                                                .font(.title3)
-                                                .bold()
-                                                .foregroundColor(.white)
+                                // Dark / Light Mode
+                                VStack {
+                                    HStack {
+                                        Text("Dark Theme")
+                                            .font(.title3)
+                                            .bold()
+                                            .foregroundColor(isDarkMode ? Color.white : Color.black)
+                                        
+                                        Spacer()
+                                        
+                                        Button {
+                                            isDarkMode.toggle()
+                                        } label: {
                                             
-                                            Spacer()
-                                            
-                                            Image(systemName: "arrow.right")
-                                                .foregroundColor(.white)
+                                            Image(systemName: isDarkMode == true ? "moon.circle.fill" : "moon.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(isDarkMode == true ? ColorConstant.luminousGreen : .black)
+                                                .frame(width: 30)
                                         }
-                                        .padding(.bottom, 15)
+                                        
                                     }
-                                }
-                                    
+                                    .padding(.bottom, 15)
                                     
                                     Divider()
                                         .background(.gray)
-                                
-                            }
-        //                    .padding(.bottom, 30)
-                            
-                            // Upgrade to Premium
-                            VStack (alignment: .leading) {
-                                // Pro Tag
-                                ZStack {
-                                    Rectangle()
-                                        .fill(Color.red) // Fill color of the rectangle
-                                        .frame(width: 37, height: 18) // Size of the rectangle
-                                        .cornerRadius(5)
-                                    Text("PRO")
-                                        .font(.custom("tag", fixedSize: 14))
-                                        .bold()
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.leading, 10)
-                                
-                                HStack {
-                                    Text("Upgrade to Premium")
-                                        .font(.title3)
-                                        .bold()
-                                        .foregroundColor(.white)
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "arrow.right")
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.horizontal, 10)
-                                
-                                Text("This subscription is auto-renewable")
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 10)
-                                    .padding(.top, 1)
-                            }
-                            .frame(width: 330, height: 100)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(12)
-        //                    .padding(.bottom, 40)
-                            
-                            
-                            // Log out option
-                            Divider()
-                                .background(.gray)
-                                .padding(.bottom, 15)
-                            
-                            // Log Out Button
-                            VStack {
-                                HStack {
-                                    Button {
-                                        Task {
-                                            viewModel.signOut()
-                                        }
-                                        print("DEBUG: Sign out success!")
-                                    } label: {
-                                        Text("Sign Out")
-                                            .font(.title3)
-                                            .bold()
-                                            .foregroundColor(.red)
-                                    }
-                                    
-                                    Spacer()
                                 }
                                 .padding(.bottom, 15)
                                 
+                                Spacer()
+                                
+                                // Log out option
                                 Divider()
                                     .background(.gray)
+                                    .padding(.bottom, 15)
+                                
+                                
+                                // Log Out Button
+                                VStack {
+                                    HStack {
+                                        Button {
+                                            Task {
+                                                viewModel.signOut()
+                                            }
+                                            print("DEBUG: Sign out success!")
+                                        } label: {
+                                            Text("Sign Out")
+                                                .font(.title3)
+                                                .bold()
+                                                .foregroundColor(.red)
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(.bottom, 15)
+                                    
+                                    Divider()
+                                        .background(.gray)
+                                }
+                                .padding(.bottom, 50)
                             }
-                            .padding(.bottom, 50)
+                            .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
+                            .frame(width: 330)
                         }
-                        .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
-                        .frame(width: 330)
+                        // MARK: Hide default Back Button
+                        .navigationBarBackButtonHidden(true)
                     }
-                    // MARK: Hide default Back Button
-                    .navigationBarBackButtonHidden(true)
+                    .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                 }
-                .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
+                
             }
-
         }
     }
 }

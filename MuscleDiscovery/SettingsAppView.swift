@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-enum Theme {
-    static let darkMode = false
-}
+//enum Theme {
+//    static let darkMode = false
+//}
 
 struct SettingsAppView: View {
     // Save systemTheme to AppStorage to save user option for the next using and access from other view
