@@ -1,22 +1,23 @@
-//
-//  EditProfileView.swift
-//  MuscleDiscovery
-//
-//  Created by Vo Thanh Thong on 15/09/2023.
-//
-
 import SwiftUI
+import FirebaseStorage
+import FirebaseFirestore
 
 struct EditProfileView: View {
     @State private var isEditingName = false
     @State private var editedName = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State var isPickerShowing = false
     
+    @State var image: UIImage? = UIImage()
+    @State var url: String? = ""
+    @State var progress: Int = 0
+
     
     @EnvironmentObject var viewModel: AuthViewModel
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     // Back Button
     var backButton: some View {
         Button(action: {
@@ -50,34 +51,54 @@ struct EditProfileView: View {
                     Spacer()
                     // Profile Image and Button
                     ZStack {
-                        Text("Profile-Picture") // user.initials
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.white)
-                            .frame(width: 120, height: 120)
-                            .background(.gray)
-                            .clipShape(Circle())
+                        AsyncImage(url: URL(string: viewModel.currentUser?.imageUrl ?? "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")) {image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                                .frame(width: 150)
+                        } placeholder: {
+                            ProgressView()
+                                .tint(Color("Neon"))
+                        }
                         
                         VStack {
                             Spacer()
                             HStack {
                                 Spacer()
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.gray) // Fill color of the circle
-                                        .frame(width: 46, height: 46) // Size of the circle
-                                    Image(systemName: "camera.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 23)
-                                        .foregroundColor(Color.white)
+                                Button {
+                                    isPickerShowing = true
+                                } label: {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color.gray) // Fill color of the circle
+                                            .frame(width: 46, height: 46) // Size of the circle
+                                        Image(systemName: "camera.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 23)
+                                            .foregroundColor(Color.white)
+                                    }
                                 }
-                                
+                            }
+                            .sheet(isPresented: $isPickerShowing) {
+                                ImagePicker(image: self.$image)
+                            }
+                            .onChange(of: self.image) {newValue in
+                                self.uploadImage {url in
+                                    if let url = url {
+                                        // Use the URL returned by the completion handler
+                                        print("Uploaded media URL: \(url)")
+                                        self.url = url
+                                    } else {
+                                        // Handle the case when the URL is nil
+                                        print("Error uploading media")
+                                    }
+                                }
                             }
                             
                         }
                         .frame(width: 130, height: 130)
-                        
                     }
                     .padding(.bottom, 50)
                     
@@ -184,12 +205,9 @@ struct EditProfileView: View {
                     Button {
                         Task {
                             do {
-                                //                                try await viewModel.updateUser(fullname: editedName, email: user.email)
                                 let success = try await viewModel.updateUser(fullname: editedName, email: user.email)
                                 
                                 if success {
-                                    print("Update user information successfully")
-                                    
                                     // Update was successful, show the alert
                                     self.alertMessage = "Update user information successfully"
                                     self.showAlert.toggle()
@@ -237,10 +255,113 @@ struct EditProfileView: View {
             }
         }
     }
-}
+        
+    
+    /// Upload image to Firebase Storage
+    /// - Parameter completion: image url
+    func uploadImage(completion: @escaping (_ url: String?) -> Void) {
+        
+        // Reference to firebase Storage
+        let storageRef = Storage.storage().reference().child("avatars/avatar.jpeg")
+        
+        if let uploadData = self.image!.jpegData(compressionQuality: 0.5) {
+            let uploadTask = storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                if error != nil { // Upload error
+                    print("error")
+                    completion(nil)
+                } else {
+                    // Download image after upload
+                    storageRef.downloadURL(completion: { (url, error) in
+                        if let error = error {
+                            print("DEBUG: DOWNLOAD FAILED")
+                        }
+                        
+                        // Assign new avatar url
+                        viewModel.currentUser!.imageUrl = url!.absoluteString
+                        
+                        // Update new user avatar
+                        Task {
+                            do {
+                                let success = try await viewModel.updateUserAvatar(image: url!.absoluteString)
+                                
+                                if success {
+                                    // Update was successful, show the alert
+                                    self.alertMessage = "Update avatar success"
+                                    self.showAlert.toggle()
+                                    
+                                    // Set a timer to automatically dismiss the alert after 3 seconds
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        self.showAlert = false
+                                    }
+                                } else {
+                                    // Handle the case where the update was not successful
+                                    print("Avatar update failed.")
+                                }
+                            } catch {
+                                // Handle error if the update fails
+                                print("Failed to update user avatar: \(error.localizedDescription)")
+                            }
+                        }
+                        
+                        print("Image URL: \(viewModel.currentUser!.imageUrl)")
+                        completion(url?.absoluteString)
+                    })
+                }
+            }
+            
+            // DEBUG: Monitor uploading process
+            uploadTask.observe(.progress) {snapshot in
+                let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
+                  / Double(snapshot.progress!.totalUnitCount)
 
-//struct EditProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditProfileView()
-//    }
-//}
+                print(percentComplete)
+            }
+        }
+    }
+    
+    
+    /// Image picker used to select the image in Photo Library
+    struct ImagePicker: UIViewControllerRepresentable {
+        @Environment(\.presentationMode) var presentationMode
+        @Binding var image: UIImage?
+        
+        class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+            @Binding var presentationMode: PresentationMode
+            @Binding var image: UIImage?
+            
+            
+            init(presentationMode: Binding<PresentationMode>, image: Binding<UIImage?>) {
+                _presentationMode = presentationMode
+                _image = image
+            }
+            
+            func imagePickerController(_ picker: UIImagePickerController,
+                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                let uiImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+                image = uiImage
+                presentationMode.dismiss()
+            }
+            
+            
+            func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+                
+                presentationMode.dismiss()
+                
+            }
+        }
+        
+        func makeCoordinator() -> Coordinator {
+            return Coordinator(presentationMode: presentationMode, image: $image)
+        }
+        
+        func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+            let picker = UIImagePickerController()
+            picker.delegate = context.coordinator
+            return picker
+        }
+        
+        func updateUIViewController(_ uiViewController: UIImagePickerController,
+                                    context: UIViewControllerRepresentableContext<ImagePicker>) {
+        }
+    }
+}

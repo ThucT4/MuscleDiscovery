@@ -12,13 +12,10 @@ struct SessionCheckView: View {
     @State private var isLoading = false
     
     var body: some View {
-        Group {
-            if viewModel.isLoggedIn {
-                ContentView()
-                    .navigationBarBackButtonHidden(true)
-            } else {
-                LoginView()
-            }
+        if viewModel.isLoggedIn {
+            MainMenuView()
+        } else {
+            LoginView()
         }
     }
 }

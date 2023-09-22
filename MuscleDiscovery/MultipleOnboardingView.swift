@@ -18,60 +18,62 @@ struct MultipleOnboardingView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color("Background")
-                
-                TabView(selection: $pageIdx) {
-                    ForEach(pages) { page in
-                        VStack {
-                            // Instruction page
-                            SingleOnboardingView(page: page)
+        ZStack {
+            Color("Background")
+                .ignoresSafeArea(.all)
+            
+            NavigationView {
+                    TabView(selection: $pageIdx) {
+                        ForEach(pages) { page in
+                            VStack {
+                                // Instruction page
+                                SingleOnboardingView(page: page)
 
-                            // Last page detected
-                            if page == pages.last {
+                                // Last page detected
+                                if page == pages.last {
 
-                                NavigationLink {
-                                    SessionCheckView()
-                                } label: {
-                                    HStack(spacing: 20) {
-                                        Text("Start now")
-                                            .fontWeight(.regular)
-                                            .font(.system(size: 20))
-                                        Image(systemName: "arrowtriangle.forward.fill")
+                                    NavigationLink {
+                                        SessionCheckView()
+                                    } label: {
+                                        HStack(spacing: 20) {
+                                            Text("Start now")
+                                                .fontWeight(.regular)
+                                                .font(.system(size: 20))
+                                            Image(systemName: "arrowtriangle.forward.fill")
+                                        }
+                                        .foregroundColor(.black)
+                                        .frame(width: UIScreen.main.bounds.width - 180, height: 60)
                                     }
-                                    .foregroundColor(.black)
-                                    .frame(width: UIScreen.main.bounds.width - 180, height: 60)
+                                    .background(Color("Neon"))
+                                    .cornerRadius(48)
+                                    .padding(.bottom, 12)
+                                } else { // Move to next page
+                                    Button {
+                                        pageIdx += 1
+                                    } label: {
+                                        Image(systemName: "arrow.right.circle")
+                                    }
+                                    .tint(Color("Neon"))
+                                    .font(.system(size: 20))
                                 }
-                                .background(Color("Neon"))
-                                .cornerRadius(48)
-                                .padding(.bottom, 12)
-                            } else { // Move to next page
-                                Button {
-                                    pageIdx += 1
-                                } label: {
-                                    Image(systemName: "arrow.right.circle")
-                                }
-                                .tint(Color("Neon"))
-                                .font(.system(size: 20))
-                            }
-                            
-                            Spacer(minLength: 200)
-                        } // VStack
-                        .tag(page.tag)
-                    } // ForEach
-                } // TabView
-                .edgesIgnoringSafeArea(.all)
-                .animation(.easeOut, value: pageIdx)
-                .tabViewStyle(.page)
-                .indexViewStyle(.page(backgroundDisplayMode: .interactive))
-                .onAppear {
-                    pageDots.currentPageIndicatorTintColor = UIColor(Color("Neon"))
-                    pageDots.pageIndicatorTintColor = UIColor(named: "light-gray")
-                } // TabView
-            } // ZStack
-            .ignoresSafeArea(.all)
-        } // NaviationStack
+                                
+                                Spacer(minLength: 200)
+                            } // VStack
+                            .tag(page.tag)
+                        } // ForEach
+                    } // TabView
+                    .edgesIgnoringSafeArea(.all)
+                    .animation(.easeOut, value: pageIdx)
+                    .tabViewStyle(.page)
+                    .indexViewStyle(.page(backgroundDisplayMode: .interactive))
+                    .onAppear {
+                        pageDots.currentPageIndicatorTintColor = UIColor(Color("Neon"))
+                        pageDots.pageIndicatorTintColor = UIColor(named: "light-gray")
+                    } // TabView
+                
+                } // NaviationStack
+       
+        } // ZStack
     }
 }
 

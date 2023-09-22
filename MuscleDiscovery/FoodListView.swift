@@ -69,16 +69,18 @@ struct FoodListView: View {
                         .buttonStyle(PlainButtonStyle())
                 }
                 .padding(.bottom, 10)
-                ForEach(searchingResult) {item in
-                    HStack(spacing: 0) {
-                        FoodRowView(FoodItem: item)
-                        NavigationLink(destination: FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)) {
-                            FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
+                LazyVStack(){
+                    ForEach(searchingResult) {item in
+                        HStack(spacing: 0) {
+                            FoodRowView(FoodItem: item)
+                            NavigationLink(destination: FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)) {
+                                FoodDetailView(FoodItem: item, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
+                            }
+                            .frame(width: 0, height: 0)
+                            .opacity(0)
                         }
-                        .frame(width: 0, height: 0)
-                        .opacity(0)
+                        .padding(.all, 0)
                     }
-                    .padding(.all, 0)
                 }
             }
             .listRowSeparator(.hidden)

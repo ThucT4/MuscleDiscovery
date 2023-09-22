@@ -30,7 +30,7 @@ struct ForgotPasswordView: View {
                     }
                     .padding(.vertical, 30)
                     
-                    InputView(text: $email, title: "Email", placeholder: "example@hotmail.com")
+                    InputView(text: $email, title: "Email", placeholder: "example@hotmail.com", isSecuredField: true)
                         .textInputAutocapitalization(.never)
                         .padding(.horizontal, 40)
                         .padding(.top, 12)

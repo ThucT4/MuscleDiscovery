@@ -58,7 +58,7 @@ struct AppointmentListView: View {
                     
                     Spacer()
                 } // end VStack for list
-                .padding(.top)
+                .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                 
                 Button {
                     showing = true
@@ -81,7 +81,7 @@ struct AppointmentListView: View {
                     TrainerListView(showing: self.$showing)
                 }
                 
-            }
+            } // end ZStack
             
         } // end Main NavigationView
         .environmentObject(appointmentViewModel)

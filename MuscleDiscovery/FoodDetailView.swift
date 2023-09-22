@@ -59,9 +59,9 @@ struct FoodDetailView: View {
                             .clipShape(Rectangle())
                             .padding(.bottom, 20)
                     } placeholder: {
-                        
+                        ProgressView()
                     }
-                    .frame(width: .infinity, height: 200)
+                    .frame(width: UIScreen.main.bounds.width, height: 200)
                     VStack(alignment: .leading, spacing: 5){
                         Text(FoodItem.name)
                             .font(.system(.title3))
@@ -167,7 +167,7 @@ struct FoodDetailView: View {
                             } label: {
                                 Rectangle()
                                     .fill(ColorConstant.luminousGreen)
-                                    .frame(width: .infinity, height: 50)
+                                    .frame(width: UIScreen.main.bounds.width, height: 50)
                                     .border(.white, width: 4)
                                     .cornerRadius(15)
                                     .overlay(

@@ -13,6 +13,7 @@ struct FoodRowView: View {
     private var imageURL: URL {
         return URL(string: FoodItem.image)!
     }
+    
     var body: some View {
         HStack(spacing: 40){
             AsyncImage(url: imageURL) {image in
@@ -22,7 +23,7 @@ struct FoodRowView: View {
                     .clipShape(Circle())
                     .padding(.leading, 10)
             } placeholder: {
-                
+                ProgressView()
             }.frame(width: 80, height: 80)
             VStack(alignment: .leading, spacing: 8){
                 VStack(alignment: .leading){

@@ -27,7 +27,7 @@ struct VideoCallView: View {
         // Initialize Stream Video client
         self.client = StreamVideo(
             apiKey: apiKey,
-            user: .init(id: "Thuc", name: "Thuc Thieu", imageURL: .init(string: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/food1.jpeg?alt=media&token=2cb8b8f5-9205-4601-b2cc-d97a2cb670ee")),
+            user: .init(id: "Thuc", name: "Customer Name", imageURL: .init(string: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/food1.jpeg?alt=media&token=2cb8b8f5-9205-4601-b2cc-d97a2cb670ee")),
             token: .init(stringLiteral: token)
         )
         
@@ -70,7 +70,6 @@ struct VideoCallView: View {
         .onAppear {
             Task {
                 guard videoCallViewModel.call == nil else { return }
-//                videoCallViewModel.start(callType: callID, callId: callID)
                 videoCallViewModel.startCall(callType: .default, callId: callID, members: [])
             }
         }

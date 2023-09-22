@@ -39,7 +39,7 @@ struct AnimatedSplashView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 withAnimation {
                     showingMainView = true
                 }

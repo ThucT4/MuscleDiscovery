@@ -15,6 +15,8 @@ struct AppointmentRow: View {
         
         formartter.dateFormat = "EEE d MMM yyyy"
         
+        formartter.locale = Locale(identifier: "en_US_POSIX")
+        
         return formartter
     }()
     
@@ -22,6 +24,8 @@ struct AppointmentRow: View {
         let formartter = DateFormatter()
         
         formartter.dateFormat = "HH:mm"
+        
+        formartter.locale = Locale(identifier: "en_US_POSIX")
         
         return formartter
     }()
