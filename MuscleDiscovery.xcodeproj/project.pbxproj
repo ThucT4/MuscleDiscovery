@@ -33,7 +33,6 @@
 		84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45E32AB4303E0088A60D /* ForgotPasswordView.swift */; };
 		84BE45E62AB430790088A60D /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45E52AB430790088A60D /* AuthViewModel.swift */; };
 		84BE45E82AB4309A0088A60D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45E72AB4309A0088A60D /* SplashView.swift */; };
-		84C078672ABCA24E009EB542 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C078662ABCA24E009EB542 /* PhotoPickerView.swift */; };
 		A2241E122AB05A4600E06D8B /* MuscleDiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E112AB05A4600E06D8B /* MuscleDiscoveryApp.swift */; };
 		A2241E142AB05A4600E06D8B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2241E132AB05A4600E06D8B /* ContentView.swift */; };
 		A2241E162AB05A4800E06D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2241E152AB05A4800E06D8B /* Assets.xcassets */; };
@@ -103,7 +102,6 @@
 		84BE45E32AB4303E0088A60D /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		84BE45E52AB430790088A60D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		84BE45E72AB4309A0088A60D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		84C078662ABCA24E009EB542 /* PhotoPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		A2241E0E2AB05A4600E06D8B /* MuscleDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MuscleDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2241E112AB05A4600E06D8B /* MuscleDiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleDiscoveryApp.swift; sourceTree = "<group>"; };
 		A2241E132AB05A4600E06D8B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -420,7 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				A9EB7D492AB491F80050B68D /* SettingsView.swift */,
-				84C078662ABCA24E009EB542 /* PhotoPickerView.swift */,
 				A9EB7D4E2AB496460050B68D /* EditProfileView.swift */,
 				A9EB7D502AB496610050B68D /* PrivacyPolicyView.swift */,
 				A9EB7D522AB496980050B68D /* SettingsAppView.swift */,
@@ -532,7 +529,6 @@
 				84AF3E162AB8115A008225D8 /* SessionCheckView.swift in Sources */,
 				A2241E4C2AB07C4C00E06D8B /* ViewModifiers.swift in Sources */,
 				A29E21D42AB97FE7001F6403 /* AnimatedSplashView.swift in Sources */,
-				84C078672ABCA24E009EB542 /* PhotoPickerView.swift in Sources */,
 				A2241E602AB20C4300E06D8B /* AppointmentListView.swift in Sources */,
 				119293882AB45259002AA155 /* FoodListViewModel.swift in Sources */,
 				84A2F3AA2AB4705B00FBB5D0 /* OnboardingModel.swift in Sources */,
