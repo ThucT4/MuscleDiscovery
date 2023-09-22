@@ -18,8 +18,8 @@ struct MuscleDiscoveryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-//            SplashView()
+//            ContentView()
+            SplashView()
                 .environmentObject(viewModel)
         }
     }

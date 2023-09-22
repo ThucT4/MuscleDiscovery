@@ -45,26 +45,26 @@ struct LoginView: View {
                     
                     // -- INPUT FORM --
                     VStack(spacing: 24) {
-                        InputView(text: $email, title: "Email", placeholder: "example@hotmail.com")
+                        InputView(text: $email, title: "Email", placeholder: "example@hotmail.com", isSecuredField: false)
                             .textInputAutocapitalization(.never)
                         
-                        InputView(text: $password, title: "Password", placeholder: "Enter your password...", isSecuredField: false)
+                        InputView(text: $password, title: "Password", placeholder: "Enter your password...", isSecuredField: true)
                             .textInputAutocapitalization(.never)
                     }
                     .padding(.horizontal, 40)
                     .padding(.top, 12)
                     .padding(.vertical, 30)
                     
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: ForgotPasswordView(email: $email)) {
-                            Text("Forget Password")
-                                .font(.system(size: 13))
-                        }
-                    }
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("Neon"))
-                    .padding(.horizontal, 42)
+//                    HStack {
+//                        Spacer()
+//                        NavigationLink(destination: ForgotPasswordView(email: $email)) {
+//                            Text("Forget Password")
+//                                .font(.system(size: 13))
+//                        }
+//                    }
+//                    .fontWeight(.semibold)
+//                    .foregroundColor(Color("Neon"))
+//                    .padding(.horizontal, 42)
                     
                     Spacer()
                     
