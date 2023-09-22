@@ -46,15 +46,15 @@ struct RegistrationView: View {
                 
                 // -- INPUT FORM --
                 VStack(spacing: 24) {
-                    InputView(text: $email, title: "Email", placeholder: "example@hotmail.com")
+                    InputView(text: $email, title: "Email", placeholder: "example@hotmail.com", isSecuredField: false)
                         .textInputAutocapitalization(.never)
                     
-                    InputView(text: $fullname, title: "Fullname", placeholder: "Enter your name")
+                    InputView(text: $fullname, title: "Fullname", placeholder: "Enter your name", isSecuredField: false)
                     
-                    InputView(text: $password, title: "Password", placeholder: "Enter your password...")
+                    InputView(text: $password, title: "Password", placeholder: "Enter your password...", isSecuredField: true)
                     
                     ZStack(alignment: .trailing) {
-                        InputView(text: $confirmedPassword, title: "Password again", placeholder: "Enter password again")
+                        InputView(text: $confirmedPassword, title: "Password again", placeholder: "Enter password again", isSecuredField: true)
                         
                         if (!password.isEmpty && !confirmedPassword.isEmpty) {
                             if (password == confirmedPassword) {

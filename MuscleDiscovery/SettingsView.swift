@@ -11,6 +11,10 @@ struct SettingsView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     @State private var premium: Bool = false
+
+    private var imageURL: URL {
+        return URL(string: viewModel.currentUser?.imageUrl ?? "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")!
+    }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // Back Button
@@ -61,13 +65,19 @@ struct SettingsView: View {
                                         .frame(width: 100, height: 100)
                                         .rotationEffect(.degrees(-90)) // Rotate to start at the top
                                     
-                                    Text(user.initials)
-                                        .font(.title)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white)
-                                        .frame(width: 80, height: 80)
-                                        .background(.gray)
-                                        .clipShape(Circle())
+//                                    URL(string: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")
+                                    
+                                    
+                                    AsyncImage(url: imageURL) {image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .clipShape(Circle())
+                                            .frame(width: 120)
+                                    } placeholder: {
+                                        ProgressView()
+                                            .tint(Color("Neon"))
+                                    }
                                 }
                                 .padding(.trailing, 65)
                                 

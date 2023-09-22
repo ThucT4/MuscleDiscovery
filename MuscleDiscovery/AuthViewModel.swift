@@ -65,7 +65,7 @@ class AuthViewModel: ObservableObject {
                     self.userSession = authResult?.user
                     
                     // Init User object with newly created user and store the encoded object to firestore
-                    let user = User(id: authResult!.user.uid , fullname: fullname, email: email)
+                    let user = User(id: authResult!.user.uid , fullname: fullname, email: email, imageUrl: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")
                     let encodedUser = try Firestore.Encoder().encode(user)
                     Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
                 } catch {
@@ -75,27 +75,6 @@ class AuthViewModel: ObservableObject {
                 print("Create user \(self.userSession?.description ?? "") success.")
             }
         }
-        
-        // -- OLD WORKS --
-//        do {
-//            // Create Firebase user
-//            let result = try await Auth.auth().createUser(withEmail: email, password: password)
-//            self.userSession = result.user
-//            let user = User(id: result.user.uid , fullname: fullname, email: email)
-//
-//            let encodedUser = try Firestore.Encoder().encode(user)
-//
-//            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-//            self.authenticationState = .SUCCESS
-//
-//            print("Create new user success.")
-//
-//            // Fetch after creating new user session
-//            await fetchUser()
-//        } catch {
-//            self.authenticationState = .FAILED
-//            print("Failed to create user! \(error.localizedDescription )")
-//        }
     }
     
     
@@ -151,6 +130,27 @@ class AuthViewModel: ObservableObject {
                 "fullname": fullname,
                 "email": email
                 // Add other fields you want to update here
+            ]
+            
+            try await Firestore.firestore().collection("users").document(uid).updateData(userData)
+            
+            return true
+            
+        } catch {
+            print("Failed to update user information: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    func updateUserAvatar(image: String) async throws -> Bool {
+        do {
+            guard let uid = Auth.auth().currentUser?.uid else {
+                return false
+            }
+            
+            // Update user information in Firestore
+            let userData: [String: Any] = [
+                "imageUrl": image
             ]
             
             try await Firestore.firestore().collection("users").document(uid).updateData(userData)
