@@ -22,7 +22,7 @@ struct FoodRowView: View {
                     .clipShape(Circle())
                     .padding(.leading, 10)
             } placeholder: {
-                
+                ProgressView()
             }.frame(width: 80, height: 80)
             VStack(alignment: .leading, spacing: 8){
                 VStack(alignment: .leading){

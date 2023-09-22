@@ -59,7 +59,7 @@ struct FoodDetailView: View {
                             .clipShape(Rectangle())
                             .padding(.bottom, 20)
                     } placeholder: {
-                        
+                        ProgressView()
                     }
                     .frame(width: .infinity, height: 200)
                     VStack(alignment: .leading, spacing: 5){
