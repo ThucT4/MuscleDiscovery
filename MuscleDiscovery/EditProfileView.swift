@@ -5,6 +5,8 @@ import FirebaseFirestore
 struct EditProfileView: View {
     @State private var isEditingName = false
     @State private var editedName = ""
+    @State private var isEditingEmail = false
+    @State private var editedEmail = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State var isPickerShowing = false
@@ -13,6 +15,7 @@ struct EditProfileView: View {
     @State var url: String? = ""
     @State var progress: Int = 0
 
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     
     @EnvironmentObject var viewModel: AuthViewModel
     
@@ -44,13 +47,27 @@ struct EditProfileView: View {
     var body: some View {
         if let user = viewModel.currentUser {
             ZStack {
+                // Background Color
+                isDarkMode ?
                 ColorConstant.black
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(.all)
+                :
+                Color.white
+                    .ignoresSafeArea(.all)
                 
                 VStack {
                     Spacer()
                     // Profile Image and Button
                     ZStack {
+                        Circle()
+                            .trim(from: 0.0, to: 0.75) // Trim 75% of the circle
+                            .stroke(
+                                LinearGradient(gradient: Gradient(colors: [Color.red, Color.yellow, Color.green]), startPoint: .topLeading, endPoint: .bottomTrailing),
+                                lineWidth: 3
+                            )
+                            .frame(width: 150, height: 150)
+                            .rotationEffect(.degrees(-90)) // Rotate to start at the top
+                        
                         AsyncImage(url: URL(string: viewModel.currentUser?.imageUrl ?? "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")) {image in
                             image
                                 .resizable()
@@ -102,6 +119,8 @@ struct EditProfileView: View {
                     }
                     .padding(.bottom, 50)
                     
+                    Spacer()
+                    
                     // MARK: Information
                     // Name
                     VStack(alignment: .leading) {
@@ -110,7 +129,9 @@ struct EditProfileView: View {
                             .padding(.bottom, 10)
                         
                         Text("Name")
-                            .foregroundColor(ColorConstant.luminousGreen)
+                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
+                            .font(.title3)
+                            .bold()
                             .padding(.bottom, 5)
                             .padding(.horizontal)
                         
@@ -119,8 +140,8 @@ struct EditProfileView: View {
                                 // Save the edited name or perform any necessary actions
                                 isEditingName = false
                             })
-                            .font(.title2)
-                            .foregroundColor(.white)
+                            .font(.title3)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                             .padding(.bottom, 15)
                             .padding(.horizontal)
                             .onTapGesture {
@@ -129,9 +150,8 @@ struct EditProfileView: View {
                             .background(Color.clear) // Hide TextField background
                         } else {
                             Text(user.fullname)
-                                .font(.title2)
-                                .bold()
-                                .foregroundColor(.white)
+                                .font(.title3)
+                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                                 .padding(.bottom, 15)
                                 .padding(.horizontal)
                                 .onTapGesture {
@@ -146,66 +166,61 @@ struct EditProfileView: View {
                     }
                     .padding(.bottom, 10)
                     
-                    // Age
-                    VStack (alignment: .leading) {
-                        Text("Age")
-                            .foregroundColor(ColorConstant.luminousGreen)
+                    // Email
+                    VStack(alignment: .leading) {
+                        Divider()
+                            .background(Color.gray)
+                            .padding(.bottom, 10)
+                        
+                        Text("Email")
+                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
+                            .bold()
+                            .font(.title3)
                             .padding(.bottom, 5)
                             .padding(.horizontal)
-                        Text("23")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.white)
+                        
+                        if isEditingEmail {
+                            TextField("Enter email", text: $editedEmail, onCommit: {
+                                // Save the edited name or perform any necessary actions
+                                isEditingEmail = false
+                            })
+                            .font(.title3)
+                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                             .padding(.bottom, 15)
                             .padding(.horizontal)
+                            .onTapGesture {
+                                // Do nothing when tapped inside the TextField
+                            }
+                            .background(Color.clear) // Hide TextField background
+                        } else {
+                            Text(user.email)
+                                .font(.title3)
+                                .foregroundColor(isDarkMode ? Color.white : Color.black)
+                                .padding(.bottom, 15)
+                                .padding(.horizontal)
+                                .onTapGesture {
+                                    // Enable editing when tapped
+                                    editedEmail = user.email
+                                    isEditingEmail = true
+                                }
+                        }
                         
                         Divider()
                             .background(Color.gray)
                     }
                     .padding(.bottom, 10)
                     
-                    // Height
-                    VStack (alignment: .leading) {
-                        Text("Height")
-                            .foregroundColor(ColorConstant.luminousGreen)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal)
-                        Text("174 cm")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(Color.white)
-                            .padding(.bottom, 15)
-                            .padding(.horizontal)
-                        
-                        Divider()
-                            .background(Color.gray)
-                    }
-                    .padding(.bottom, 10)
                     
-                    // Weight
-                    VStack (alignment: .leading) {
-                        Text("Weight")
-                            .foregroundColor(ColorConstant.luminousGreen)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal)
-                        Text("74 kg")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(Color.white)
-                            .padding(.bottom, 15)
-                            .padding(.horizontal)
-                        
-                        Divider()
-                            .background(Color.gray)
-                    }
-                    .padding(.bottom, 10)
                     
                     Spacer()
                     
                     Button {
+                        isEditingName = false
+                        isEditingEmail = false
+                        
                         Task {
                             do {
-                                let success = try await viewModel.updateUser(fullname: editedName, email: user.email)
+                                let success = try await viewModel.updateUser(fullname: editedName, email: editedEmail)
                                 
                                 if success {
                                     // Update was successful, show the alert

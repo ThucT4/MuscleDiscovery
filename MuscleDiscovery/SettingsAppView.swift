@@ -7,7 +7,14 @@
 
 import SwiftUI
 
+//enum Theme {
+//    static let darkMode = false
+//}
+
 struct SettingsAppView: View {
+    // Save systemTheme to AppStorage to save user option for the next using and access from other view
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     // Back Button
     var backButton: some View {
@@ -32,12 +39,21 @@ struct SettingsAppView: View {
         .padding(.trailing, 20)
     }
     
-    @State private var isDark = false
-    
     var body: some View {
         ZStack {
-            ColorConstant.black
-                .ignoresSafeArea()
+            
+            isDarkMode == true ?
+            
+            VStack {
+                ColorConstant.black
+            }
+            .ignoresSafeArea()
+            :
+            VStack {
+                Color.white
+            }
+            .ignoresSafeArea()
+            
             VStack {
                 Divider()
                     .background(.gray)
@@ -55,15 +71,14 @@ struct SettingsAppView: View {
                         Spacer()
                         
                         Button {
-                            print("toggle dark theme")
-                            isDark.toggle()
+                            isDarkMode.toggle()
                         } label: {
                             
                             
-                            Image(systemName: isDark == true ? "moon.circle.fill" : "moon.circle")
+                            Image(systemName: isDarkMode == true ? "moon.circle.fill" : "moon.circle")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(isDark == true ? ColorConstant.luminousGreen : .white)
+                                .foregroundColor(isDarkMode == true ? ColorConstant.luminousGreen : .white)
                                 .frame(width: 30)
                         }
                         
@@ -72,7 +87,7 @@ struct SettingsAppView: View {
                     
                     Divider()
                         .background(.gray)
-                }   
+                }
                 .padding(.bottom, 15)
                 
                 Spacer()
