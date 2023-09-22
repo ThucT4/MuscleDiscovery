@@ -46,14 +46,11 @@ struct SettingsView: View {
                 NavigationView {
                     ZStack {
                         ColorConstant.black
-                            .ignoresSafeArea()
+                            .ignoresSafeArea(.all)
                         
                         VStack (alignment: .leading) {
-                            Spacer()
-                            
                             // Profile Information
                             HStack {
-                                
                                 // Profile Picture
                                 ZStack {
                                     Circle()
@@ -251,19 +248,13 @@ struct SettingsView: View {
                             }
                             .padding(.bottom, 50)
                         }
+                        .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                         .frame(width: 330)
                     }
                     // MARK: Hide default Back Button
                     .navigationBarBackButtonHidden(true)
-        //                .toolbar {
-        //                    ToolbarItem(placement: .principal) {
-        //                        HStack (spacing: 20) {
-        //                            backButton
-        //                        }
-        //                        .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
-        //                    }
-        //                }
                 }
+                .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
             }
 
         }

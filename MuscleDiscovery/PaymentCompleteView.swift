@@ -22,6 +22,8 @@ struct PaymentCompleteView: View {
         
         formartter.dateFormat = "dd MMMM yyyy - EEEE"
         
+        formartter.locale = Locale(identifier: "en_US_POSIX")
+        
         return formartter
     }()
     
@@ -29,6 +31,8 @@ struct PaymentCompleteView: View {
         let formartter = DateFormatter()
         
         formartter.dateFormat = "hh:mm a"
+        
+        formartter.locale = Locale(identifier: "en_US_POSIX")
         
         return formartter
     }()

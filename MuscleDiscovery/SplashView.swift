@@ -11,9 +11,11 @@ struct SplashView: View {
         // If splash view animated duration end, jump to Login view
         if isActive {
             MultipleOnboardingView()
-        } else {
+        }
+        else {
             ZStack {
                 Color("Background")
+                    .ignoresSafeArea(.all)
                 
                 VStack {
                     VStack(alignment: .center) {
@@ -53,19 +55,10 @@ struct SplashView: View {
                         }
                     }
                 } // VStack
-//                .onAppear {
-//                    DispatchQueue.main.asyncAfter(
-//                        deadline: .now() + 2.0,
-//                        execute: {
-//                        isActive.toggle()
-//                    })
-//                }
-                
                 .onTapGesture {
                     isActive.toggle()
                 }
             } // ZStack
-            .ignoresSafeArea(.all)
         } // Splash view check
     }
 }

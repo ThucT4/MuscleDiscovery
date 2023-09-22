@@ -9,7 +9,6 @@ struct LoginView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
-        
         NavigationView {
             ZStack {
                 Image("login-wallpaper")

@@ -67,6 +67,7 @@
 		A27A745D2AB5C18600796661 /* StreamVideo in Frameworks */ = {isa = PBXBuildFile; productRef = A27A745C2AB5C18600796661 /* StreamVideo */; };
 		A27A745F2AB5C18600796661 /* StreamVideoSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A27A745E2AB5C18600796661 /* StreamVideoSwiftUI */; };
 		A27A74632AB5EA2900796661 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A27A74622AB5EA2900796661 /* GoogleService-Info.plist */; };
+		A282BABA2ABD79AB0068D0CD /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A282BAB92ABD79AB0068D0CD /* MainMenuView.swift */; };
 		A282DA532AB98127005CFC6F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A282DA522AB98127005CFC6F /* SDWebImageSwiftUI */; };
 		A29E21D02AB97F3A001F6403 /* IntegralCF-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A29E21CF2AB97F37001F6403 /* IntegralCF-ExtraBold.otf */; };
 		A29E21D22AB97F4E001F6403 /* fitness.gif in Resources */ = {isa = PBXBuildFile; fileRef = A29E21D12AB97F4E001F6403 /* fitness.gif */; };
@@ -128,6 +129,7 @@
 		A27A74562AB5BE4A00796661 /* AppointmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentRow.swift; sourceTree = "<group>"; };
 		A27A74592AB5C10500796661 /* VideoCallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCallView.swift; sourceTree = "<group>"; };
 		A27A74622AB5EA2900796661 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A282BAB92ABD79AB0068D0CD /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		A282DA542AB9816A005CFC6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A29E21CF2AB97F37001F6403 /* IntegralCF-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-ExtraBold.otf"; sourceTree = "<group>"; };
 		A29E21D12AB97F4E001F6403 /* fitness.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fitness.gif; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				A20EE5992AB40B6100191FC6 /* TrainerTab */,
 				A9EB7D4D2AB492630050B68D /* Settings */,
 				A29E21D32AB97FE7001F6403 /* AnimatedSplashView.swift */,
+				A282BAB92ABD79AB0068D0CD /* MainMenuView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */,
 				119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */,
 				84BE45E02AB42FE70088A60D /* SettingRowView.swift in Sources */,
+				A282BABA2ABD79AB0068D0CD /* MainMenuView.swift in Sources */,
 				A9EB7D532AB496980050B68D /* SettingsAppView.swift in Sources */,
 				A2241E582AB198E100E06D8B /* PaymentCompleteView.swift in Sources */,
 				119293792AB45114002AA155 /* FoodListView.swift in Sources */,

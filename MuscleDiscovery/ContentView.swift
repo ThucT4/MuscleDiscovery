@@ -8,35 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @State var showingMainView: Bool = false
     
     var body: some View {
         Group {
             if showingMainView {
-                TabView {
-                    AppointmentListView()
-                        .tabItem{
-                            Label("Trainers", systemImage: "figure.strengthtraining.traditional")
-                        }
-                    
-                    FoodAnalysisView()
-                        .tabItem {
-                            Label("Nutrition", systemImage: "chart.pie.fill")
-                        }
-                    
-                    SettingsView()
-                        .tabItem {
-                            Label("Settings", systemImage: "gearshape.fill")
-                        }
-                    
-                    //            EmptyView()
-                    //                .tabItem{
-                    //                    Label("Home", systemImage: "person")
-                    //                }
-                    
-                }
-                
-                .toolbarColorScheme(.light, for: .tabBar)
+                SessionCheckView()
             }
             else {
                 AnimatedSplashView(showingMainView: self.$showingMainView)
