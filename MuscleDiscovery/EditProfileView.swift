@@ -1,3 +1,17 @@
+/*
+    RMIT University Vietnam
+    Course: COSC2659 iOS Development
+    Semester: 2023B
+    Assessment: Assignment 3
+    Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+    ID: s3799602, s3870730, s3891909, s3878071
+    Created  date: 12/9/2023
+    Last modified: 25/9/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Gym fitness app ui kit: Figma community,” Figma, https://www.figma.com/community/file/1096744662320428503 (accessed Sep. 12, 2023).
+ */
+
 import SwiftUI
 import FirebaseStorage
 import FirebaseFirestore
@@ -50,7 +64,6 @@ struct EditProfileView: View {
                     .ignoresSafeArea(.all)
                 
                 VStack {
-                    Spacer()
                     // Profile Image and Button
                     ZStack {
                         Circle()
@@ -66,13 +79,14 @@ struct EditProfileView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
+                                .frame(width: 140)
                                 .clipShape(Circle())
-                                .frame(width: 150)
                         } placeholder: {
                             ProgressView()
                                 .tint(Color("Neon"))
                         }
                         
+                        // MARK: Button to open image picker
                         VStack {
                             Spacer()
                             HStack {
@@ -108,12 +122,10 @@ struct EditProfileView: View {
                                 }
                             }
                             
-                        }
+                        } // end Button to open image picker
                         .frame(width: 130, height: 130)
                     }
                     .padding(.bottom, 50)
-                    
-                    Spacer()
                     
                     // MARK: Information
                     // Name
@@ -123,8 +135,7 @@ struct EditProfileView: View {
                             .padding(.bottom, 10)
                         
                         Text("Name")
-                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
-                        
+                            .foregroundColor(Color("Neon"))
                             .font(.title3)
                             .bold()
                             .padding(.bottom, 5)
@@ -136,14 +147,13 @@ struct EditProfileView: View {
                                 isEditingName = false
                             })
                             .font(.title3)
-                            .foregroundColor(isDarkMode ? Color.white : Color.black)
                             .padding(.bottom, 15)
                             .padding(.horizontal)
                             .background(Color.clear) // Hide TextField background
-                        } else {
+                        }
+                        else {
                             Text(user.fullname)
                                 .font(.title3)
-                                .foregroundColor(isDarkMode ? Color.white : Color.black)
                                 .padding(.bottom, 15)
                                 .padding(.horizontal)
                                 .onTapGesture {
@@ -156,61 +166,16 @@ struct EditProfileView: View {
                         Divider()
                             .background(Color.gray)
                     }
-                    .padding(.bottom, 10)
-                    
-                    // Email
-                    VStack(alignment: .leading) {
-                        Divider()
-                            .background(Color.gray)
-                            .padding(.bottom, 10)
-                        
-                        Text("Email")
-                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
-                            .bold()
-                            .font(.title3)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal)
-                        
-                        if isEditingEmail {
-                            TextField("Enter email", text: $editedEmail, onCommit: {
-                                // Save the edited name or perform any necessary actions
-                                isEditingEmail = false
-                            })
-                            .font(.title3)
-                            .foregroundColor(isDarkMode ? Color.white : Color.black)
-                            .padding(.bottom, 15)
-                            .padding(.horizontal)
-                            .background(Color.clear) // Hide TextField background
-                        } else {
-                            Text(user.email)
-                                .font(.title3)
-                                .foregroundColor(isDarkMode ? Color.white : Color.black)
-                                .padding(.bottom, 15)
-                                .padding(.horizontal)
-                                .onTapGesture {
-                                    // Enable editing when tapped
-                                    editedEmail = user.email
-                                    isEditingEmail = true
-                                }
-                        }
-                        
-                        Divider()
-                            .background(Color.gray)
-                    }
-                    .padding(.bottom, 10)
-                    
-                    
                     
                     Spacer()
                     
                     // Save Button
                     Button {
+                        print("New \(user.fullname)")
                         isEditingName = false
-                        isEditingEmail = false
-                        
                         Task {
                             do {
-                                let success = try await viewModel.updateUser(fullname: editedName, email: editedEmail)
+                                let success = try await viewModel.updateUser(fullname: editedName)
                                 
                                 if success {
                                     // Update was successful, show the alert
@@ -234,13 +199,13 @@ struct EditProfileView: View {
                         Text("Save")
                             .foregroundColor(Color.black)
                             .bold()
-                            .frame(width: 260, height: 50)
-                            .background(ColorConstant.luminousGreen)
+                            .frame(width: UIScreen.main.bounds.width*0.6, height: 50)
+                            .background(Color("Neon"))
                             .cornerRadius(50)
-                            .padding(.bottom, 30)
+                            .padding(.bottom)
                     }
                 }
-                .frame(width: 330)
+                .frame(width: UIScreen.main.bounds.width*0.9)
             }
             // MARK: Hide default Back Button
             .navigationBarBackButtonHidden(true)
@@ -267,7 +232,7 @@ struct EditProfileView: View {
     func uploadImage(completion: @escaping (_ url: String?) -> Void) {
         
         // Reference to firebase Storage
-        let storageRef = Storage.storage().reference().child("avatars/avatar.jpeg")
+        let storageRef = Storage.storage().reference().child("avatars/\(viewModel.currentUser!.id).jpeg")
         
         if let uploadData = self.image!.jpegData(compressionQuality: 0.5) {
             let uploadTask = storageRef.putData(uploadData, metadata: nil) { (metadata, error) in

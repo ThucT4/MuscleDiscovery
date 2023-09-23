@@ -1,9 +1,16 @@
-//
-//  TrainerDetailView.swift
-//  MuscleDiscovery
-//
-//  Created by Thuc on 12/9/2023.
-//
+/*
+    RMIT University Vietnam
+    Course: COSC2659 iOS Development
+    Semester: 2023B
+    Assessment: Assignment 3
+    Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+    ID: s3799602, s3870730, s3891909, s3878071
+    Created  date: 12/9/2023
+    Last modified: 25/9/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Gym fitness app ui kit: Figma community,” Figma, https://www.figma.com/community/file/1096744662320428503 (accessed Sep. 12, 2023).
+ */
 
 import SwiftUI
 
@@ -75,7 +82,7 @@ struct TrainerDetailView: View {
                             })
                             .padding(.leading, 20)
 
-                        
+                        // MARK: Name, experience and decoration
                         VStack (spacing: 15) {
                             Text(trainer.name!)
                                 .font(.title)
@@ -110,7 +117,7 @@ struct TrainerDetailView: View {
                                         blinking = true
                                     }
                                 }
-                        }
+                        } // end VStack Name, experience and decoration
                         
                     } // end HStack for avt and basic info
                     
@@ -166,7 +173,8 @@ struct TrainerDetailView: View {
                             
                         } // end ScrollView highlights
                         .frame(height: 70)
-                    }
+                        
+                    } // end VStack for highlight
                     .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     
                     // MARK: Rating
@@ -207,7 +215,7 @@ struct TrainerDetailView: View {
                     .padding()
                     .background(
                         Rectangle()
-                        .fill(ColorConstant.luminousGreen)
+                        .fill(Color("Neon"))
                         .cornerRadius(25)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .shadow(color: .white.opacity(0.4), radius: 4)
@@ -226,6 +234,7 @@ struct TrainerDetailView: View {
 
     }
     
+    // This function can be used to animate a counter or perform any task that requires incrementing a value over time.
     func runCounter(counter: Binding<Double>, start: Double, end: Double, speed: Double) {
         counter.wrappedValue = start
 

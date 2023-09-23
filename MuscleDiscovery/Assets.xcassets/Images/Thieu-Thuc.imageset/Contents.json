@@ -6,10 +6,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "Thieu-Thuc@2x.jpeg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Thieu-Thuc@3x.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }

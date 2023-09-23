@@ -1,9 +1,16 @@
-//
-//  VideoCallView.swift
-//  MuscleDiscovery
-//
-//  Created by Thuc on 16/9/2023.
-//
+/*
+    RMIT University Vietnam
+    Course: COSC2659 iOS Development
+    Semester: 2023B
+    Assessment: Assignment 3
+    Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+    ID: s3799602, s3870730, s3891909, s3878071
+    Created  date: 12/9/2023
+    Last modified: 25/9/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Gym fitness app ui kit: Figma community,” Figma, https://www.figma.com/community/file/1096744662320428503 (accessed Sep. 12, 2023).
+ */
 
 import SwiftUI
 import StreamVideo
@@ -38,7 +45,8 @@ struct VideoCallView: View {
     
     var body: some View {
         ZStack {
-            ColorConstant.black
+            Color("Background")
+                .ignoresSafeArea(.all)
             
             VStack {
                 if videoCallViewModel.call != nil {
@@ -47,7 +55,7 @@ struct VideoCallView: View {
                 else {
                     Image(systemName: "phone.circle.fill")
                         .font(.system(size: 100, weight: .bold))
-                        .foregroundColor(ColorConstant.luminousGreen)
+                        .foregroundColor(Color("Neon"))
                         .rotationEffect(.degrees(ringing ? -20 : 20))
                         .onAppear {
                             // Create animation to blink the button and make it repeate forever

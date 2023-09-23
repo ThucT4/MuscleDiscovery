@@ -1,14 +1,16 @@
 /*
-  RMIT University Vietnam
-  Course: COSC2659 iOS Development
-  Semester: 2023B
-  Assessment: Assignment 3
-  Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
-  ID: s3799602, s3870730, s3891909, s3878071
-  Created  date: 23/09/2023
-  Last modified: 23/09/2023
-  Acknowledgement: iOS Development course (lecture and tutorial material slides), Apple Documentation, Code With Chris, Hacking with Swift, Medium.
-*/
+    RMIT University Vietnam
+    Course: COSC2659 iOS Development
+    Semester: 2023B
+    Assessment: Assignment 3
+    Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+    ID: s3799602, s3870730, s3891909, s3878071
+    Created  date: 12/9/2023
+    Last modified: 25/9/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Gym fitness app ui kit: Figma community,” Figma, https://www.figma.com/community/file/1096744662320428503 (accessed Sep. 12, 2023).
+ */
 
 import SwiftUI
 
@@ -22,6 +24,26 @@ struct RegistrationView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    var backButton: some View {
+        Button(action: {
+            withAnimation() {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        })  {
+            Circle()
+                .fill(Color(red: 96, green: 96, blue: 96))
+                .frame(height: 30)
+                .overlay(alignment: .center, content: {
+                    Image(systemName: "chevron.left")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                    
+                })
+                .modifier(Shadown3DModifier())
+        }
+        .contentShape(Circle())
+    }
     
     var body: some View {
         ZStack {
@@ -125,7 +147,7 @@ struct RegistrationView: View {
             } // VStack
         } // ZStack
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton())
+        .navigationBarItems(leading: backButton)
     }
     
     /// Navigate back to parent view
@@ -146,12 +168,5 @@ extension RegistrationView: AuthenticationFormProtocol {
         return !email.isEmpty && email.contains("@")
         && !password.isEmpty && password.count >= 6
         && !fullname.isEmpty && password == confirmedPassword
-    }
-}
-
-struct RegistrationView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegistrationView()
-            .preferredColorScheme(.dark)
     }
 }

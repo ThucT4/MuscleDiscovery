@@ -1,9 +1,16 @@
-//
-//  SettingsView.swift
-//  MuscleDiscovery
-//
-//  Created by Vo Thanh Thong on 15/09/2023.
-//
+/*
+    RMIT University Vietnam
+    Course: COSC2659 iOS Development
+    Semester: 2023B
+    Assessment: Assignment 3
+    Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+    ID: s3799602, s3870730, s3891909, s3878071
+    Created  date: 12/9/2023
+    Last modified: 25/9/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Gym fitness app ui kit: Figma community,” Figma, https://www.figma.com/community/file/1096744662320428503 (accessed Sep. 12, 2023).
+ */
 
 import SwiftUI
 
@@ -31,16 +38,15 @@ struct SettingsView: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
         .padding(.trailing, 20)
@@ -220,16 +226,10 @@ struct SettingsView: View {
                     }
                     .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .preferredColorScheme(isDarkMode ? .dark : .light)
                 
             }
         }
-    }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-            .environmentObject(AuthViewModel()) // Provide an instance of AuthViewModel
     }
 }
