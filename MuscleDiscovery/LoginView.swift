@@ -12,6 +12,10 @@
 
 import SwiftUI
 
+protocol AuthenticationFormProtocol {
+    var formIsActive: Bool { get }
+}
+
 /// Structure of login page
 struct LoginView: View {
     @State var email: String = ""
