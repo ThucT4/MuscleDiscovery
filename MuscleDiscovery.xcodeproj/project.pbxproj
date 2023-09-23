@@ -75,7 +75,6 @@
 		A97472242ABE825E0055BA4C /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97472232ABE825E0055BA4C /* AboutUs.swift */; };
 		A9EB7D4A2AB491F80050B68D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D492AB491F80050B68D /* SettingsView.swift */; };
 		A9EB7D4F2AB496460050B68D /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D4E2AB496460050B68D /* EditProfileView.swift */; };
-		A9EB7D532AB496980050B68D /* SettingsAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9EB7D522AB496980050B68D /* SettingsAppView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,7 +136,6 @@
 		A97472232ABE825E0055BA4C /* AboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
 		A9EB7D492AB491F80050B68D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A9EB7D4E2AB496460050B68D /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
-		A9EB7D522AB496980050B68D /* SettingsAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,7 +420,6 @@
 			children = (
 				A9EB7D492AB491F80050B68D /* SettingsView.swift */,
 				A9EB7D4E2AB496460050B68D /* EditProfileView.swift */,
-				A9EB7D522AB496980050B68D /* SettingsAppView.swift */,
 				A97472232ABE825E0055BA4C /* AboutUs.swift */,
 			);
 			name = Settings;
@@ -543,7 +540,6 @@
 				119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */,
 				84BE45E02AB42FE70088A60D /* SettingRowView.swift in Sources */,
 				A282BABA2ABD79AB0068D0CD /* MainMenuView.swift in Sources */,
-				A9EB7D532AB496980050B68D /* SettingsAppView.swift in Sources */,
 				A2241E582AB198E100E06D8B /* PaymentCompleteView.swift in Sources */,
 				119293792AB45114002AA155 /* FoodListView.swift in Sources */,
 				A2241E452AB0693B00E06D8B /* TrainerDetailView.swift in Sources */,

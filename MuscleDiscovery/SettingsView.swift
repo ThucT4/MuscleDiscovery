@@ -131,7 +131,7 @@ struct SettingsView: View {
                                     .padding(.bottom, 15)
                                 }
                                 
-                                // Navigate to Privacy Policy Page
+                                // Navigate to About Us View
                                 NavigationLink (destination: AboutUs()) {
                                     VStack {
                                         HStack {
@@ -153,7 +153,7 @@ struct SettingsView: View {
                                     .padding(.bottom, 15)
                                 }
                                 
-                                // Dark / Light Mode
+                                // Dark / Light Mode Button
                                 VStack {
                                     HStack {
                                         Text("Dark Theme")

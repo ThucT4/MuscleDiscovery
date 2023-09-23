@@ -137,9 +137,6 @@ struct EditProfileView: View {
                             .foregroundColor(isDarkMode ? Color.white : Color.black)
                             .padding(.bottom, 15)
                             .padding(.horizontal)
-                            .onTapGesture {
-                                // Do nothing when tapped inside the TextField
-                            }
                             .background(Color.clear) // Hide TextField background
                         } else {
                             Text(user.fullname)
@@ -181,9 +178,6 @@ struct EditProfileView: View {
                             .foregroundColor(isDarkMode ? Color.white : Color.black)
                             .padding(.bottom, 15)
                             .padding(.horizontal)
-                            .onTapGesture {
-                                // Do nothing when tapped inside the TextField
-                            }
                             .background(Color.clear) // Hide TextField background
                         } else {
                             Text(user.email)
@@ -207,6 +201,7 @@ struct EditProfileView: View {
                     
                     Spacer()
                     
+                    // Save Button
                     Button {
                         isEditingName = false
                         isEditingEmail = false
