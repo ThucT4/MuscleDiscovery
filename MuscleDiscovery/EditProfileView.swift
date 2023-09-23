@@ -14,7 +14,7 @@ struct EditProfileView: View {
     @State var image: UIImage? = UIImage()
     @State var url: String? = ""
     @State var progress: Int = 0
-
+    
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     
     @EnvironmentObject var viewModel: AuthViewModel
@@ -123,6 +123,8 @@ struct EditProfileView: View {
                             .padding(.bottom, 10)
                         
                         Text("Name")
+                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
+                        
                             .font(.title3)
                             .bold()
                             .padding(.bottom, 5)
@@ -258,7 +260,7 @@ struct EditProfileView: View {
             }
         }
     }
-        
+    
     
     /// Upload image to Firebase Storage
     /// - Parameter completion: image url
@@ -315,8 +317,8 @@ struct EditProfileView: View {
             // DEBUG: Monitor uploading process
             uploadTask.observe(.progress) {snapshot in
                 let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
-                  / Double(snapshot.progress!.totalUnitCount)
-
+                / Double(snapshot.progress!.totalUnitCount)
+                
                 print(percentComplete)
             }
         }
