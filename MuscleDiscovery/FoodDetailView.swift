@@ -54,9 +54,13 @@ struct FoodDetailView: View {
             Color("Background")
                 .ignoresSafeArea(.all)
             // MARK: Main ScrollView to display information
+            
             ScrollView {
+                
                 ZStack(){
+                    
                     VStack(alignment: .leading, spacing: 20){
+                        
                         // MARK: Food Image
                         AsyncImage(url: imageURL) {image in
                             image
@@ -73,7 +77,9 @@ struct FoodDetailView: View {
                         
                         VStack {
                             // MARK: Food information
+                            
                             VStack(alignment: .leading, spacing: 5){
+                                
                                 Text(FoodItem.name)
                                     .font(.system(.title3))
                                     .bold()
@@ -90,9 +96,12 @@ struct FoodDetailView: View {
                             
                             // MARK: Food nutrition information and calculation
                             HStack(spacing: 20){
+                                
                                 VStack(){
+                                    
                                     CircleProgressView(progress: FoodItem.carbs/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
                                         .frame(width: 80, height: 80)
+                                    
                                     Text("Carbs")
                                         .font(.subheadline)
                                 }
@@ -100,8 +109,10 @@ struct FoodDetailView: View {
                                 Spacer()
                                 
                                 VStack(){
+                                    
                                     CircleProgressView(progress: FoodItem.protein/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
                                         .frame(width: 80, height: 80)
+                                    
                                     Text("Protein")
                                         .font(.subheadline)
                                 }
@@ -111,16 +122,20 @@ struct FoodDetailView: View {
                                 VStack(){
                                     CircleProgressView(progress: FoodItem.fat/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
                                         .frame(width: 80, height: 80)
+                                    
                                     Text("Fat")
                                         .font(.subheadline)
                                 }
                             }
                             
+                            // MARK: VStack to display all the food nutrition needed
                             VStack(){
+                                
                                 Divider()
                                     .background(Color("Neon"))
                                 
                                 HStack(){
+                                    
                                     Text("Calories")
                                         .font(.system(.title3))
                                         .bold()
@@ -201,6 +216,7 @@ struct FoodDetailView: View {
                 
                 // MARK: Action to specific item (Add or Remove)
                 VStack(){
+                    
                     Button{
                         if(isItemInTheList(FoodItem)){
                             self.removeItemFromList(FoodItem)
@@ -210,6 +226,7 @@ struct FoodDetailView: View {
                         }
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
+                        
                         Rectangle()
                             .fill(Color("Neon"))
                             .frame(width: UIScreen.main.bounds.width*0.7, height: 50)

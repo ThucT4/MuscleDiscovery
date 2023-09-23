@@ -19,8 +19,10 @@ struct FoodRowView: View {
     // MARK: This component is constructed to show the food row list in the whole list view
     
     var body: some View {
+        
         // MARK: Main HStack
         HStack(spacing: 40){
+            
             // MARK: Show the food image that fetched from firebase
             AsyncImage(url: currentUrl) {image in
                 image
@@ -40,8 +42,10 @@ struct FoodRowView: View {
                     }
                 }
             }
+            
             // MARK: Show the brief information of the specific food item
             VStack(alignment: .leading, spacing: 8){
+                
                 VStack(alignment: .leading){
                     Text(FoodItem.name)
                         .bold()
@@ -52,6 +56,7 @@ struct FoodRowView: View {
                         .font(.caption2)
                         .bold()
                 }
+                
                 // MARK: Show all the badges of the current item
                 HStack(){
                     BadgeView(tags: FoodItem.tags)

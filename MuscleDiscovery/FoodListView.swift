@@ -46,14 +46,18 @@ struct FoodListView: View {
     }
     
     var body: some View {
+        
         // MARK: Main navigation View
         NavigationView(){
+            
             // MARK: Main ZStack for background
             ZStack {
+                
                 Color("Background")
                     .ignoresSafeArea(.all)
                 // MARK: Main List for display items
                 List {
+                    
                     // MARK: WrappingHStack to display item in the next line when overflowing
                     WrappingHStack(badgeItems, id: \.self){ item in
                             Button {
@@ -76,8 +80,8 @@ struct FoodListView: View {
                             .buttonStyle(PlainButtonStyle())
                     }
                     .padding(.bottom, 10)
+                    
                     // MARK: LazyVStack help to load the FoodRowView
-//                    LazyVStack(){
                         ForEach(searchingResult) {item in
                             HStack(spacing: 0) {
                                 FoodRowView(FoodItem: item)
@@ -91,18 +95,21 @@ struct FoodListView: View {
                             }
                             .padding(.all, 0)
                         }
-//                    }
-                }
+                    
+                } //end of list
                 .listRowSeparator(.hidden)
                 .listStyle(PlainListStyle())
                 .navigationBarBackButtonHidden(true)
                 .toolbar {
+                    
                     ToolbarItem(placement: .principal) {
+                        
                         HStack (spacing: 20) {
                             backButton
 
                             Text("FOOD LIST")
                                 .font(.system(.title3, weight: .heavy))
+                            
                         }
                         .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     }
