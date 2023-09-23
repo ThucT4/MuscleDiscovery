@@ -83,7 +83,7 @@ struct SettingsView: View {
                                             .tint(Color("Neon"))
                                     }
                                 }
-                                .padding(.trailing)
+                                .padding(.trailing, 40)
                                 
                                 Divider()
                                     .background(.gray)
