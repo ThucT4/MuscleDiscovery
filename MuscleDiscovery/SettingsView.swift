@@ -132,10 +132,10 @@ struct SettingsView: View {
                                 }
                                 
                                 // Navigate to Privacy Policy Page
-                                NavigationLink (destination: PrivacyPolicyView()) {
+                                NavigationLink (destination: AboutUs()) {
                                     VStack {
                                         HStack {
-                                            Text("Privacy Policy")
+                                            Text("About Us")
                                                 .font(.title3)
                                                 .bold()
                                                 .foregroundColor(isDarkMode ? Color.white : Color.black)
