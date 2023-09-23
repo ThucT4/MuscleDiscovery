@@ -6,9 +6,6 @@
 //
 
 import Foundation
-
-import Foundation
-
 import SwiftUI
 import CoreLocation
 
@@ -22,5 +19,4 @@ struct Food: Identifiable, Codable, Equatable{
     var carbs: CGFloat
     var protein: CGFloat
     var fat: CGFloat
-        
 }
