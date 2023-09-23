@@ -11,15 +11,23 @@ import FirebaseFirestore
 class AppointmentViewModel: ObservableObject {
     @Published var userAppointments = [Appointment]()
     
-    private var db = Firestore.firestore()
+    private var customerID: String = ""
+    
+    @Published var db = Firestore.firestore()
     
     init(customerID: String) {
+        self.customerID = customerID
         self.userAppointments = [Appointment]()
         queryUserAppointments(customerID: customerID)
     }
     
     func queryUserAppointments(customerID: String) {
+        
+        self.userAppointments = [Appointment]()
+        print("Before query: \(customerID)")
         let queryData = db.collection("appointments").whereField("customerID", isEqualTo: customerID)
+        
+        print(queryData)
         
         queryData.addSnapshotListener{ (querySnapshot, error) in
             self.userAppointments = [Appointment]()
@@ -87,8 +95,8 @@ class AppointmentViewModel: ObservableObject {
         }
     }
     
-    func bookAppointment(customerID: String, trainerID: String, date: Date) {
-        db.collection("appointments").addDocument(data: ["customerID": customerID, "trainerID": trainerID, "date": date.timeIntervalSince1970])
+    func bookAppointment(trainerID: String, date: Date) {
+        db.collection("appointments").addDocument(data: ["customerID": self.customerID, "trainerID": trainerID, "date": date.timeIntervalSince1970])
     }
     
     func removeAppointment(documentID: String) {

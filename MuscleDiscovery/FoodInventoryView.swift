@@ -46,15 +46,18 @@ struct FoodInventoryView: View {
     var body: some View {
         NavigationView(){
             // MARK: Main ZStack for background
+            
             ZStack {
                 Color("Background")
                     .ignoresSafeArea(.all)
                 // MARK: Main List for display item
+                
                 List {
                     ForEach(searchingResult) {item in
                         HStack(spacing: 0) {
                             FoodRowView(FoodItem: item)
                             // MARK: Button to remove item from current list
+                            
                             Button{
                                 removeItemFromList(item)
                             } label: {
@@ -67,6 +70,8 @@ struct FoodInventoryView: View {
                                     .clipShape(Circle())
                             }
                         }
+                        .listRowBackground(Color("Background"))
+                        .listRowSeparator(.hidden)
                         .padding(.all, 0)
                     }
                 }
@@ -74,13 +79,14 @@ struct FoodInventoryView: View {
                 .navigationBarBackButtonHidden(true)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
+                        
                         HStack (spacing: 20) {
                             backButton
 
                             Text(type)
                                 .textCase(.uppercase)
-                                .foregroundColor(.white)
                                 .font(.system(.title3, weight: .heavy))
+                            
                         }
                         .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     }

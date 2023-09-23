@@ -54,9 +54,13 @@ struct FoodDetailView: View {
             Color("Background")
                 .ignoresSafeArea(.all)
             // MARK: Main ScrollView to display information
+            
             ScrollView {
+                
                 ZStack(){
+                    
                     VStack(alignment: .leading, spacing: 20){
+                        
                         // MARK: Food Image
                         AsyncImage(url: imageURL) {image in
                             image
@@ -67,112 +71,135 @@ struct FoodDetailView: View {
                                 .padding(.bottom, 20)
                         } placeholder: {
                             ProgressView()
+                                .tint(Color("Neon"))
                         }
-                        .frame(width: UIScreen.main.bounds.width*0.8, height: 200, alignment: .center)
-                        // MARK: Food information
-                        VStack(alignment: .leading, spacing: 5){
-                            Text(FoodItem.name)
-                                .font(.system(.title3))
-                                .bold()
-                            
-                            Text(FoodItem.description)
-                                .font(.system(.body))
-                                .fontWeight(.medium)
-                            
-                            Text("Calculate the nutrition **per item**")
-                                .padding(.top, 20)
-                                .font(.system(.title3))
-                                .bold()
-                        }
-                        // MARK: Food nutrition information and calculation
-                        HStack(spacing: 20){
-                            VStack(){
-                                CircleProgressView(progress: FoodItem.carbs/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
-                                    .frame(width: 80, height: 80)
-                                Text("Carbs")
-                                    .font(.subheadline)
-                            }
-                            Spacer()
-                            VStack(){
-                                CircleProgressView(progress: FoodItem.protein/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
-                                    .frame(width: 80, height: 80)
-                                Text("Protein")
-                                    .font(.subheadline)
-                            }
-                            Spacer()
-                            VStack(){
-                                CircleProgressView(progress: FoodItem.fat/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
-                                    .frame(width: 80, height: 80)
-                                Text("Fat")
-                                    .font(.subheadline)
-                            }
-                        }
-                        VStack(){
-                            Divider()
-                                .background(Color("Neon"))
-                            
-                            HStack(){
-                                Text("Calories")
-                                    .font(.system(.title3))
-                                    .bold()
-                                
-                                Spacer()
-                                
-                                Text("\(FoodItem.calo, specifier: "%.1f") cal")
-                                    .font(.system(.title3))
-                                    .bold()
-                            }
-                            
-                            Divider()
-                                .background(Color("Neon"))
-                            
-                            HStack(){
-                                Text("Carbs")
-                                    .font(.system(.title3))
-                                    .bold()
-                                
-                                Spacer()
-                                
-                                Text("\(FoodItem.carbs, specifier: "%.1f") g")
-                                    .font(.system(.title3))
-                                    .bold()
-                            }
-                            
-                            Divider()
-                                .background(Color("Neon"))
-                            
-                            HStack(){
-                                Text("Protein")
-                                    .font(.system(.title3))
-                                    .bold()
-                                
-                                Spacer()
-                                
-                                Text("\(FoodItem.protein, specifier: "%.1f") g")
-                                    .font(.system(.title3))
-                                    .bold()
-                            }
-                            
-                            Divider()
-                                .background(Color("Neon"))
-                            
-                            HStack(){
-                                Text("Fat")
-                                    .font(.system(.title3))
-                                    .bold()
-                                
-                                Spacer()
-                                
-                                Text("\(FoodItem.fat, specifier: "%.1f") g")
-                                    .font(.system(.title3))
-                                    .bold()
-                            }
-                        }
+                        .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
                         
-                        Spacer()
+                        VStack {
+                            // MARK: Food information
+                            
+                            VStack(alignment: .leading, spacing: 5){
+                                
+                                Text(FoodItem.name)
+                                    .font(.system(.title3))
+                                    .bold()
+                                
+                                Text(FoodItem.description)
+                                    .font(.system(.body))
+                                    .fontWeight(.medium)
+                                
+                                Text("Calculate the nutrition **per item**")
+                                    .padding(.top, 20)
+                                    .font(.system(.title3))
+                                    .bold()
+                            }
+                            
+                            // MARK: Food nutrition information and calculation
+                            HStack(spacing: 20){
+                                
+                                VStack(){
+                                    
+                                    CircleProgressView(progress: FoodItem.carbs/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
+                                        .frame(width: 80, height: 80)
+                                    
+                                    Text("Carbs")
+                                        .font(.subheadline)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(){
+                                    
+                                    CircleProgressView(progress: FoodItem.protein/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
+                                        .frame(width: 80, height: 80)
+                                    
+                                    Text("Protein")
+                                        .font(.subheadline)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(){
+                                    CircleProgressView(progress: FoodItem.fat/total*100, isPercent: true, size: 6.0, targetCalo: $targetCalo)
+                                        .frame(width: 80, height: 80)
+                                    
+                                    Text("Fat")
+                                        .font(.subheadline)
+                                }
+                            }
+                            
+                            // MARK: VStack to display all the food nutrition needed
+                            VStack(){
+                                
+                                Divider()
+                                    .background(Color("Neon"))
+                                
+                                HStack(){
+                                    
+                                    Text("Calories")
+                                        .font(.system(.title3))
+                                        .bold()
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(FoodItem.calo, specifier: "%.1f") cal")
+                                        .font(.system(.title3))
+                                        .bold()
+                                }
+                                
+                                Divider()
+                                    .background(Color("Neon"))
+                                
+                                HStack(){
+                                    Text("Carbs")
+                                        .font(.system(.title3))
+                                        .bold()
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(FoodItem.carbs, specifier: "%.1f") g")
+                                        .font(.system(.title3))
+                                        .bold()
+                                }
+                                
+                                Divider()
+                                    .background(Color("Neon"))
+                                
+                                HStack(){
+                                    Text("Protein")
+                                        .font(.system(.title3))
+                                        .bold()
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(FoodItem.protein, specifier: "%.1f") g")
+                                        .font(.system(.title3))
+                                        .bold()
+                                }
+                                
+                                Divider()
+                                    .background(Color("Neon"))
+                                
+                                HStack(){
+                                    Text("Fat")
+                                        .font(.system(.title3))
+                                        .bold()
+                                    
+                                    Spacer()
+                                    
+                                    Text("\(FoodItem.fat, specifier: "%.1f") g")
+                                        .font(.system(.title3))
+                                        .bold()
+                                }
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal)
                     }
                     .padding(.leading)
                     .padding(.trailing)
+                    
                 }
                 .padding(.top)
                 .navigationTitle(FoodItem.name)
@@ -186,8 +213,10 @@ struct FoodDetailView: View {
                         .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)
                     }
                 }
+                
                 // MARK: Action to specific item (Add or Remove)
                 VStack(){
+                    
                     Button{
                         if(isItemInTheList(FoodItem)){
                             self.removeItemFromList(FoodItem)
@@ -197,6 +226,7 @@ struct FoodDetailView: View {
                         }
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
+                        
                         Rectangle()
                             .fill(Color("Neon"))
                             .frame(width: UIScreen.main.bounds.width*0.7, height: 50)
@@ -211,6 +241,7 @@ struct FoodDetailView: View {
                             .modifier(Shadown3DModifier())
                     }
                 }
+                .padding(.horizontal)
                 .frame(maxHeight: UIScreen.main.bounds.height, alignment: .bottom)
             }
         }

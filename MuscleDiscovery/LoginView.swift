@@ -1,5 +1,22 @@
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+  ID: s3799602, s3870730, s3891909, s3878071
+  Created  date: 23/09/2023
+  Last modified: 23/09/2023
+  Acknowledgement: iOS Development course (lecture and tutorial material slides), Apple Documentation, Code With Chris, Hacking with Swift, Medium.
+*/
+
 import SwiftUI
 
+protocol AuthenticationFormProtocol {
+    var formIsActive: Bool { get }
+}
+
+/// Structure of login page
 struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
@@ -20,7 +37,7 @@ struct LoginView: View {
                 
                 
                 VStack {
-                    // -- HEADER --
+                    // -- Sign up link --
                     NavigationLink(destination: RegistrationView()) {
                         HStack {
                             Text("Sign up")
@@ -56,27 +73,25 @@ struct LoginView: View {
                     .padding(.top, 12)
                     .padding(.vertical, 30)
                     
-                    Spacer()
-                    
                     Text(message)
                         .font(.body)
                         .foregroundColor(.red)
+                        .padding(.horizontal)
                     
                     // -- LOGIN --
                     HStack {
                         Spacer()
                         
+                        // Face ID option
                         Button(action: {
                             let email = UserDefaults.standard.string(forKey: "email")
                             let password = UserDefaults.standard.string(forKey: "password")
-                            
-                            print (email!, password!)
                             
                             Task {
                                 let result = await viewModel.authenticate()
                                 
                                 if (result == 1) {
-                                    try await viewModel.signIn(email: email!, password: password!)
+                                    _ = try await viewModel.signIn(email: email!, password: password!)
                                 }
                                 else if (result == -1) {
                                     self.message = "Your device does not suppot Face ID!"
@@ -96,9 +111,14 @@ struct LoginView: View {
                         
                         Spacer()
                         
+                        // Manually login with email and password
                         Button {
                             Task {
-                                try await viewModel.signIn(email: email, password: password)
+                                let result = try await viewModel.signIn(email: email, password: password)
+                                
+                                if !result {
+                                    self.message = "INVALID LOGIN CREDENTIALS. Check your email and password again!"
+                                }
                             }
                         } label: {
                             HStack(spacing: 15) {
@@ -117,12 +137,16 @@ struct LoginView: View {
                         .padding(.top, 12)
                         .padding(.trailing, 30)
                     }
+                    .padding(.bottom)
                     
                     Spacer()
-                }
+                } // VStack
             } // ZStack
         } // NavigationView
         .navigationBarHidden(true)
+        .onAppear() {
+            self.email = UserDefaults.standard.string(forKey: "email") ?? ""
+        }
         
     }
 }

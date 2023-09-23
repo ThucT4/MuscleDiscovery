@@ -1,3 +1,15 @@
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2023B
+ Assessment: Assignment 3
+ Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+ ID: s3799602, s3870730, s3891909, s3878071
+ Created  date: 23/09/2023
+ Last modified: 23/09/2023
+ Acknowledgement: iOS Development course (lecture and tutorial material slides), Apple Documentation, Code With Chris, Hacking with Swift, Medium.
+ */
+
 import Foundation
 import SwiftUI
 import FirebaseAuth
@@ -5,20 +17,17 @@ import Firebase
 import FirebaseFirestoreSwift
 import LocalAuthentication
 
-protocol AuthenticationFormProtocol {
-    var formIsActive: Bool { get }
-}
-
 @MainActor
+/// This view model is used for access control of user
 class AuthViewModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     private var userListener: ListenerRegistration?
-            
+    
     @Published var isLoggedIn = false
     @Published var isSignupSuccess = false
     @Published var isBusy = false
-
+    
     
     /// The app will retrieve user data in firestore by id
     /// and store them in current user every time the app run
@@ -31,10 +40,13 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    
+    /// Authenticate access against biometric features of user's face
+    /// - Returns: 1 for success and vice versa
     func authenticate() async -> Int {
         let context = LAContext()
         var error: NSError?
-
+        
         // check whether biometric authentication is possible
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             // it's possible, so go ahead and use it
@@ -44,17 +56,15 @@ class AuthViewModel: ObservableObject {
             
             await withUnsafeContinuation { continuation in
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                                // authentication has now completed
-                                if success {
-                                    result = 1
-                                } else {
-                                    result = 0
-                                }
-                                continuation.resume(returning: ())
-                            }
-
+                    // authentication has now completed
+                    if success {
+                        result = 1
+                    } else {
+                        result = 0
+                    }
+                    continuation.resume(returning: ())
+                }
             }
-            
             return result
         } else {
             return -1
@@ -65,23 +75,28 @@ class AuthViewModel: ObservableObject {
     /// - Parameters:
     ///   - email: Registered email
     ///   - password: Email password
-    func signIn(email: String, password: String) async throws {
+    func signIn(email: String, password: String) async throws -> Bool {
         do {
+            // Sign in with provided email and password
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            self.userSession = result.user
-            self.isLoggedIn = true
-            await fetchUser()
+            self.userSession = result.user // Store current login session of user
+            await fetchUser() // Fetch user data
+            self.isLoggedIn = true // Indicating user has logged in
             
+            // Store email and password in local database
             UserDefaults.standard.set(email, forKey: "email")
             UserDefaults.standard.set(password, forKey: "password")
             
             print("Login success!")
-
+            return true
+            
         } catch {
-            print("Failed to login! \(error.localizedDescription )")
+            print("Failed to login! \(error.localizedDescription ) \(error)")
+            
+            return false
         }
     }
-     
+    
     
     /// Create new user info and store them in Firestore
     /// - Parameters:
@@ -89,9 +104,10 @@ class AuthViewModel: ObservableObject {
     ///   - password: Email password
     ///   - fullname: Registered user's name
     func createUser(email: String, password: String, fullname: String) async throws {
+        // Create new account with provided email, password and fullname
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error != nil {
-//                self.authenticationState = .FAILED
+                //                self.authenticationState = .FAILED
                 print(error?.localizedDescription ?? "")
                 
             } else {
@@ -162,8 +178,7 @@ class AuthViewModel: ObservableObject {
             
             // Update user information in Firestore
             let userData: [String: Any] = [
-                "fullname": fullname != "" ? fullname : currentUser?.fullname as Any,
-                "email": email != "" ? email : currentUser?.email as Any
+                "fullname": fullname != "" ? fullname : currentUser?.fullname as Any
                 // Add other fields you want to update here
             ]
             
@@ -177,6 +192,9 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    /// Update user avatar
+    /// - Parameter image: image url
+    /// - Returns: true for update success and false for fail
     func updateUserAvatar(image: String) async throws -> Bool {
         do {
             guard let uid = Auth.auth().currentUser?.uid else {
@@ -200,43 +218,37 @@ class AuthViewModel: ObservableObject {
     
     // Start listener
     private func startUserListener() {
-           guard let uid = Auth.auth().currentUser?.uid else {
-               return
-           }
-           
-           let userDocRef = Firestore.firestore().collection("users").document(uid)
-           
-           userListener = userDocRef.addSnapshotListener { [weak self] documentSnapshot, error in
-               if let error = error {
-                   print("Error listening for user updates: \(error.localizedDescription)")
-                   return
-               }
-               
-               guard let document = documentSnapshot, document.exists else {
-                   print("User document does not exist")
-                   return
-               }
-               
-               do {
-                   if let user = try document.data(as: User?.self) {
-                       self?.currentUser = user
-                   } else {
-                       print("Failed to decode user document")
-                   }
-               } catch {
-                   print("Error decoding user document: \(error.localizedDescription)")
-               }
-           }
-       }
-       
-       deinit {
-           // Stop the user listener when the view model is deinitialized
-           userListener?.remove()
-       }
-}
-
-extension Encodable {
-    var dictionary: [String: Any]? {
-       return try? Firestore.Encoder().encode(self)
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let userDocRef = Firestore.firestore().collection("users").document(uid)
+        
+        userListener = userDocRef.addSnapshotListener { [weak self] documentSnapshot, error in
+            if let error = error {
+                print("Error listening for user updates: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                print("User document does not exist")
+                return
+            }
+            
+            do {
+                if let user = try document.data(as: User?.self) {
+                    self?.currentUser = user
+                } else {
+                    print("Failed to decode user document")
+                }
+            } catch {
+                print("Error decoding user document: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    deinit {
+        // Stop the user listener when the view model is deinitialized
+        userListener?.remove()
     }
 }

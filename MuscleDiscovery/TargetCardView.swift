@@ -24,16 +24,20 @@ struct TargetCardView: View {
     // MARK: This component constructed to display the current information of breakfast, lunch and dinner including add/remove food
     
     var body: some View {
+        
         // MARK: Main VStack
         VStack(){
+            
             // MARK: Display the icon of meal
             HStack(){
+                
                     Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                         .padding(.horizontal, 10)
                         .frame(width: 80, height: 80)
+                
                 VStack(alignment: .leading){
                     Text(type)
                         .bold()
@@ -42,7 +46,9 @@ struct TargetCardView: View {
                         .lineLimit(1)
                         .font(.subheadline)
                 }
+                
                 Spacer()
+                
                 // MARK: Show the button to navigate to add/remove food list
                 Button() {
                     isPresented.toggle()
@@ -58,28 +64,35 @@ struct TargetCardView: View {
                         .background(ColorConstant.luminousGreen.opacity(0.7))
                         .clipShape(Circle())
                 }
+                
                 .fullScreenCover(isPresented: $isPresented){
                     FoodListView(FoodData: Foods.foodList, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
                 }
             }
+            
             // MARK: Show the calories calculation if there is at least one food item in the whole list
             if(foodListName.count != 0){
+                
                 VStack{
+                    
                     Divider()
                         .background(ColorConstant.textWarning)
+                    
                     Text("\(calculateAllCalo(singleSelectionList), specifier: "%.1f") cal")
                         .foregroundColor(Color("Neon"))
                         .bold()
+                    
                 }
                 .onTapGesture {
                     self.showInventory = true
                 }
+                
                 .fullScreenCover(isPresented: $showInventory){
                     FoodInventoryView(type: type,FoodData: Foods.foodList, selectionList: $selectionList, singleSelectionList: $singleSelectionList)
                 }
             }
 
-        }
+        } //end of VStack
         .frame(maxWidth: .infinity)
         .padding(.all, 20)
         .background(Color("Dark grey"))
@@ -89,8 +102,10 @@ struct TargetCardView: View {
             for i in 0..<singleSelectionList.count{
                 foodListName.append(singleSelectionList[i].name)
             }
-        }//end of VStack
+        }
+        
     }
+    
     // MARK: Function to calculate the current calories based on added/removed food
     func calculateAllCalo(_ foodList: [Food]) -> CGFloat {
         var total: CGFloat = 0.0

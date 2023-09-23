@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct AppointmentListView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     
-    @StateObject var appointmentViewModel = AppointmentViewModel(customerID: "729ZaGcDAd29nCk8pEU4")
+    @StateObject var appointmentViewModel: AppointmentViewModel
+    
+    init(userID: String) {
+        _appointmentViewModel = StateObject(wrappedValue: AppointmentViewModel(customerID: userID))
+    }
     
     @State var showing: Bool = false
     
@@ -90,11 +96,5 @@ struct AppointmentListView: View {
         } // end Main NavigationView
         .environmentObject(appointmentViewModel)
         .preferredColorScheme(isDarkMode ? .dark : .light)
-    }
-}
-
-struct AppointmentListView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppointmentListView()
     }
 }

@@ -27,8 +27,6 @@
 		84BE45CE2AB419B80088A60D /* backButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45CD2AB419B80088A60D /* backButton.swift */; };
 		84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45D92AB42F620088A60D /* LoginView.swift */; };
 		84BE45DC2AB42F860088A60D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45DB2AB42F860088A60D /* RegistrationView.swift */; };
-		84BE45DE2AB42FAC0088A60D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45DD2AB42FAC0088A60D /* ProfileView.swift */; };
-		84BE45E02AB42FE70088A60D /* SettingRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45DF2AB42FE70088A60D /* SettingRowView.swift */; };
 		84BE45E22AB430120088A60D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45E12AB430120088A60D /* InputView.swift */; };
 		84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45E32AB4303E0088A60D /* ForgotPasswordView.swift */; };
 		84BE45E62AB430790088A60D /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BE45E52AB430790088A60D /* AuthViewModel.swift */; };
@@ -96,8 +94,6 @@
 		84BE45CD2AB419B80088A60D /* backButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backButton.swift; sourceTree = "<group>"; };
 		84BE45D92AB42F620088A60D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		84BE45DB2AB42F860088A60D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		84BE45DD2AB42FAC0088A60D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		84BE45DF2AB42FE70088A60D /* SettingRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowView.swift; sourceTree = "<group>"; };
 		84BE45E12AB430120088A60D /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		84BE45E32AB4303E0088A60D /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		84BE45E52AB430790088A60D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -193,6 +189,16 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		84BB32252ABECBFB00CD2B49 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				84BE45E12AB430120088A60D /* InputView.swift */,
+				84BE45E32AB4303E0088A60D /* ForgotPasswordView.swift */,
+				84AF3E152AB8115A008225D8 /* SessionCheckView.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		84BE45CF2AB41A040088A60D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,13 +209,9 @@
 		84BE45EB2AB430F80088A60D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				84BE45E12AB430120088A60D /* InputView.swift */,
+				84BB32252ABECBFB00CD2B49 /* Components */,
 				84BE45D92AB42F620088A60D /* LoginView.swift */,
 				84BE45DB2AB42F860088A60D /* RegistrationView.swift */,
-				84BE45DD2AB42FAC0088A60D /* ProfileView.swift */,
-				84BE45DF2AB42FE70088A60D /* SettingRowView.swift */,
-				84BE45E32AB4303E0088A60D /* ForgotPasswordView.swift */,
-				84AF3E152AB8115A008225D8 /* SessionCheckView.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -538,7 +540,6 @@
 				A9EB7D4F2AB496460050B68D /* EditProfileView.swift in Sources */,
 				84BE45E42AB4303E0088A60D /* ForgotPasswordView.swift in Sources */,
 				119293762AB450D9002AA155 /* FoodAnalysisView.swift in Sources */,
-				84BE45E02AB42FE70088A60D /* SettingRowView.swift in Sources */,
 				A282BABA2ABD79AB0068D0CD /* MainMenuView.swift in Sources */,
 				A2241E582AB198E100E06D8B /* PaymentCompleteView.swift in Sources */,
 				119293792AB45114002AA155 /* FoodListView.swift in Sources */,
@@ -563,7 +564,6 @@
 				84BE45E22AB430120088A60D /* InputView.swift in Sources */,
 				84BE45DA2AB42F620088A60D /* LoginView.swift in Sources */,
 				119293862AB45215002AA155 /* CircleProgressView.swift in Sources */,
-				84BE45DE2AB42FAC0088A60D /* ProfileView.swift in Sources */,
 				84BE45CE2AB419B80088A60D /* backButton.swift in Sources */,
 				A2241E122AB05A4600E06D8B /* MuscleDiscoveryApp.swift in Sources */,
 				A2241E3E2AB0648600E06D8B /* TrainerListViewModel.swift in Sources */,

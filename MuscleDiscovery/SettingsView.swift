@@ -69,15 +69,13 @@ struct SettingsView: View {
                                         .frame(width: 120, height: 120)
                                         .rotationEffect(.degrees(-90)) // Rotate to start at the top
                                     
-                                    //                                    URL(string: "https://firebasestorage.googleapis.com/v0/b/muscledicovery.appspot.com/o/avatars%2Favatar-default-icon.png?alt=media&token=7571f663-6784-4e27-a9c1-8eec9e3c6742")
-                                    
                                     
                                     AsyncImage(url: imageURL) {image in
                                         image
                                             .resizable()
                                             .scaledToFit()
+                                            .frame(width: 110, height: 110)
                                             .clipShape(Circle())
-                                            .frame(width: 120)
                                     } placeholder: {
                                         ProgressView()
                                             .tint(Color("Neon"))
