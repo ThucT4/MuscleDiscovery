@@ -77,7 +77,7 @@ struct FoodListView: View {
                     }
                     .padding(.bottom, 10)
                     // MARK: LazyVStack help to load the FoodRowView
-                    LazyVStack(){
+//                    LazyVStack(){
                         ForEach(searchingResult) {item in
                             HStack(spacing: 0) {
                                 FoodRowView(FoodItem: item)
@@ -91,7 +91,7 @@ struct FoodListView: View {
                             }
                             .padding(.all, 0)
                         }
-                    }
+//                    }
                 }
                 .listRowSeparator(.hidden)
                 .listStyle(PlainListStyle())

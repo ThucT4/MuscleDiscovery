@@ -14,13 +14,15 @@ struct FoodRowView: View {
         return URL(string: FoodItem.image)!
     }
     
+    @State private var currentUrl: URL?
+    
     // MARK: This component is constructed to show the food row list in the whole list view
     
     var body: some View {
         // MARK: Main HStack
         HStack(spacing: 40){
             // MARK: Show the food image that fetched from firebase
-            AsyncImage(url: imageURL) {image in
+            AsyncImage(url: currentUrl) {image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -31,6 +33,13 @@ struct FoodRowView: View {
             }
             .frame(width: 80, height: 80)
             .padding(.leading)
+            .onAppear {
+                if currentUrl == nil {
+                    DispatchQueue.main.async {
+                        currentUrl = imageURL
+                    }
+                }
+            }
             // MARK: Show the brief information of the specific food item
             VStack(alignment: .leading, spacing: 8){
                 VStack(alignment: .leading){

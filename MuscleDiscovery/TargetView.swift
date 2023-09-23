@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TargetView: View {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     var name: String
     var current: CGFloat
     var max: CGFloat
@@ -26,7 +27,7 @@ struct TargetView: View {
             .padding(.horizontal, 20)
             Text("\(current, specifier: "%.0f")")
                 .bold()
-                .foregroundColor(current > max ? ColorConstant.textWarning : .white)
+                .foregroundColor(current > max ? ColorConstant.textWarning : isDarkMode ? .white : .black)
             + Text("/\(max, specifier: "%.0f")")
                 .bold()
         }//end of VStack

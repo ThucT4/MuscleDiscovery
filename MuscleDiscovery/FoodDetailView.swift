@@ -189,7 +189,12 @@ struct FoodDetailView: View {
                 // MARK: Action to specific item (Add or Remove)
                 VStack(){
                     Button{
-                        self.addItemToList(FoodItem)
+                        if(isItemInTheList(FoodItem)){
+                            self.removeItemFromList(FoodItem)
+                        }
+                        else{
+                            self.addItemToList(FoodItem)
+                        }
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
                         Rectangle()
@@ -212,18 +217,20 @@ struct FoodDetailView: View {
     }
     // MARK: End of ZStack
     
+    // MARK: List of functions
     func isItemInTheList(_ foodItem: Food) -> Bool {
+        // Return bool to check if item in the list
         if singleSelectionList.firstIndex(where: {$0.id == foodItem.id}) != nil{
             return true;
         }
         return false;
     }
-    
+    // add the item to the current meal list and whole selection list
     func addItemToList(_ foodItem: Food) {
         selectionList.append(foodItem)
         singleSelectionList.append(foodItem)
     }
-    
+    // remove the item to the current meal list and whole selection list
     func removeItemFromList(_ foodItem: Food){
         if let singleFoodIndex = singleSelectionList.firstIndex(where: {$0.id == foodItem.id}){
             singleSelectionList.remove(at: singleFoodIndex)
