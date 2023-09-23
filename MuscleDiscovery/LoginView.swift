@@ -1,5 +1,18 @@
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+  ID: s3799602, s3870730, s3891909, s3878071
+  Created  date: 23/09/2023
+  Last modified: 23/09/2023
+  Acknowledgement: iOS Development course (lecture and tutorial material slides), Apple Documentation, Code With Chris, Hacking with Swift, Medium.
+*/
+
 import SwiftUI
 
+/// Structure of login page
 struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
@@ -20,7 +33,7 @@ struct LoginView: View {
                 
                 
                 VStack {
-                    // -- HEADER --
+                    // -- Sign up link --
                     NavigationLink(destination: RegistrationView()) {
                         HStack {
                             Text("Sign up")
@@ -66,11 +79,13 @@ struct LoginView: View {
                     HStack {
                         Spacer()
                         
+                        // Face ID option
                         Button(action: {
                             let email = UserDefaults.standard.string(forKey: "email")
                             let password = UserDefaults.standard.string(forKey: "password")
                             
-                            print (email!, password!)
+                            // DEBUG
+                            print(email!, password!)
                             
                             Task {
                                 let result = await viewModel.authenticate()
@@ -96,6 +111,7 @@ struct LoginView: View {
                         
                         Spacer()
                         
+                        // Manually login with email and password
                         Button {
                             Task {
                                 try await viewModel.signIn(email: email, password: password)
@@ -119,7 +135,7 @@ struct LoginView: View {
                     }
                     
                     Spacer()
-                }
+                } // VStack
             } // ZStack
         } // NavigationView
         .navigationBarHidden(true)

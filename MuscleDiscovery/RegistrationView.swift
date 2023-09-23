@@ -1,16 +1,24 @@
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Lai Nghiep Tri, Thieu Tran Tri Thuc, Truong Bach Minh, Vo Thanh Thong
+  ID: s3799602, s3870730, s3891909, s3878071
+  Created  date: 23/09/2023
+  Last modified: 23/09/2023
+  Acknowledgement: iOS Development course (lecture and tutorial material slides), Apple Documentation, Code With Chris, Hacking with Swift, Medium.
+*/
+
 import SwiftUI
 
+/// Structure of sign up page
 struct RegistrationView: View {
     @State var email: String = ""
     @State var fullname: String = ""
     @State var password: String = ""
     @State var confirmedPassword : String = ""
-    
-    @State private var isLoginActive = true
-    @State private var isShowingAlert = false
-    
-    @State var signUpSuccess = false
-    
+            
     @EnvironmentObject var viewModel: AuthViewModel
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -56,6 +64,7 @@ struct RegistrationView: View {
                     ZStack(alignment: .trailing) {
                         InputView(text: $confirmedPassword, title: "Password again", placeholder: "Enter password again", isSecuredField: true)
                         
+                        // Matching password icon
                         if (!password.isEmpty && !confirmedPassword.isEmpty) {
                             if (password == confirmedPassword) {
                                 Image(systemName: "checkmark.circle.fill")
@@ -69,14 +78,14 @@ struct RegistrationView: View {
                                     .foregroundColor(.red)
                             }
                         }
-                    }
+                    } // ZStack: Signup button
                 } // VStack - Input
                 .padding(.horizontal, 40)
                 .padding(.bottom)
                                     
                 // -- SIGNUP --
                 HStack {
-                    // Login message after pressing the login button
+                    // Signup status message
                     if viewModel.isSignupSuccess {
                         Text("Signup Success ✅")
                         .foregroundColor(.green)
@@ -89,6 +98,7 @@ struct RegistrationView: View {
                     
                     Spacer()
                     
+                    // Registrate for new account action
                     Button {
                         Task {
                             try await viewModel.createUser(email: email, password: password, fullname: fullname)
@@ -118,6 +128,7 @@ struct RegistrationView: View {
         .navigationBarItems(leading: backButton())
     }
     
+    /// Navigate back to parent view
     private func dismiss() {
         presentationMode.wrappedValue.dismiss()
     }
