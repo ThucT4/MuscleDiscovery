@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainMenuView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     
     init() {
@@ -16,7 +18,7 @@ struct MainMenuView: View {
     
     var body: some View {
         TabView {
-            AppointmentListView()
+            AppointmentListView(userID: viewModel.currentUser?.id ?? "")
                 .tabItem{
                     Image(systemName: "figure.strengthtraining.traditional")
                         .font(.headline)

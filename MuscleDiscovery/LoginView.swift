@@ -73,11 +73,10 @@ struct LoginView: View {
                     .padding(.top, 12)
                     .padding(.vertical, 30)
                     
-                    Spacer()
-                    
                     Text(message)
                         .font(.body)
                         .foregroundColor(.red)
+                        .padding(.horizontal)
                     
                     // -- LOGIN --
                     HStack {
@@ -88,14 +87,11 @@ struct LoginView: View {
                             let email = UserDefaults.standard.string(forKey: "email")
                             let password = UserDefaults.standard.string(forKey: "password")
                             
-                            // DEBUG
-                            print(email!, password!)
-                            
                             Task {
                                 let result = await viewModel.authenticate()
                                 
                                 if (result == 1) {
-                                    try await viewModel.signIn(email: email!, password: password!)
+                                    _ = try await viewModel.signIn(email: email!, password: password!)
                                 }
                                 else if (result == -1) {
                                     self.message = "Your device does not suppot Face ID!"
@@ -118,7 +114,11 @@ struct LoginView: View {
                         // Manually login with email and password
                         Button {
                             Task {
-                                try await viewModel.signIn(email: email, password: password)
+                                let result = try await viewModel.signIn(email: email, password: password)
+                                
+                                if !result {
+                                    self.message = "INVALID LOGIN CREDENTIALS. Check your email and password again!"
+                                }
                             }
                         } label: {
                             HStack(spacing: 15) {
@@ -137,12 +137,16 @@ struct LoginView: View {
                         .padding(.top, 12)
                         .padding(.trailing, 30)
                     }
+                    .padding(.bottom)
                     
                     Spacer()
                 } // VStack
             } // ZStack
         } // NavigationView
         .navigationBarHidden(true)
+        .onAppear() {
+            self.email = UserDefaults.standard.string(forKey: "email") ?? ""
+        }
         
     }
 }

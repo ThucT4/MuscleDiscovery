@@ -75,22 +75,25 @@ class AuthViewModel: ObservableObject {
     /// - Parameters:
     ///   - email: Registered email
     ///   - password: Email password
-    func signIn(email: String, password: String) async throws {
+    func signIn(email: String, password: String) async throws -> Bool {
         do {
             // Sign in with provided email and password
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user // Store current login session of user
-            self.isLoggedIn = true // Indicating user has logged in
             await fetchUser() // Fetch user data
+            self.isLoggedIn = true // Indicating user has logged in
             
             // Store email and password in local database
             UserDefaults.standard.set(email, forKey: "email")
             UserDefaults.standard.set(password, forKey: "password")
             
             print("Login success!")
+            return true
             
         } catch {
-            print("Failed to login! \(error.localizedDescription )")
+            print("Failed to login! \(error.localizedDescription ) \(error)")
+            
+            return false
         }
     }
     
@@ -175,8 +178,7 @@ class AuthViewModel: ObservableObject {
             
             // Update user information in Firestore
             let userData: [String: Any] = [
-                "fullname": fullname != "" ? fullname : currentUser?.fullname as Any,
-                "email": email != "" ? email : currentUser?.email as Any
+                "fullname": fullname != "" ? fullname : currentUser?.fullname as Any
                 // Add other fields you want to update here
             ]
             

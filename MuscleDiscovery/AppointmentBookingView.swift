@@ -93,7 +93,7 @@ struct AppointmentBookingView: View {
                     .disabled(!isValid)
                     .simultaneousGesture(TapGesture().onEnded({
                         if (isValid) {
-                            self.appointmentViewModel.bookAppointment(customerID: "729ZaGcDAd29nCk8pEU4", trainerID: trainer.documentID!, date: self.selectedDate)
+                            self.appointmentViewModel.bookAppointment(trainerID: trainer.documentID!, date: self.selectedDate)
                         }
                     }))
                 )

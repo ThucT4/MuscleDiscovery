@@ -67,6 +67,8 @@ struct FoodInventoryView: View {
                                     .clipShape(Circle())
                             }
                         }
+                        .listRowBackground(Color("Background"))
+                        .listRowSeparator(.hidden)
                         .padding(.all, 0)
                     }
                 }
@@ -79,7 +81,6 @@ struct FoodInventoryView: View {
 
                             Text(type)
                                 .textCase(.uppercase)
-                                .foregroundColor(.white)
                                 .font(.system(.title3, weight: .heavy))
                         }
                         .frame(maxWidth: UIScreen.main.bounds.width, alignment: .leading)

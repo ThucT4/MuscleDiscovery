@@ -66,8 +66,8 @@ struct EditProfileView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
+                                .frame(width: 140)
                                 .clipShape(Circle())
-                                .frame(width: 150)
                         } placeholder: {
                             ProgressView()
                                 .tint(Color("Neon"))
@@ -113,8 +113,6 @@ struct EditProfileView: View {
                     }
                     .padding(.bottom, 50)
                     
-                    Spacer()
-                    
                     // MARK: Information
                     // Name
                     VStack(alignment: .leading) {
@@ -127,6 +125,7 @@ struct EditProfileView: View {
                             .bold()
                             .padding(.bottom, 5)
                             .padding(.horizontal)
+                            .foregroundColor(Color("Neon"))
                         
                         if isEditingName {
                             TextField("Enter name", text: $editedName, onCommit: {
@@ -141,7 +140,8 @@ struct EditProfileView: View {
                                 // Do nothing when tapped inside the TextField
                             }
                             .background(Color.clear) // Hide TextField background
-                        } else {
+                        }
+                        else {
                             Text(user.fullname)
                                 .font(.title3)
                                 .foregroundColor(isDarkMode ? Color.white : Color.black)
@@ -157,53 +157,6 @@ struct EditProfileView: View {
                         Divider()
                             .background(Color.gray)
                     }
-                    .padding(.bottom, 10)
-                    
-                    // Email
-                    VStack(alignment: .leading) {
-                        Divider()
-                            .background(Color.gray)
-                            .padding(.bottom, 10)
-                        
-                        Text("Email")
-                            .foregroundColor(isDarkMode ? ColorConstant.luminousGreen : ColorConstant.black)
-                            .bold()
-                            .font(.title3)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal)
-                        
-                        if isEditingEmail {
-                            TextField("Enter email", text: $editedEmail, onCommit: {
-                                // Save the edited name or perform any necessary actions
-                                isEditingEmail = false
-                            })
-                            .font(.title3)
-                            .foregroundColor(isDarkMode ? Color.white : Color.black)
-                            .padding(.bottom, 15)
-                            .padding(.horizontal)
-                            .onTapGesture {
-                                // Do nothing when tapped inside the TextField
-                            }
-                            .background(Color.clear) // Hide TextField background
-                        } else {
-                            Text(user.email)
-                                .font(.title3)
-                                .foregroundColor(isDarkMode ? Color.white : Color.black)
-                                .padding(.bottom, 15)
-                                .padding(.horizontal)
-                                .onTapGesture {
-                                    // Enable editing when tapped
-                                    editedEmail = user.email
-                                    isEditingEmail = true
-                                }
-                        }
-                        
-                        Divider()
-                            .background(Color.gray)
-                    }
-                    .padding(.bottom, 10)
-                    
-                    
                     
                     Spacer()
                     
@@ -268,9 +221,10 @@ struct EditProfileView: View {
     /// Upload image to Firebase Storage
     /// - Parameter completion: image url
     func uploadImage(completion: @escaping (_ url: String?) -> Void) {
+        print(viewModel.currentUser!.id)
         
         // Reference to firebase Storage
-        let storageRef = Storage.storage().reference().child("avatars/avatar.jpeg")
+        let storageRef = Storage.storage().reference().child("avatars/\(viewModel.currentUser!.id).jpeg")
         
         if let uploadData = self.image!.jpegData(compressionQuality: 0.5) {
             let uploadTask = storageRef.putData(uploadData, metadata: nil) { (metadata, error) in

@@ -20,16 +20,15 @@ struct AboutUs: View {
             }
         })  {
             Circle()
-                .fill(ColorConstant.gray)
+                .fill(Color("Dark grey"))
                 .frame(height: 30)
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.system(size: 15, weight: .medium))
+                        .font(.headline)
+                        .foregroundColor(isDarkMode ? .white : .black)
                     
                 })
-                .foregroundColor(.black)
-                .shadow(color: Color("BlackTransparent"), radius: 7)
+                .modifier(Shadown3DModifier())
         }
         .contentShape(Circle())
         .padding(.trailing, 20)
@@ -41,9 +40,7 @@ struct AboutUs: View {
             Color("Background")
                 .ignoresSafeArea(.all)
             
-            VStack{
-                Spacer()
-                // Title
+            VStack{                // Title
                 Text("TEAM MEMBER")
                     .font(.title)
                     .bold()
