@@ -25,7 +25,8 @@ struct VideoCallView: View {
     private var client: StreamVideo
     
     private let apiKey: String = "mmhfdzb5evj2" // The API key can be found in the Credentials section
-    private let token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiRGFydGhfS3JheXQiLCJpc3MiOiJwcm9udG8iLCJzdWIiOiJ1c2VyL0RhcnRoX0tyYXl0IiwiaWF0IjoxNjk0ODUwMzk2LCJleHAiOjE2OTU0NTUyMDF9.HCSA3UMcJFaTkTx4fUIV8QcJLRAWg0P1L7yCi6rvFG8" // The Token can be found in the Credentials section
+    private let token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiWmF5bmVfQ2FycmljayIsImlzcyI6InByb250byIsInN1YiI6InVzZXIvWmF5bmVfQ2FycmljayIsImlhdCI6MTY5NTUzMjI2NSwiZXhwIjoxNjk2MTM3MDcwfQ.wkI54E0YOP3OS6FHTqKgLWAhZiV6iddLPh9OiKkabYU" // The Token can be found in the Credentials section
+    
     private let callID: String
     
     @State var ringing: Bool = false
