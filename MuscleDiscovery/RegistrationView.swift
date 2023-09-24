@@ -37,7 +37,7 @@ struct RegistrationView: View {
                 .overlay(alignment: .center, content: {
                     Image(systemName: "chevron.left")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.black)
                     
                 })
                 .modifier(Shadown3DModifier())
